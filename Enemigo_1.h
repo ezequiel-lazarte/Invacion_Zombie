@@ -9,7 +9,8 @@ using namespace std;
 
 class Enemigo_1 : public Entidad {
 public:
-	Enemigo_1(float pos_x);
+	Enemigo_1();
+	void SetPosEnemigo();
 	void Actualizar();
 	void Dibujar (sf::RenderWindow & w);
 	void CambiarVolumenMusica(float vol);
@@ -29,6 +30,8 @@ private:
 	float m_move_adel, m_move_atras;
 	/// otros
 	sf::Vector2f m_move, m_pos_player;
+	sf::Vector2f m_posEnemigo;
+	int m_posHasta, m_posDesde;
 	int m_vida;
 };
 

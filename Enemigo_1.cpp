@@ -1,20 +1,15 @@
 #include "Enemigo_1.h"
 #include <SFML/System/Vector2.hpp>
+#include <ctime>
 
-Enemigo_1::Enemigo_1(float pos_x) {
+Enemigo_1::Enemigo_1() {
 	m_alto_sprite = 392;
 	m_ancho_sprite = 248;
-	
 	m_sonido1.loadFromFile("recursos/musica/zombie1.wav");
 	m_sound_zombie.setBuffer(m_sonido1);
-	
-	m_sound_zombie.play();
-	
 	m_move_adel = 0;
 	m_move_atras = 0;
-	
 	m_move = {1.3,0};
-	
 	m_danio = 20;
 	
 	for(int i=0;i<6;i++) { /// por ahora solo 6 texturas
@@ -26,10 +21,18 @@ Enemigo_1::Enemigo_1(float pos_x) {
 	}
 	
 	m_sprite.setTexture(m_texturas_adel[0]);
-	m_sprite.setPosition(pos_x,412);
 	m_sprite.setScale(0.34,0.34);
-	
+	SetPosEnemigo();
 	m_vida = 100;
+}
+
+void Enemigo_1::SetPosEnemigo () {
+	m_posDesde = -1400;
+	m_posHasta = 1400;
+	srand(time(NULL)*time(NULL));
+	m_posEnemigo.x = (rand()*rand())%(m_posHasta - m_posDesde) + m_posDesde;
+	m_posEnemigo.y = 412;
+	m_sprite.setPosition(m_posEnemigo.x, m_posEnemigo.y);
 }
 
 void Enemigo_1::Actualizar () {

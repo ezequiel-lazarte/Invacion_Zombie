@@ -10,7 +10,13 @@
 using namespace std;
 using namespace sf;
 
-Partida::Partida() : m_color_fondo(20,110,255), m_enemigo(1000) {
+Partida::Partida() : m_color_fondo(20,110,255) {
+	m_numeroEnemigos = 2;
+	Enemigo_1* enemigo;
+	for(int i=0;i<m_numeroEnemigos;i++) {
+		enemigo = new Enemigo_1;
+		m_enemigos[i] = enemigo;
+	}
 	m_musica_fondo.openFromFile("recursos/musica/Lost.wav");
 	m_musica_fondo.play();
 	m_musica_fondo.setVolume(30);
@@ -46,7 +52,8 @@ Partida::Partida() : m_color_fondo(20,110,255), m_enemigo(1000) {
 	m_player.CambiarVolumenMusica(m_volumen);
 	m_enemigo.CambiarVolumenMusica(m_volumen);
 	m_musica_fondo.setVolume(m_volumen);
-	
+	/// musica
+	m_musica_fondo.setLoop(true);
 }
 
 void Partida::Actualizar (Juego &juego) {
@@ -55,40 +62,70 @@ void Partida::Actualizar (Juego &juego) {
 	m_tiempo.setString(to_string(aux));
 	/// obtengo el fps del juego
 	m_fps = juego.ObtenerFps();
-	/// musica
-	m_musica_fondo.setLoop(true);
+	
 	/// Keyboard
 	
 	if(Keyboard::isKeyPressed(Keyboard::Key::Escape)) {
 		m_musica_fondo.stop();
 		for(int i=0;i<m_enemigos.size();i++) {
-			m_enemigos[i].Finalizar();
+			m_enemigos[i]->Finalizar();
 		}
 		m_enemigo.Finalizar();
+		m_enemigo2.Finalizar();
+		m_enemigo3.Finalizar();
+		m_enemigo4.Finalizar();
+		
 		m_player.Finalizar();
 		juego.CambiarEscena(new Menu());
 	}
 	if(Keyboard::isKeyPressed(Keyboard::Key::F)) {
 		m_player.Ataque();
+		for(int i=0;i<m_enemigos.size();i++) {
+			if(m_player.Colision(*m_enemigos[i])) {
+				m_enemigos[i]->Finalizar();
+			}
+		}
 		if(m_player.Colision(m_enemigo)) {
 			m_enemigo.BajarVida();
+		}
+		if(m_player.Colision(m_enemigo2)) {
+			m_enemigo2.BajarVida();
+		}
+		if(m_player.Colision(m_enemigo3)) {
+			m_enemigo3.BajarVida();
+		}
+		if(m_player.Colision(m_enemigo4)) {
+			m_enemigo4.BajarVida();
 		}
 	}
 	if(m_player.getVida()>0) {
 		for(int i=0;i<m_enemigos.size();i++) {
-			if(m_enemigos[i].Colision(m_player)) {//m_enemigos.Ataque() and m_player.getVida()>0) {
+			if(m_enemigos[i]->Colision(m_player) and m_enemigos[i]->getVida()>0) {//m_enemigos.Ataque() and m_player.getVida()>0) {
 				m_player.BajarVida();
 			} 
 		}
 		if(m_enemigo.Colision(m_player) and m_enemigo.getVida()>0) {
 			m_player.BajarVida();
 		}
+		if(m_enemigo2.Colision(m_player) and m_enemigo2.getVida()>0) {
+			m_player.BajarVida();
+		}
+		if(m_enemigo3.Colision(m_player) and m_enemigo3.getVida()>0) {
+			m_player.BajarVida();
+		}
+		if(m_enemigo4.Colision(m_player) and m_enemigo4.getVida()>0) {
+			m_player.BajarVida();
+		}
 	} else if(m_player.getVida()<=0) {
 		m_musica_fondo.stop();
 		for(size_t i=0;i<m_enemigos.size();i++) {
-			m_enemigos[i].Finalizar();
+			m_enemigos[i]->Finalizar();
+			delete m_enemigos[i];
 		}
 		m_enemigo.Finalizar();
+		m_enemigo2.Finalizar();
+		m_enemigo3.Finalizar();
+		m_enemigo4.Finalizar();
 		m_player.Finalizar();
 		juego.CambiarEscena(new GameOver());
 	}
@@ -98,11 +135,17 @@ void Partida::Actualizar (Juego &juego) {
 	
 	m_player.Actualizar();
 	for(size_t i=0;i<m_enemigos.size();i++) {
-		m_enemigos[i].Actualizar();
-		m_enemigos[i].getPosPlayer(m_player.getPos());
+		m_enemigos[i]->Actualizar();
+		m_enemigos[i]->getPosPlayer(m_player.getPos());
 	}
 	m_enemigo.Actualizar();
 	m_enemigo.getPosPlayer(m_player.getPos());
+	m_enemigo2.Actualizar();
+	m_enemigo2.getPosPlayer(m_player.getPos());
+	m_enemigo3.Actualizar();
+	m_enemigo3.getPosPlayer(m_player.getPos());
+	m_enemigo4.Actualizar();
+	m_enemigo4.getPosPlayer(m_player.getPos());
 	m_fondo_1.Actualizar();
 	ActualizarPuntaje();
 }
@@ -112,9 +155,12 @@ void Partida::Dibujar (RenderWindow & window) {
 	m_fondo_1.Dibujar(window);
 	m_player.Dibujar(window);
 	for(size_t i=0;i<m_enemigos.size();i++) {
-		m_enemigos[i].Dibujar(window);
+		m_enemigos[i]->Dibujar(window);
 	}
 	m_enemigo.Dibujar(window);
+	m_enemigo2.Dibujar(window);
+	m_enemigo3.Dibujar(window);
+	m_enemigo4.Dibujar(window);
 	window.draw(m_vida_player);
 	window.draw(m_tiempo);
 	window.draw(m_t1);

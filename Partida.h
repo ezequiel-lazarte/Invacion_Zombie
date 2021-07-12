@@ -31,7 +31,7 @@ private:
 	Color m_color_fondo;
 	Fondo m_fondo_1;
 	Player m_player;
-	vector<Enemigo_1> m_enemigos;
+	vector<Enemigo_1*> m_enemigos;
 	Music m_musica_fondo;
 	int m_fps;
 	Clock m_reloj;
@@ -43,11 +43,12 @@ private:
 	Sprite m_corazon;
 	/// otros
 	float m_volumen;
-	Enemigo_1 m_enemigo;
+	Enemigo_1 m_enemigo, m_enemigo2, m_enemigo3, m_enemigo4;
 	// Puntajes
 	string nameplayer;
 	float m_puntaje_actual; // me guardo el puntaje del jugador
 	Puntajes m_puntaje;
+	int m_numeroEnemigos;
 };
 
 #endif
