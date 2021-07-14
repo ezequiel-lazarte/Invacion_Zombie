@@ -34,6 +34,7 @@ private:
 	vector<Enemigo_1*> m_enemigos;
 	Music m_musica_fondo;
 	int m_fps;
+	int aux;
 	Clock m_reloj;
 	Time m_crono;
 	Text m_vida_player, m_tiempo, m_t1;

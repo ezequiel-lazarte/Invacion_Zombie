@@ -34,8 +34,6 @@ private:
 	vector<Puntaje> m_puntajes;
 };
 
-
-
 #endif
 
  

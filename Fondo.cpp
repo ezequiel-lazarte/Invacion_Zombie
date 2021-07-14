@@ -7,10 +7,7 @@ Fondo::Fondo() : rojo(0), verde(0), azul(0) {
 	m_proporcion = {1560,375};/// ancho y alto
 	int diferencia = 520-m_proporcion.y;
 	m_sprite.setPosition(0,diferencia);
-	
-	
 	ultima_textura = 1;
-	
 	// sol
 	m_textura_sol.loadFromFile("recursos/fondos/escenario/sol.png");
 	m_sol.setTexture(m_textura_sol);
@@ -19,7 +16,6 @@ Fondo::Fondo() : rojo(0), verde(0), azul(0) {
 	m_sol.setScale(2.5,2.5);
 	m_move_sol = {.5,-.2};
 	gravedad = 0.00016;
-	
 	// luna
 	m_textura_luna.loadFromFile("recursos/fondos/escenario/luna.png");
 	/// colores
@@ -30,7 +26,7 @@ Fondo::Fondo() : rojo(0), verde(0), azul(0) {
 }
 
 void Fondo::Actualizar ( ) {
-	/// IA del sol/luna
+	///sol/luna
 	m_sol.move(m_move_sol);
 	m_move_sol.y += gravedad;
 	
@@ -72,4 +68,3 @@ void Fondo::Dibujar (sf::RenderWindow & w) {
 	w.draw(m_sol);
 	w.draw(m_sprite);
 }
-

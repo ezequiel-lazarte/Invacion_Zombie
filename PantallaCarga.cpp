@@ -14,10 +14,8 @@ PantallaCarga::PantallaCarga() {
 	m_sprite.setTexture(m_texturas[0]);
 	m_sprite.setPosition(835,400);
 	m_sprite.setScale(.3,.3);
-	
 	/// otros
 	m_cambiar_textura = 0;
-	
 	/// texto "cargando"
 	m_fuente.loadFromFile("recursos/fuentes/cave-story.ttf");
 	m_t1.setFont(m_fuente);

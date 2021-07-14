@@ -12,14 +12,13 @@ using namespace sf;
 
 Partida::Partida() : m_color_fondo(20,110,255) {
 	m_numeroEnemigos = 2;
-	Enemigo_1* enemigo;
-	for(int i=0;i<m_numeroEnemigos;i++) {
-		enemigo = new Enemigo_1;
-		m_enemigos[i] = enemigo;
-	}
+//	Enemigo_1* enemigo;
+//	for(int i=0;i<m_numeroEnemigos;i++) {
+//		enemigo = new Enemigo_1;
+//		m_enemigos[i] = enemigo;
+//	}
 	m_musica_fondo.openFromFile("recursos/musica/Lost.wav");
 	m_musica_fondo.play();
-	m_musica_fondo.setVolume(30);
 	/// cronometros y reloj
 	m_crono = m_reloj.restart();
 	/// fuentes
@@ -48,23 +47,21 @@ Partida::Partida() : m_color_fondo(20,110,255) {
 	m_corazon.setPosition(10,12);
 	m_corazon.setScale(.13,.13);
 	/// volumen partida
-	m_volumen = 0;
+	m_volumen = 15;
 	m_player.CambiarVolumenMusica(m_volumen);
 	m_enemigo.CambiarVolumenMusica(m_volumen);
 	m_musica_fondo.setVolume(m_volumen);
-	/// musica
-	m_musica_fondo.setLoop(true);
 }
 
 void Partida::Actualizar (Juego &juego) {
+	/// musica
+	m_musica_fondo.setLoop(true);
 	m_crono = m_reloj.getElapsedTime();
-	int aux = m_crono.asSeconds();
+	aux = m_crono.asSeconds();
 	m_tiempo.setString(to_string(aux));
-	/// obtengo el fps del juego
+	/// obtengo fps del juego
 	m_fps = juego.ObtenerFps();
-	
 	/// Keyboard
-	
 	if(Keyboard::isKeyPressed(Keyboard::Key::Escape)) {
 		m_musica_fondo.stop();
 		for(int i=0;i<m_enemigos.size();i++) {
@@ -74,7 +71,6 @@ void Partida::Actualizar (Juego &juego) {
 		m_enemigo2.Finalizar();
 		m_enemigo3.Finalizar();
 		m_enemigo4.Finalizar();
-		
 		m_player.Finalizar();
 		juego.CambiarEscena(new Menu());
 	}
@@ -131,7 +127,7 @@ void Partida::Actualizar (Juego &juego) {
 	}
 	/// vida Player
 	m_vida_player.setString(to_string(m_player.getVida()));
-	/// update
+	/// updates
 	
 	m_player.Actualizar();
 	for(size_t i=0;i<m_enemigos.size();i++) {
@@ -177,7 +173,9 @@ void Partida::ActualizarPuntaje ( ) {
 		m_puntaje_actual = m_crono.asSeconds();
 	}
 	if(m_player.getVida()<=0) {
-		/// llamo a m_puntaje.GuardarUnPuntajeNuevo();
+		/// llamo a 
+		string nombre_player = "John";
+		int tiempo = 777;
+		m_puntaje.GuardarUnPuntajeNuevo(nombre_player, tiempo);
 	}
 }
-
