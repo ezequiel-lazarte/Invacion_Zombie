@@ -54,7 +54,7 @@ void PantallaCarga::Actualizar (Juego & juego) {
 	
 	/// cambiar Escena
 	m_crono = m_reloj.getElapsedTime();
-	if(m_crono.asSeconds() >= 3.0) {
+	if(m_crono.asSeconds() >= 0.5) {
 		juego.CambiarEscena(new Partida);
 	}
 }

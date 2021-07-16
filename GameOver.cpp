@@ -5,6 +5,8 @@
 GameOver::GameOver() {
 	m_text_gameOver.loadFromFile("recursos/GameOver/gameover.png");
 	m_gameOver.setTexture(m_text_gameOver);
+	m_gameOver.setScale(1.1,1.1);
+	m_gameOver.setPosition(-25,0);
 	
 	m_musica_gameOver.openFromFile("recursos/gameOver/gameover.wav");
 	m_musica_gameOver.play();

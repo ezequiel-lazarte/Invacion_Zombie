@@ -22,14 +22,10 @@ public:
 	bool Ataque();
 	void Finalizar();
 private:
-	/// sonidos
 	sf::SoundBuffer m_sonido1;
 	sf::Sound m_sound_zombie;
-	/// texturas
 	vector<sf::Texture> m_texturas_adel, m_texturas_atras;
-	/// velocidad de movimiento
 	float m_move_adel, m_move_atras;
-	/// otros
 	sf::Vector2f m_move, m_pos_player;
 	sf::Vector2f m_posEnemigo;
 	int m_posHasta, m_posDesde;

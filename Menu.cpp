@@ -44,6 +44,7 @@ Menu::Menu(){
 	m_textura_fondo.loadFromFile("recursos/fondos/fondo.jpg");
 	m_fondo.setTexture(m_textura_fondo);
 	m_fondo.setPosition(0,0);
+	m_fondo.setScale(1.2,1.24);
 	
 }
 void Menu::Actualizar (Juego &juego) {

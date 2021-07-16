@@ -24,6 +24,8 @@ public:
 	void GuardarUnPuntajeNuevo(string nameplayer, int tiempo);
 	void CambiarVolumenMusica(float vol);
 private:
+	Texture m_textura_fondo;
+	Sprite m_fondo;
 	Music m_musica;
 	Text m_titulo;
 	Font m_fuente;

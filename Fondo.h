@@ -15,9 +15,8 @@ private:
 	Vector2f m_proporcion, m_move_sol, m_pos_sol;
 	Sprite m_sol;
 	Texture m_textura_sol, m_textura_luna;
-	/// color del cielo
 	Color m_color_fondo;
-	float rojo, verde, azul;
+	Uint8 rojo, verde, azul;
 	float gravedad;
 	int ultima_textura; /// 0 para sol y 1 para luna
 };

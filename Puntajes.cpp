@@ -6,6 +6,10 @@
 using namespace std;
 
 Puntajes::Puntajes()  {
+	m_textura_fondo.loadFromFile("recursos/fondos/puntajes.jpg");
+	m_fondo.setTexture(m_textura_fondo);
+	m_fondo.setScale(1.1,1.3);
+	
 	m_musica.openFromFile("recursos/musica/puntajes.wav");
 	m_musica.play();
 	m_fuente.loadFromFile("recursos/fuentes/Cave-Story.ttf");
@@ -63,6 +67,7 @@ void Puntajes::Dibujar (sf::RenderWindow & window) {
 	for(int i=0;i<m_nro_puntajes;i++) {
 		window.draw(m_posiciones[i]);
 	}
+	window.draw(m_fondo);
 	window.display();
 }
 

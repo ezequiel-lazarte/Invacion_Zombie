@@ -4,7 +4,7 @@
 Fondo::Fondo() : rojo(0), verde(0), azul(0) {
 	m_textura.loadFromFile("recursos/fondos/escenario/fondo.png");
 	m_sprite.setTexture(m_textura);
-	m_proporcion = {1560,375};/// ancho y alto
+	m_proporcion = {1024,356};/// ancho y alto
 	int diferencia = 520-m_proporcion.y;
 	m_sprite.setPosition(0,diferencia);
 	ultima_textura = 1;
@@ -66,5 +66,5 @@ void Fondo::Actualizar ( ) {
 void Fondo::Dibujar (sf::RenderWindow & w) {
 	w.clear(m_color_fondo);
 	w.draw(m_sol);
-	w.draw(m_sprite);
+	//w.draw(m_sprite);
 }
