@@ -63,11 +63,11 @@ void Puntajes::Actualizar (Juego & juego) {
 
 void Puntajes::Dibujar (sf::RenderWindow & window) {
 	window.clear({0,0,0});
+	window.draw(m_fondo);
 	window.draw(m_titulo);
 	for(int i=0;i<m_nro_puntajes;i++) {
 		window.draw(m_posiciones[i]);
 	}
-	window.draw(m_fondo);
 	window.display();
 }
 
