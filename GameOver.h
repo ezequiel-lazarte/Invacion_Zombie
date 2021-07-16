@@ -12,12 +12,12 @@ public:
 	GameOver();
 	void Actualizar (Juego & juego);
 	void Dibujar (sf::RenderWindow & window);
+	void Finalizar();
 	void CambiarVolumenMusica(float vol);
 private:
 	sf::Sprite m_gameOver;
 	sf::Texture m_text_gameOver;
 	sf::Music m_musica_gameOver, m_voz_gameover;
-	
 	sf::Text m_t1;
 	sf::Font m_fuente;
 };

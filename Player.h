@@ -21,7 +21,6 @@ public:
 	sf::Vector2f getPos();
 	void BajarVida();
 	int getVida();
-	void CambiarVolumenMusica(float vol);
 	void MovimientoGolpea();
 	void MovimientoGolpeaCamina();
 	void MovimientoCamina();
@@ -41,9 +40,6 @@ private:
 	sf::Vector2f m_pos_inicial;
 	int m_vida;
 	float m_cambiar_textura;
-	
-	/// sonidos del personaje
-	sf::Music m_camina;
 	/// tecla
 	int m_ultima_tecla;
 };

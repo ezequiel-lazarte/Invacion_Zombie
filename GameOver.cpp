@@ -36,7 +36,14 @@ void GameOver::Dibujar (sf::RenderWindow & window) {
 	window.display();
 }
 
+
 void GameOver::CambiarVolumenMusica (float vol) {
 	m_musica_gameOver.setVolume(vol);
 	m_voz_gameover.setVolume(vol);
 }
+
+void GameOver::Finalizar ( ) {
+	m_musica_gameOver.stop();
+	m_voz_gameover.stop();
+}
+

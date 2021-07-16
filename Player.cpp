@@ -127,10 +127,6 @@ int Player::getVida ( ) {
 	return m_vida;
 }
 
-void Player::CambiarVolumenMusica (float vol) {
-	m_camina.setVolume(vol);
-}
-
 void Player::MovimientoGolpea ( ) {
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::F) and m_ultima_tecla == 1) {
 		if(m_cambiar_textura==0) {

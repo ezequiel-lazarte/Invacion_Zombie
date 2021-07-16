@@ -14,6 +14,7 @@ public:
 	void Actualizar();
 	void Dibujar (sf::RenderWindow & w);
 	void CambiarVolumenMusica(float vol);
+	void Animaciones();
 	sf::Vector2f getPosPlayer(sf::Vector2f pos_player);
 	void BajarVida();
 	int getVida();

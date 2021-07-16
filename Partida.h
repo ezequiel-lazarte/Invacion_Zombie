@@ -33,23 +33,20 @@ private:
 	Player m_player;
 	vector<Enemigo_1*> m_enemigos;
 	Music m_musica_fondo;
-	int m_fps;
-	int aux;
 	Clock m_reloj;
 	Time m_crono;
 	Text m_vida_player, m_tiempo, m_t1;
 	Font m_fuente;
-	/// corazon de la vida Player
 	Texture m_textura_corazon;
 	Sprite m_corazon;
 	/// otros
-	float m_volumen;
 	Enemigo_1 m_enemigo, m_enemigo2, m_enemigo3, m_enemigo4;
-	// Puntajes
-	string nameplayer;
+	string nameplayer; // nombre del jugador
 	float m_puntaje_actual; // me guardo el puntaje del jugador
-	Puntajes m_puntaje;
+	float m_volumen;
 	int m_numeroEnemigos;
+	int m_fps;
+	int aux;
 };
 
 #endif

@@ -11,6 +11,14 @@ using namespace std;
 using namespace sf;
 
 Partida::Partida() : m_color_fondo(20,110,255) {
+	/// volumen partida
+	m_volumen = 20;
+	m_enemigo.CambiarVolumenMusica(m_volumen);
+	m_enemigo2.CambiarVolumenMusica(m_volumen);
+	m_enemigo3.CambiarVolumenMusica(m_volumen);
+	m_enemigo4.CambiarVolumenMusica(m_volumen);
+	m_musica_fondo.setVolume(m_volumen+40);
+	
 	m_numeroEnemigos = 2;
 //	Enemigo_1* enemigo;
 //	for(int i=0;i<m_numeroEnemigos;i++) {
@@ -19,6 +27,7 @@ Partida::Partida() : m_color_fondo(20,110,255) {
 //	}
 	m_musica_fondo.openFromFile("recursos/musica/Lost.wav");
 	m_musica_fondo.play();
+	
 	/// cronometros y reloj
 	m_crono = m_reloj.restart();
 	/// fuentes
@@ -46,11 +55,6 @@ Partida::Partida() : m_color_fondo(20,110,255) {
 	m_corazon.setTexture(m_textura_corazon);
 	m_corazon.setPosition(10,12);
 	m_corazon.setScale(.13,.13);
-	/// volumen partida
-	m_volumen = 15;
-	m_player.CambiarVolumenMusica(m_volumen);
-	m_enemigo.CambiarVolumenMusica(m_volumen);
-	m_musica_fondo.setVolume(m_volumen);
 }
 
 void Partida::Actualizar (Juego &juego) {
@@ -176,6 +180,5 @@ void Partida::ActualizarPuntaje ( ) {
 		/// llamo a 
 		string nombre_player = "John";
 		int tiempo = 777;
-		m_puntaje.GuardarUnPuntajeNuevo(nombre_player, tiempo);
 	}
 }

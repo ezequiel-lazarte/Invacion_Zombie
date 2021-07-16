@@ -18,9 +18,7 @@ private:
 	/// color del cielo
 	Color m_color_fondo;
 	float rojo, verde, azul;
-	
 	float gravedad;
-	
 	int ultima_textura; /// 0 para sol y 1 para luna
 };
 
