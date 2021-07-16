@@ -16,7 +16,7 @@ private:
 	Sprite m_sol;
 	Texture m_textura_sol, m_textura_luna;
 	Color m_color_fondo;
-	Uint8 rojo, verde, azul;
+	float rojo, verde, azul;
 	float gravedad;
 	int ultima_textura; /// 0 para sol y 1 para luna
 };
