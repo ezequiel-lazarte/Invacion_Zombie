@@ -26,6 +26,7 @@ void Juego::Jugar ( ) {
 			delete m_escena;
 			m_escena = m_proxima_escena;
 			m_proxima_escena = nullptr;
+			
 		}
 	}
 }
