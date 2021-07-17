@@ -47,7 +47,7 @@ Puntajes::Puntajes()  {
 	/// binario
 	m_archi.open(m_binaryname, ios::binary|ios::app);
 	if(!m_archi.is_open()) {
-		cout << "Error al abrir el archivo puntajes.dat" << endl;
+		cerr << "Error al abrir el archivo puntajes.dat" << endl;
 	}
 	LeerDatos();
 }
