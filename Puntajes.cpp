@@ -51,7 +51,6 @@ Puntajes::Puntajes()  {
 	}
 	LeerDatos();
 }
-
 void Puntajes::Actualizar (Juego & juego) {
 	m_musica.setLoop(true);
 	
@@ -97,7 +96,6 @@ void Puntajes::LeerDatos ( ) { // listo ya tengo los datos en un vector de struc
 			m_archi.write(reinterpret_cast<char*>(&aux.tiempo), sizeof(aux.tiempo));
 		}
 	}
-	
 }
 
 void Puntajes::GuardarUnPuntajeNuevo (string nameplayer, int tiempo) {
