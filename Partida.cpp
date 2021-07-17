@@ -5,7 +5,6 @@
 #include "GameOver.h"
 #include <SFML/Graphics/Color.hpp>
 #include "Enemigo_1.h"
-
 #include <iostream>
 using namespace std;
 using namespace sf;
@@ -18,13 +17,11 @@ Partida::Partida() : m_color_fondo(20,110,255) {
 	m_enemigo3.CambiarVolumenMusica(m_volumen);
 	m_enemigo4.CambiarVolumenMusica(m_volumen);
 	m_musica_fondo.setVolume(m_volumen+40);
-	
 	m_numeroEnemigos = 2;
-//	Enemigo_1* enemigo;
-//	for(int i=0;i<m_numeroEnemigos;i++) {
-//		enemigo = new Enemigo_1;
-//		m_enemigos[i] = enemigo;
-//	}
+	for(int i=0;i<m_numeroEnemigos;i++) {
+		Enemigo_1 enemigo;
+		m_enemigos[i] = enemigo;
+	}
 	m_musica_fondo.openFromFile("recursos/musica/Lost.wav");
 	m_musica_fondo.play();
 	
@@ -69,7 +66,7 @@ void Partida::Actualizar (Juego &juego) {
 	if(Keyboard::isKeyPressed(Keyboard::Key::Escape)) {
 		m_musica_fondo.stop();
 		for(int i=0;i<m_enemigos.size();i++) {
-			m_enemigos[i]->Finalizar();
+			m_enemigos[i].Finalizar();
 		}
 		m_enemigo.Finalizar();
 		m_enemigo2.Finalizar();
@@ -81,8 +78,8 @@ void Partida::Actualizar (Juego &juego) {
 	if(Keyboard::isKeyPressed(Keyboard::Key::F)) {
 		m_player.Ataque();
 		for(int i=0;i<m_enemigos.size();i++) {
-			if(m_player.Colision(*m_enemigos[i])) {
-				m_enemigos[i]->Finalizar();
+			if(m_player.Colision(m_enemigos[i])) {
+				m_enemigos[i].BajarVida();
 			}
 		}
 		if(m_player.Colision(m_enemigo)) {
@@ -100,7 +97,7 @@ void Partida::Actualizar (Juego &juego) {
 	}
 	if(m_player.getVida()>0) {
 		for(int i=0;i<m_enemigos.size();i++) {
-			if(m_enemigos[i]->Colision(m_player) and m_enemigos[i]->getVida()>0) {//m_enemigos.Ataque() and m_player.getVida()>0) {
+			if(m_enemigos[i].Colision(m_player) and m_enemigos[i].getVida()>0) {//m_enemigos.Ataque() and m_player.getVida()>0) {
 				m_player.BajarVida();
 			} 
 		}
@@ -119,8 +116,7 @@ void Partida::Actualizar (Juego &juego) {
 	} else if(m_player.getVida()<=0) {
 		m_musica_fondo.stop();
 		for(size_t i=0;i<m_enemigos.size();i++) {
-			m_enemigos[i]->Finalizar();
-			delete m_enemigos[i];
+			m_enemigos[i].Finalizar();
 		}
 		m_enemigo.Finalizar();
 		m_enemigo2.Finalizar();
@@ -132,11 +128,10 @@ void Partida::Actualizar (Juego &juego) {
 	/// vida Player
 	m_vida_player.setString(to_string(m_player.getVida()));
 	/// updates
-	
 	m_player.Actualizar();
 	for(size_t i=0;i<m_enemigos.size();i++) {
-		m_enemigos[i]->Actualizar();
-		m_enemigos[i]->getPosPlayer(m_player.getPos());
+		m_enemigos[i].Actualizar();
+		m_enemigos[i].getPosPlayer(m_player.getPos());
 	}
 	m_enemigo.Actualizar();
 	m_enemigo.getPosPlayer(m_player.getPos());
@@ -155,7 +150,7 @@ void Partida::Dibujar (RenderWindow & window) {
 	m_fondo_1.Dibujar(window);
 	m_player.Dibujar(window);
 	for(size_t i=0;i<m_enemigos.size();i++) {
-		m_enemigos[i]->Dibujar(window);
+		m_enemigos[i].Dibujar(window);
 	}
 	m_enemigo.Dibujar(window);
 	m_enemigo2.Dibujar(window);

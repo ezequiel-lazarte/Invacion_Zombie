@@ -31,7 +31,7 @@ private:
 	Color m_color_fondo;
 	Fondo m_fondo_1;
 	Player m_player;
-	vector<Enemigo_1*> m_enemigos;
+	vector<Enemigo_1> m_enemigos;
 	Music m_musica_fondo;
 	Clock m_reloj;
 	Time m_crono;

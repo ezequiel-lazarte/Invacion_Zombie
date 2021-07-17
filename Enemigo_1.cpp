@@ -17,11 +17,9 @@ Enemigo_1::Enemigo_1() {
 	for(int i=0;i<6;i++) { /// por ahora solo 6 texturas
 		m_textura.loadFromFile("recursos/enemigos/enemigo1/adel/sprite_" + to_string(i+1) + ".png");
 		m_texturas_adel.push_back(m_textura);
-		
 		m_textura.loadFromFile("recursos/enemigos/enemigo1/atras/sprite_" + to_string(i+1) + ".png");
 		m_texturas_atras.push_back(m_textura);
 	}
-	
 	m_sprite.setTexture(m_texturas_adel[0]);
 	m_sprite.setScale(0.75,0.75);
 	SetPosEnemigo();
