@@ -14,6 +14,7 @@
 #include <vector>
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Audio/Sound.hpp>
+#include "Enemigo_2.h"
 using namespace std;
 
 class Juego;
@@ -39,7 +40,12 @@ private:
 	Font m_fuente;
 	Texture m_textura_corazon;
 	Sprite m_corazon;
-	Enemigo_1 m_enemigo, m_enemigo2, m_enemigo3, m_enemigo4;
+	
+	Enemigo_1 m_enemigo;
+	Enemigo_1 m_enemigo2;
+	Enemigo_2 m_enemigo3;
+	Enemigo_2 m_enemigo4;
+	
 	string nameplayer; // nombre del jugador
 	float m_puntaje_actual; // me guardo el puntaje del jugador
 	float m_volumen;

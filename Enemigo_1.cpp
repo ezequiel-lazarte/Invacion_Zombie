@@ -11,7 +11,7 @@ Enemigo_1::Enemigo_1() {
 	m_move_adel = 0;
 	m_move_atras = 0;
 	m_move = {1.3,0};
-	m_danio = 20;
+	m_danio = 80;
 	m_textura.loadFromFile("recursos/enemigos/enemigo1/textura_enemigo_1.png");
 	m_size_rect = {144, 144};
 	for(int i=0;i<6;i++) { /// por ahora solo 6 texturas
