@@ -21,9 +21,9 @@ private:
 	RenderWindow m_window;
 	Escena *m_escena;
 	Escena *m_proxima_escena = nullptr;
-	int m_fps;
 	Clock m_reloj;
 	Time m_cronometro;
+	int m_fps;
 	
 };
 

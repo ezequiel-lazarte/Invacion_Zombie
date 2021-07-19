@@ -22,9 +22,9 @@ private:
 	Time m_crono;
 	vector<sf::Texture> m_texturas;
 	Sprite m_sprite;
-	int m_cambiar_textura;
 	Text m_t1;
 	Font m_fuente;
+	int m_cambiar_textura;
 };
 
 #endif

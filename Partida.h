@@ -1,12 +1,10 @@
 #ifndef PARTIDA_H
 #define PARTIDA_H
 #include <SFML/Graphics.hpp>
-#include <SFML/Graphics/RenderWindow.hpp>
 #include "Fondo.h"
 #include "Player.h"
 #include "Escena.h"
 #include "Juego.h"
-#include <SFML/Audio/Music.hpp>
 #include "Enemigo_1.h"
 #include <ctime>
 #include <SFML/Graphics/Text.hpp>
@@ -14,7 +12,8 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <vector>
-#include "Puntajes.h"
+#include <SFML/Audio/SoundBuffer.hpp>
+#include <SFML/Audio/Sound.hpp>
 using namespace std;
 
 class Juego;
@@ -32,14 +31,14 @@ private:
 	Fondo m_fondo_1;
 	Player m_player;
 	vector<Enemigo_1> m_enemigos;
-	Music m_musica_fondo;
+	SoundBuffer m_buffer;
+	Sound m_musica_fondo;
 	Clock m_reloj;
 	Time m_crono;
 	Text m_vida_player, m_tiempo, m_t1;
 	Font m_fuente;
 	Texture m_textura_corazon;
 	Sprite m_corazon;
-	/// otros
 	Enemigo_1 m_enemigo, m_enemigo2, m_enemigo3, m_enemigo4;
 	string nameplayer; // nombre del jugador
 	float m_puntaje_actual; // me guardo el puntaje del jugador

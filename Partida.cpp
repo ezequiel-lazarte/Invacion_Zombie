@@ -7,10 +7,8 @@
 #include "Enemigo_1.h"
 #include <iostream>
 using namespace std;
-using namespace sf;
 
 Partida::Partida() : m_color_fondo(20,110,255) {
-	/// volumen partida
 	m_volumen = 20;
 	m_enemigo.CambiarVolumenMusica(m_volumen);
 	m_enemigo2.CambiarVolumenMusica(m_volumen);
@@ -18,24 +16,24 @@ Partida::Partida() : m_color_fondo(20,110,255) {
 	m_enemigo4.CambiarVolumenMusica(m_volumen);
 	m_musica_fondo.setVolume(m_volumen+40);
 	m_numeroEnemigos = 2;
-	for(int i=0;i<m_numeroEnemigos;i++) {
-		Enemigo_1 enemigo;
-		m_enemigos[i] = enemigo;
-	}
-	m_musica_fondo.openFromFile("recursos/musica/Lost.wav");
+//	for(int i=0;i<m_numeroEnemigos;i++) {
+//		Enemigo_1 enemigo;
+//		m_enemigos[i] = enemigo;
+//	}
+	m_buffer.loadFromFile("recursos/musica/Lost.wav");
+	m_musica_fondo.setBuffer(m_buffer);
 	m_musica_fondo.play();
-	
-	/// cronometros y reloj
+	m_musica_fondo.setLoop(true);
 	m_crono = m_reloj.restart();
-	/// fuentes
+	
 	m_fuente.loadFromFile("recursos/fuentes/cave-story.ttf");
 	m_vida_player.setFont(m_fuente);
-	/// texto vida player
+	
 	m_vida_player.setString(to_string(m_player.getVida()));
 	m_vida_player.setPosition(50,10);
 	m_vida_player.setCharacterSize(30);
 	m_vida_player.setFillColor(Color::Red);
-	///texto tiempo y texto palabra tiempo
+	
 	m_t1.setFont(m_fuente);
 	m_t1.setString("Tiempo:");
 	m_t1.setPosition(220,10);
@@ -47,7 +45,7 @@ Partida::Partida() : m_color_fondo(20,110,255) {
 	m_tiempo.setPosition(300,10);
 	m_tiempo.setCharacterSize(30);
 	m_tiempo.setFillColor(Color::Red);
-	/// textura corazon vida player
+	
 	m_textura_corazon.loadFromFile("recursos/player/corazon.png");
 	m_corazon.setTexture(m_textura_corazon);
 	m_corazon.setPosition(10,12);
@@ -55,8 +53,6 @@ Partida::Partida() : m_color_fondo(20,110,255) {
 }
 
 void Partida::Actualizar (Juego &juego) {
-	/// musica
-	m_musica_fondo.setLoop(true);
 	m_crono = m_reloj.getElapsedTime();
 	aux = m_crono.asSeconds();
 	m_tiempo.setString(to_string(aux));

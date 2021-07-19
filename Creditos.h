@@ -4,9 +4,10 @@
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/System/Vector2.hpp>
-#include <SFML/Audio/Music.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
+#include <SFML/Audio/SoundBuffer.hpp>
+#include <SFML/Audio/Sound.hpp>
 
 using namespace sf;
 
@@ -17,7 +18,8 @@ public:
 	void Dibujar (sf::RenderWindow & window);
 	void CambiarVolumenMusica(float vol);
 private:
-	Music m_musica;
+	SoundBuffer m_buffer;
+	Sound m_musica;
 	Vector2f m_move;
 	Color m_color;
 	Text m_t1, m_t2;

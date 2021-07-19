@@ -3,8 +3,8 @@
 #include <ctime>
 
 Enemigo_1::Enemigo_1() {
-	m_alto_sprite = 144;///392;
-	m_ancho_sprite = 144;///248;
+	m_alto_sprite = 144;
+	m_ancho_sprite = 144;
 	m_sonido1.loadFromFile("recursos/musica/zombie1.wav");
 	m_sound_zombie.setBuffer(m_sonido1);
 	m_sound_zombie.setVolume(20);

@@ -10,8 +10,11 @@ Puntajes::Puntajes()  {
 	m_fondo.setTexture(m_textura_fondo);
 	m_fondo.setScale(1.1,1.3);
 	
-	m_musica.openFromFile("recursos/musica/puntajes.wav");
+	m_buffer.loadFromFile("recursos/musica/puntajes.wav");
+	m_musica.setBuffer(m_buffer);
 	m_musica.play();
+	m_musica.setLoop(true);
+	
 	m_fuente.loadFromFile("recursos/fuentes/Cave-Story.ttf");
 	m_titulo.setFont(m_fuente);
 	
@@ -52,8 +55,6 @@ Puntajes::Puntajes()  {
 	LeerDatos();
 }
 void Puntajes::Actualizar (Juego & juego) {
-	m_musica.setLoop(true);
-	
 	if(Keyboard::isKeyPressed(Keyboard::Escape)) {
 		m_musica.stop();
 		juego.CambiarEscena(new Menu());

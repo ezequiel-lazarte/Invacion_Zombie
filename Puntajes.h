@@ -4,9 +4,10 @@
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include <vector>
-#include <SFML/Audio/Music.hpp>
 #include <fstream>
-using namespace std; 
+#include <SFML/Audio/SoundBuffer.hpp>
+#include <SFML/Audio/Sound.hpp>
+using namespace std;
 
 struct Puntaje {
 	string nameplayer;
@@ -26,14 +27,15 @@ public:
 private:
 	Texture m_textura_fondo;
 	Sprite m_fondo;
-	Music m_musica;
+	SoundBuffer m_buffer;
+	Sound m_musica;
 	Text m_titulo;
 	Font m_fuente;
-	int m_nro_puntajes;
 	vector<Text> m_posiciones;
 	string m_binaryname;
 	fstream m_archi;
 	vector<Puntaje> m_puntajes;
+	int m_nro_puntajes;
 };
 
 #endif

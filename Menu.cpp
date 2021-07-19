@@ -9,8 +9,10 @@
 
 Menu::Menu(){
 	/// musica
-	m_musica_inicio.openFromFile("recursos/musica/Bewitched.wav");
+	m_buffer.loadFromFile("recursos/musica/Bewitched.wav");
+	m_musica_inicio.setBuffer(m_buffer);
 	m_musica_inicio.play();
+	m_musica_inicio.setLoop(true);
 	/// titulo
 	m_color = {0,180,0};
 	m_fuente.loadFromFile("recursos/fuentes/Cave-Story.ttf");
@@ -48,7 +50,6 @@ Menu::Menu(){
 	
 }
 void Menu::Actualizar (Juego &juego) {
-	m_musica_inicio.setLoop(true);
 	if(m_mouse.isButtonPressed(m_mouse.Left)) {
 		m_musica_inicio.stop();
 		juego.CambiarEscena(new PantallaCarga());
@@ -64,14 +65,13 @@ void Menu::Actualizar (Juego &juego) {
 }
 
 void Menu::Dibujar (RenderWindow & window) {
-	window.clear({0,0,0}); // fondo negro
-	// dibuja esto
+	window.clear({0,0,0});
 	window.draw(m_fondo);
 	window.draw(m_t1);
 	window.draw(m_t2);
 	window.draw(m_t3);
 	window.draw(m_t4);
-	window.display(); // se dibuja la ventana
+	window.display();
 }
 
 void Menu::CambiarVolumenMusica (float vol) {

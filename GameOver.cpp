@@ -8,13 +8,15 @@ GameOver::GameOver() {
 	m_gameOver.setScale(1.1,1.1);
 	m_gameOver.setPosition(-25,0);
 	
-	m_musica_gameOver.openFromFile("recursos/gameOver/gameover.wav");
+	m_buffer1.loadFromFile("recursos/gameOver/gameover.wav");
+	m_musica_gameOver.setBuffer(m_buffer1);
 	m_musica_gameOver.play();
+	m_musica_gameOver.setLoop(true);
 	/// sonidos
-	m_voz_gameover.openFromFile("recursos/gameOver/voz_gameover.wav");
+	m_buffer2.loadFromFile("recursos/gameOver/voz_gameover.wav");
+	m_voz_gameover.setBuffer(m_buffer2);
 	m_voz_gameover.play();
 	m_voz_gameover.setVolume(30);
-	
 	/// textos
 	m_fuente.loadFromFile("recursos/fuentes/cave-story.ttf");
 	m_t1.setFont(m_fuente);
@@ -23,7 +25,6 @@ GameOver::GameOver() {
 }
 
 void GameOver::Actualizar (Juego & juego) {
-	m_musica_gameOver.setLoop(true);
 	if(Mouse::isButtonPressed(Mouse::Left)) {
 		m_musica_gameOver.stop();
 		m_voz_gameover.stop();
