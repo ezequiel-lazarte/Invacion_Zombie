@@ -52,6 +52,7 @@ private:
 	int m_numeroEnemigos;
 	int m_fps;
 	int aux;
+	int m_posDesde, m_posHasta;
 };
 
 #endif

@@ -10,7 +10,7 @@ using namespace std;
 class Enemigo_1 : public Entidad {
 public:
 	Enemigo_1();
-	void SetPosEnemigo();
+	void SetPosEnemigo(float x);
 	void Actualizar();
 	void Dibujar (sf::RenderWindow & w);
 	void CambiarVolumenMusica(float vol);

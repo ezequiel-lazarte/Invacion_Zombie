@@ -50,6 +50,16 @@ Partida::Partida() : m_color_fondo(20,110,255) {
 	m_corazon.setTexture(m_textura_corazon);
 	m_corazon.setPosition(10,12);
 	m_corazon.setScale(.13,.13);
+	
+	srand(time(NULL)*time(NULL));
+	m_posDesde = -1800;
+	m_posHasta = 1800;
+	
+	m_enemigo.SetPosEnemigo((rand()*rand())%(m_posHasta - m_posDesde) + m_posDesde);
+	m_enemigo2.SetPosEnemigo((rand()*rand())%(m_posHasta - m_posDesde) + m_posDesde);
+	m_enemigo3.SetPosEnemigo((rand()*rand())%(m_posHasta - m_posDesde) + m_posDesde);
+	m_enemigo4.SetPosEnemigo((rand()*rand())%(m_posHasta - m_posDesde) + m_posDesde);
+	
 }
 
 void Partida::Actualizar (Juego &juego) {

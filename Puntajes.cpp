@@ -3,6 +3,8 @@
 #include <fstream>
 #include <iostream>
 #include <cstring>
+#include <iomanip>
+#include <iostream>
 using namespace std;
 
 Puntajes::Puntajes()  {
@@ -61,16 +63,6 @@ void Puntajes::Actualizar (Juego & juego) {
 	}
 }
 
-void Puntajes::Dibujar (sf::RenderWindow & window) {
-	window.clear({0,0,0});
-	window.draw(m_fondo);
-	window.draw(m_titulo);
-	for(int i=0;i<m_nro_puntajes;i++) {
-		window.draw(m_posiciones[i]);
-	}
-	window.display();
-}
-
 void Puntajes::CambiarVolumenMusica (float vol) {
 	m_musica.setVolume(vol);
 }
@@ -110,4 +102,14 @@ bool CompararPuntajes(Puntaje p1, Puntaje p2) {
 		return true;
 	else
 		return false;
+}
+
+void Puntajes::Dibujar (sf::RenderWindow & window) {
+	window.clear({0,0,0});
+	window.draw(m_fondo);
+	window.draw(m_titulo);
+	for(int i=0;i<m_nro_puntajes;i++) {
+		window.draw(m_posiciones[i]);
+	}
+	window.display();
 }

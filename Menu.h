@@ -15,7 +15,7 @@ public:
 	Menu();
 	void Actualizar(Juego &juego) override;
 	void Dibujar(RenderWindow &window) override;
-	void CambiarVolumenMusica(float vol);
+	void CambiarVolumenMusica(float vol=0);
 private:
 	Font m_fuente;
 	Text m_t1, m_t2, m_t3, m_t4;
