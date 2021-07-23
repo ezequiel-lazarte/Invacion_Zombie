@@ -13,11 +13,11 @@ Partida::Partida() : m_color_fondo(20,110,255) {
 	m_musica_fondo.setVolume(m_volumen+0);
 	
 	srand(time(NULL)*time(NULL));
-	m_posDesde = -1800;
-	m_posHasta = 1800;
+	m_posDesde = -3800;
+	m_posHasta = 3800;
 
-	m_numeroEnemigos1 = 3;
-	m_numeroEnemigos2 = 3;
+	m_numeroEnemigos1 = 7;
+	m_numeroEnemigos2 = 7;
 	for(int i=0;i<m_numeroEnemigos1;i++) {
 		m_enemigos1.resize(m_enemigos1.size() + 1);
 		Enemigo_1 enemigo1;
@@ -36,7 +36,6 @@ Partida::Partida() : m_color_fondo(20,110,255) {
 		m_retraso2.resize(m_retraso2.size() + 1);
 		m_retraso2[i] = 0;
 	}
-	
 	
 	m_buffer.loadFromFile("recursos/musica/Lost.wav");
 	m_musica_fondo.setBuffer(m_buffer);
@@ -132,6 +131,7 @@ void Partida::Actualizar (Juego &juego) {
 		m_player.Finalizar();
 		juego.CambiarEscena(new GameOver());
 	}
+	CrearEnemigos();
 	/// vida jugador
 	m_vida_player.setString(to_string(m_player.getVida()));
 	m_player.Actualizar();
@@ -177,3 +177,25 @@ void Partida::ActualizarPuntaje ( ) {
 		int tiempo = 777;
 	}
 }
+
+void Partida::CrearEnemigos ( ) {
+	srand(time(NULL)*time(NULL));
+	m_posDesde = -3800;
+	m_posHasta = 3800;
+	
+	for(size_t i=0;i<m_enemigos1.size();i++) {
+		if(m_enemigos1[i].getVida() <= 0) {
+			Enemigo_1 enemigo1;
+			enemigo1.SetPosEnemigo((rand()*rand())%(m_posHasta - m_posDesde) + m_posDesde);
+			m_enemigos1[i] = enemigo1;
+		}
+	}
+	for(size_t i=0;i<m_enemigos2.size();i++) {
+		if(m_enemigos2[i].getVida() <= 0) {
+			Enemigo_2 enemigo2;
+			enemigo2.SetPosEnemigo((rand()*rand())%(m_posHasta - m_posDesde) + m_posDesde);
+			m_enemigos2[i] = enemigo2;
+		}
+	}
+}
+

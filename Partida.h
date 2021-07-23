@@ -24,6 +24,7 @@ class Partida : public Escena{
 public:
 	Partida();
 	void Actualizar(Juego &juego) override;
+	void CrearEnemigos();
 	void Dibujar(RenderWindow &window) override;
 	void CambiarVolumenMusica(float vol);
 	void ActualizarPuntaje();
