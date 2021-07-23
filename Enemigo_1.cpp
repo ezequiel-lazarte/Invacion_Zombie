@@ -23,14 +23,10 @@ Enemigo_1::Enemigo_1() {
 	m_sprite.setTexture(m_texturas_adel[0]);
 	m_sprite.setScale(0.75,0.75);
 	m_vida = 100;
-	m_sound_zombie.play();
+//	m_sound_zombie.play();
 }
 
 void Enemigo_1::SetPosEnemigo (float x) {
-//	m_posDesde = -1800;
-//	m_posHasta = 1800;
-//	srand(time(NULL)*time(NULL));
-//	m_posEnemigo.x = (rand()*rand())%(m_posHasta - m_posDesde) + m_posDesde;
 	m_posEnemigo.x = x;
 	m_posEnemigo.y = 412;
 	if(m_posEnemigo.x <= 0 or m_posEnemigo.x >= 1080) {

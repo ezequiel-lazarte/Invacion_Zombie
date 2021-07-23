@@ -9,17 +9,34 @@
 using namespace std;
 
 Partida::Partida() : m_color_fondo(20,110,255) {
-	m_volumen = 20;
-	m_enemigo.CambiarVolumenMusica(m_volumen);
-	m_enemigo2.CambiarVolumenMusica(m_volumen);
-	m_enemigo3.CambiarVolumenMusica(m_volumen);
-	m_enemigo4.CambiarVolumenMusica(m_volumen);
-	m_musica_fondo.setVolume(m_volumen+40);
-	m_numeroEnemigos = 2;
-//	for(int i=0;i<m_numeroEnemigos;i++) {
-//		Enemigo_1 enemigo;
-//		m_enemigos[i] = enemigo;
-//	}
+	m_volumen = 100;
+	m_musica_fondo.setVolume(m_volumen+0);
+	
+	srand(time(NULL)*time(NULL));
+	m_posDesde = -3800;
+	m_posHasta = 3800;
+
+	m_numeroEnemigos1 = 7;
+	m_numeroEnemigos2 = 7;
+	for(int i=0;i<m_numeroEnemigos1;i++) {
+		m_enemigos1.resize(m_enemigos1.size() + 1);
+		Enemigo_1 enemigo1;
+		m_enemigos1[i] = enemigo1;
+		m_enemigos1[i].SetPosEnemigo((rand()*rand())%(m_posHasta - m_posDesde) + m_posDesde);
+		
+		m_retraso1.resize(m_retraso1.size() + 1);
+		m_retraso1[i] = 0;
+	}
+	for(int i=0;i<m_numeroEnemigos2;i++) {
+		m_enemigos2.resize(m_enemigos2.size() + 1);
+		Enemigo_2 enemigo2;
+		m_enemigos2[i] = enemigo2;
+		m_enemigos2[i].SetPosEnemigo((rand()*rand())%(m_posHasta - m_posDesde) + m_posDesde);
+		
+		m_retraso2.resize(m_retraso2.size() + 1);
+		m_retraso2[i] = 0;
+	}
+	
 	m_buffer.loadFromFile("recursos/musica/Lost.wav");
 	m_musica_fondo.setBuffer(m_buffer);
 	m_musica_fondo.play();
@@ -50,118 +67,95 @@ Partida::Partida() : m_color_fondo(20,110,255) {
 	m_corazon.setTexture(m_textura_corazon);
 	m_corazon.setPosition(10,12);
 	m_corazon.setScale(.13,.13);
-	
-	srand(time(NULL)*time(NULL));
-	m_posDesde = -1800;
-	m_posHasta = 1800;
-	
-	m_enemigo.SetPosEnemigo((rand()*rand())%(m_posHasta - m_posDesde) + m_posDesde);
-	m_enemigo2.SetPosEnemigo((rand()*rand())%(m_posHasta - m_posDesde) + m_posDesde);
-	m_enemigo3.SetPosEnemigo((rand()*rand())%(m_posHasta - m_posDesde) + m_posDesde);
-	m_enemigo4.SetPosEnemigo((rand()*rand())%(m_posHasta - m_posDesde) + m_posDesde);
-	
 }
 
 void Partida::Actualizar (Juego &juego) {
 	m_crono = m_reloj.getElapsedTime();
 	aux = m_crono.asSeconds();
 	m_tiempo.setString(to_string(aux));
-	/// obtengo fps del juego
 	m_fps = juego.ObtenerFps();
 	/// Keyboard
 	if(Keyboard::isKeyPressed(Keyboard::Key::Escape)) {
 		m_musica_fondo.stop();
-		for(int i=0;i<m_enemigos.size();i++) {
-			m_enemigos[i].Finalizar();
+		for(int i=0;i<m_enemigos1.size();i++) {
+			m_enemigos1[i].Finalizar();
 		}
-		m_enemigo.Finalizar();
-		m_enemigo2.Finalizar();
-		m_enemigo3.Finalizar();
-		m_enemigo4.Finalizar();
+		for(int i=0;i<m_enemigos2.size();i++) {
+			m_enemigos2[i].Finalizar();
+		}
 		m_player.Finalizar();
 		juego.CambiarEscena(new Menu());
 	}
 	if(Keyboard::isKeyPressed(Keyboard::Key::F)) {
 		m_player.Ataque();
-		for(int i=0;i<m_enemigos.size();i++) {
-			if(m_player.Colision(m_enemigos[i])) {
-				m_enemigos[i].BajarVida();
+		for(int i=0;i<m_enemigos1.size();i++) {
+			if(m_player.Colision(m_enemigos1[i])) {
+				m_enemigos1[i].BajarVida();
 			}
 		}
-		if(m_player.Colision(m_enemigo)) {
-			m_enemigo.BajarVida();
-		}
-		if(m_player.Colision(m_enemigo2)) {
-			m_enemigo2.BajarVida();
-		}
-		if(m_player.Colision(m_enemigo3)) {
-			m_enemigo3.BajarVida();
-		}
-		if(m_player.Colision(m_enemigo4)) {
-			m_enemigo4.BajarVida();
+		for(int i=0;i<m_enemigos2.size();i++) {
+			if(m_player.Colision(m_enemigos2[i])) {
+				m_enemigos2[i].BajarVida();
+			}
 		}
 	}
 	if(m_player.getVida()>0) {
-		for(int i=0;i<m_enemigos.size();i++) {
-			if(m_enemigos[i].Colision(m_player) and m_enemigos[i].getVida()>0) {//m_enemigos.Ataque() and m_player.getVida()>0) {
-				m_player.BajarVida();
-			} 
+		for(int i=0;i<m_enemigos1.size();i++) {
+			if(m_enemigos1[i].Colision(m_player) and m_enemigos1[i].getVida()>0) {
+				m_retraso1[i] += 1;
+				if(m_retraso1[i] > 30) { // el enemigo de tipo 1 tarda mas en atacar
+					m_player.BajarVida();
+				}
+			} else if(!m_enemigos1[i].Colision(m_player)) {
+				m_retraso1[i] = 0;
+			}
 		}
-		if(m_enemigo.Colision(m_player) and m_enemigo.getVida()>0) {
-			m_player.BajarVida();
-		}
-		if(m_enemigo2.Colision(m_player) and m_enemigo2.getVida()>0) {
-			m_player.BajarVida();
-		}
-		if(m_enemigo3.Colision(m_player) and m_enemigo3.getVida()>0) {
-			m_player.BajarVida();
-		}
-		if(m_enemigo4.Colision(m_player) and m_enemigo4.getVida()>0) {
-			m_player.BajarVida();
+		for(int i=0;i<m_enemigos2.size();i++) {
+			if(m_enemigos2[i].Colision(m_player) and m_enemigos2[i].getVida()>0) {
+				m_retraso2[i] += 1;
+				if(m_retraso2[i] > 15) { // el enemigo de tipo 2 tarda menos en atacar
+					m_player.BajarVida();
+				}
+			} else if(!m_enemigos2[i].Colision(m_player)) {
+				m_retraso2[i] = 0;
+			}
 		}
 	} else if(m_player.getVida()<=0) {
 		m_musica_fondo.stop();
-		for(size_t i=0;i<m_enemigos.size();i++) {
-			m_enemigos[i].Finalizar();
+		for(size_t i=0;i<m_enemigos1.size();i++) {
+			m_enemigos1[i].Finalizar();
 		}
-		m_enemigo.Finalizar();
-		m_enemigo2.Finalizar();
-		m_enemigo3.Finalizar();
-		m_enemigo4.Finalizar();
+		for(size_t i=0;i<m_enemigos2.size();i++) {
+			m_enemigos2[i].Finalizar();
+		}
 		m_player.Finalizar();
 		juego.CambiarEscena(new GameOver());
 	}
-	/// vida Player
+	CrearEnemigos();
+	/// vida jugador
 	m_vida_player.setString(to_string(m_player.getVida()));
-	/// updates
 	m_player.Actualizar();
-	for(size_t i=0;i<m_enemigos.size();i++) {
-		m_enemigos[i].Actualizar();
-		m_enemigos[i].getPosPlayer(m_player.getPos());
+	for(size_t i=0;i<m_enemigos1.size();i++) {
+		m_enemigos1[i].Actualizar();
+		m_enemigos1[i].getPosPlayer(m_player.getPos());
 	}
-	m_enemigo.Actualizar();
-	m_enemigo.getPosPlayer(m_player.getPos());
-	m_enemigo2.Actualizar();
-	m_enemigo2.getPosPlayer(m_player.getPos());
-	m_enemigo3.Actualizar();
-	m_enemigo3.getPosPlayer(m_player.getPos());
-	m_enemigo4.Actualizar();
-	m_enemigo4.getPosPlayer(m_player.getPos());
+	for(size_t i=0;i<m_enemigos2.size();i++) {
+		m_enemigos2[i].Actualizar();
+		m_enemigos2[i].getPosPlayer(m_player.getPos());
+	}
 	m_fondo_1.Actualizar();
 	ActualizarPuntaje();
 }
 
 void Partida::Dibujar (RenderWindow & window) {
-	//dibujar
 	m_fondo_1.Dibujar(window);
 	m_player.Dibujar(window);
-	for(size_t i=0;i<m_enemigos.size();i++) {
-		m_enemigos[i].Dibujar(window);
+	for(size_t i=0;i<m_enemigos1.size();i++) {
+		m_enemigos1[i].Dibujar(window);
 	}
-	m_enemigo.Dibujar(window);
-	m_enemigo2.Dibujar(window);
-	m_enemigo3.Dibujar(window);
-	m_enemigo4.Dibujar(window);
+	for(size_t i=0;i<m_enemigos2.size();i++) {
+		m_enemigos2[i].Dibujar(window);
+	}
 	window.draw(m_vida_player);
 	window.draw(m_tiempo);
 	window.draw(m_t1);
@@ -183,3 +177,25 @@ void Partida::ActualizarPuntaje ( ) {
 		int tiempo = 777;
 	}
 }
+
+void Partida::CrearEnemigos ( ) {
+	srand(time(NULL)*time(NULL));
+	m_posDesde = -3800;
+	m_posHasta = 3800;
+	
+	for(size_t i=0;i<m_enemigos1.size();i++) {
+		if(m_enemigos1[i].getVida() <= 0) {
+			Enemigo_1 enemigo1;
+			enemigo1.SetPosEnemigo((rand()*rand())%(m_posHasta - m_posDesde) + m_posDesde);
+			m_enemigos1[i] = enemigo1;
+		}
+	}
+	for(size_t i=0;i<m_enemigos2.size();i++) {
+		if(m_enemigos2[i].getVida() <= 0) {
+			Enemigo_2 enemigo2;
+			enemigo2.SetPosEnemigo((rand()*rand())%(m_posHasta - m_posDesde) + m_posDesde);
+			m_enemigos2[i] = enemigo2;
+		}
+	}
+}
+

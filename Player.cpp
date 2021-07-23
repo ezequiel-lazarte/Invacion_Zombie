@@ -57,7 +57,8 @@ Player::Player() {
 	m_ultima_tecla =0;
 }
 
-void Player::Actualizar ( ) {
+void Player::Actualizar () {
+	
 	if(Keyboard::isKeyPressed(Keyboard::A)) { /// 0 para la A y 1 para la D
 		m_ultima_tecla = 0;
 	} else if(Keyboard::isKeyPressed(Keyboard::A)) {

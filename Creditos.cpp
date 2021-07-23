@@ -18,7 +18,7 @@ Creditos::Creditos() {
 	m_t2.setPosition(300,130);
 	m_t2.setCharacterSize(40);
 	m_t2.setString("Animacion: 		 Lazarte Ezequiel \n\nMusica:				Lazarte Ezequiel \n\nProgramador:   Lazarte Ezequiel");
-	/// Fondo
+	
 	m_textura.loadFromFile("recursos/fondos/creditos/creditos.jpg");
 	m_sprite.setTexture(m_textura);
 	m_sprite.setPosition(0,0);
@@ -29,7 +29,7 @@ Creditos::Creditos() {
 void Creditos::Actualizar (Juego & juego) {
 	m_t1.move(m_move);
 	m_t2.move(m_move);
-	if(m_t1.getPosition().y >= 500) {
+	if(m_t1.getPosition().y >= 500) { // si el texto esta por debajo de 500, respawmea arriba
 		m_t1.setPosition(400,-300);
 		m_t2.setPosition(300,-140);
 	}
@@ -38,7 +38,6 @@ void Creditos::Actualizar (Juego & juego) {
 		juego.CambiarEscena(new Menu());
 	}
 }
-
 void Creditos::Dibujar (sf::RenderWindow & window) {
 	window.clear({0,0,0});
 	window.draw(m_sprite);
@@ -50,4 +49,3 @@ void Creditos::Dibujar (sf::RenderWindow & window) {
 void Creditos::CambiarVolumenMusica (float vol) {
 	m_musica.setVolume(vol);
 }
-
