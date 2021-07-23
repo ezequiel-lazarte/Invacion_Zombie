@@ -14,7 +14,7 @@ using namespace std;
 class Player : public Entidad {
 public:
 	Player();
-	void Actualizar ( );
+	void Actualizar ();
 	void Dibujar (sf::RenderWindow & w);
 	void Ataque();
 	sf::Sprite &getSprite();

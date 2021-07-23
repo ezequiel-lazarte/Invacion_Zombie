@@ -16,7 +16,7 @@ void Juego::Jugar ( ) {
 	/// Bucle Principal
 	while(m_window.isOpen()) {
 		m_cronometro = m_reloj.getElapsedTime(); // obtengo tiempo transcurrido
-		if(m_cronometro.asSeconds() > 1/m_fps) { // 1 segundo dividido 60 fps
+		if(m_cronometro.asSeconds() > 1/m_fps) {
 			ProcesarEventos();
 			m_reloj.restart(); // reinicio el reloj
 		}
@@ -31,13 +31,11 @@ void Juego::Jugar ( ) {
 	}
 }
 void Juego::ProcesarEventos ( ) {
-	// Procesar eventos
 	Event evento;
 	while(m_window.pollEvent(evento)) {
 		if(evento.type == Event::Closed)
 			m_window.close();
 	}
-	
 }
 void Juego::Actualizar ( ) {
 	m_escena->Actualizar(*this);
