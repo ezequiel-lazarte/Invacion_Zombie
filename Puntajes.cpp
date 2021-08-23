@@ -35,7 +35,6 @@ Puntajes::Puntajes()  {
 	for(int i=0;i<m_nro_puntajes;i++) {
 		m_puntajes.push_back(aux1);
 	}
-	
 	/// Puntajes
 	string aux;
 	Text t1;
@@ -46,7 +45,6 @@ Puntajes::Puntajes()  {
 		t1.setPosition(30,85*(i+1));
 		t1.setString(aux);
 		t1.setFillColor(sf::Color {180,0,0});
-		
 		m_posiciones.push_back(t1);
 	}
 	/// binario
@@ -56,6 +54,7 @@ Puntajes::Puntajes()  {
 	}
 	LeerDatos();
 }
+
 void Puntajes::Actualizar (Juego & juego) {
 	if(Keyboard::isKeyPressed(Keyboard::Escape)) {
 		m_musica.stop();

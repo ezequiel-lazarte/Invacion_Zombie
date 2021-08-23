@@ -1,0 +1,4 @@
+#Ignoro ambas carpetas ya que el compilador las debe crear
+*.o
+*.exe
+*.dat

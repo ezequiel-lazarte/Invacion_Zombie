@@ -9,15 +9,13 @@
 using namespace std;
 
 Partida::Partida() : m_color_fondo(20,110,255) {
-	m_volumen = 100;
-	m_musica_fondo.setVolume(m_volumen+0);
-	
+	m_volumen = 30;
+	m_musica_fondo.setVolume(m_volumen);
 	srand(time(NULL)*time(NULL));
 	m_posDesde = -3800;
 	m_posHasta = 3800;
-
-	m_numeroEnemigos1 = 7;
-	m_numeroEnemigos2 = 7;
+	m_numeroEnemigos1 = 13;
+	m_numeroEnemigos2 = 3;
 	for(int i=0;i<m_numeroEnemigos1;i++) {
 		m_enemigos1.resize(m_enemigos1.size() + 1);
 		Enemigo_1 enemigo1;
@@ -36,7 +34,6 @@ Partida::Partida() : m_color_fondo(20,110,255) {
 		m_retraso2.resize(m_retraso2.size() + 1);
 		m_retraso2[i] = 0;
 	}
-	
 	m_buffer.loadFromFile("recursos/musica/Lost.wav");
 	m_musica_fondo.setBuffer(m_buffer);
 	m_musica_fondo.play();
@@ -182,7 +179,6 @@ void Partida::CrearEnemigos ( ) {
 	srand(time(NULL)*time(NULL));
 	m_posDesde = -3800;
 	m_posHasta = 3800;
-	
 	for(size_t i=0;i<m_enemigos1.size();i++) {
 		if(m_enemigos1[i].getVida() <= 0) {
 			Enemigo_1 enemigo1;

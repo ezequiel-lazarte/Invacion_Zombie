@@ -22,7 +22,7 @@ Enemigo_2::Enemigo_2() {
 	}
 	m_sprite.setTexture(m_texturas_adel[0]);
 	m_sprite.setScale(0.75,0.75);
-	m_vida = 100;
+	m_vida = 800;
 //	m_sound_zombie.play();
 }
 

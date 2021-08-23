@@ -48,10 +48,8 @@ void PantallaCarga::Actualizar (Juego & juego) {
 		m_cambiar_textura=0;
 	}
 	m_cambiar_textura +=1;
-	
-	/// cambiar Escena
 	m_crono = m_reloj.getElapsedTime();
-	if(m_crono.asSeconds() >= 2) {
+	if(m_crono.asSeconds() >= 0) {
 		juego.CambiarEscena(new Partida);
 	}
 }

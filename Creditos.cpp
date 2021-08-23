@@ -21,7 +21,7 @@ Creditos::Creditos() {
 	
 	m_textura.loadFromFile("recursos/fondos/creditos/creditos.jpg");
 	m_sprite.setTexture(m_textura);
-	m_sprite.setPosition(0,0);
+	m_sprite.setPosition(0,0); 
 	m_sprite.setScale(1.1,1.1);
 	m_musica.setLoop(true);
 }

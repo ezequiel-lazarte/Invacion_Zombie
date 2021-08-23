@@ -21,6 +21,7 @@ public:
 	bool Ataque();
 	sf::Vector2f getPosPlayer(sf::Vector2f pos_player);
 	sf::Vector2f getPos();
+	
 private:
 	sf::SoundBuffer m_sonido1;
 	sf::Sound m_sound_zombie;

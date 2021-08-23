@@ -22,8 +22,7 @@ Enemigo_1::Enemigo_1() {
 	}
 	m_sprite.setTexture(m_texturas_adel[0]);
 	m_sprite.setScale(0.75,0.75);
-	m_vida = 100;
-//	m_sound_zombie.play();
+	m_vida = 300;
 }
 
 void Enemigo_1::SetPosEnemigo (float x) {
@@ -32,15 +31,13 @@ void Enemigo_1::SetPosEnemigo (float x) {
 	if(m_posEnemigo.x <= 0 or m_posEnemigo.x >= 1080) {
 		// no hago nada
 	} else {
-		m_posEnemigo.x -= 950;
+		m_posEnemigo.x -= 1950;
 	}
 	m_sprite.setPosition(m_posEnemigo.x, m_posEnemigo.y);
 }
 
 void Enemigo_1::Actualizar () {
-	if(m_vida>0){
-		m_sound_zombie.setLoop(true);
-	} else if(m_vida<=0) {
+	if(m_vida<=0) {
 		Finalizar();
 	}
 	Animaciones();
