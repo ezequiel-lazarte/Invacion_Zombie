@@ -9,7 +9,7 @@
 using namespace std;
 
 Partida::Partida() : m_color_fondo(20,110,255) {
-	m_volumen = 30;
+	m_volumen = 10;
 	m_musica_fondo.setVolume(m_volumen);
 	srand(time(NULL)*time(NULL));
 	m_posDesde = -3800;
@@ -134,7 +134,7 @@ void Partida::Actualizar (Juego &juego) {
 	m_player.Actualizar();
 	for(size_t i=0;i<m_enemigos1.size();i++) {
 		m_enemigos1[i].Actualizar();
-		m_enemigos1[i].getPosPlayer(m_player.getPos());
+		m_enemigos1[i].setPosPlayer(m_player.getPos());
 	}
 	for(size_t i=0;i<m_enemigos2.size();i++) {
 		m_enemigos2[i].Actualizar();

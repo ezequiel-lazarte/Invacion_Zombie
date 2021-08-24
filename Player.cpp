@@ -39,10 +39,8 @@ Player::Player() {
 	m_ancho_sprite = 320/5;
 	m_move = {5,0};
 	m_gravedad = 6;
-	/// posicion inicial
 	m_pos_inicial.x = 1080/2;
 	m_pos_inicial.y = 520-m_alto_sprite*.9;
-	/// sprite
 	m_sprite.setTexture(m_texturas_adel[0]);
 	m_sprite.setScale(.3,.3);
 	m_sprite.setPosition(m_pos_inicial);
@@ -64,7 +62,6 @@ void Player::Actualizar () {
 		m_ultima_tecla = 1;
 	}
 	sf::Vector2f player_pos = m_sprite.getPosition();
-	/// movimientos
 	MovimientoQuieto();
 	MovimientoGolpea();
 	MovimientoGolpeaCamina();

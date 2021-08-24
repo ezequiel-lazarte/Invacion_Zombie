@@ -46,7 +46,7 @@ Menu::Menu(){
 	m_fondo.setTexture(m_textura_fondo);
 	m_fondo.setPosition(0,0);
 	m_fondo.setScale(1.2,1.24);
-	m_musica_inicio.setVolume(30);
+	m_musica_inicio.setVolume(10);
 }
 void Menu::Actualizar (Juego &juego) {
 	if(m_mouse.isButtonPressed(m_mouse.Left)) {

@@ -1,4 +1,4 @@
-#Ignoro ambas carpetas ya que el compilador las debe crear
+Debug_Win32
 *.o
 *.exe
 *.dat

@@ -16,8 +16,8 @@ protected:
 	sf::Texture m_textura;
 	sf::Sprite m_sprite;
 	sf::IntRect m_rect;
-	sf::Vector2f m_size_rect;
-	float m_alto_sprite, m_ancho_sprite;
+	sf::Vector2i m_size_rect;
+	int m_alto_sprite, m_ancho_sprite;
 	int m_vida, m_danio;
 };
 
