@@ -78,7 +78,7 @@ path=Fondo.h
 cursor=18:10
 [header]
 path=Enemigo_1.h
-cursor=28:30
+cursor=32:0
 open=true
 [header]
 path=Escena.h
