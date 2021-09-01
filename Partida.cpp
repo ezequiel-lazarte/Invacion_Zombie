@@ -182,14 +182,14 @@ void Partida::CrearEnemigos ( ) {
 	for(size_t i=0;i<m_enemigos1.size();i++) {
 		if(m_enemigos1[i].getVida() <= 0) {
 			Enemigo_1 enemigo1;
-			enemigo1.SetPosEnemigo((rand()*rand())%(m_posHasta - m_posDesde) + m_posDesde);
+			enemigo1.SetPosEnemigo(m_posDesde);
 			m_enemigos1[i] = enemigo1;
 		}
 	}
 	for(size_t i=0;i<m_enemigos2.size();i++) {
 		if(m_enemigos2[i].getVida() <= 0) {
 			Enemigo_2 enemigo2;
-			enemigo2.SetPosEnemigo((rand()*rand())%(m_posHasta - m_posDesde) + m_posDesde);
+			enemigo2.SetPosEnemigo(m_posHasta);
 			m_enemigos2[i] = enemigo2;
 		}
 	}
