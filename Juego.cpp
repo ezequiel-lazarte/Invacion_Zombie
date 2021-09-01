@@ -7,18 +7,16 @@ using namespace sf;
 
 Juego::Juego() : m_window(VideoMode(1080,520), "Invación Zombie") {
 	m_fps = 60;
-	// limite de fps
 	m_window.setFramerateLimit(m_fps);
-	m_escena = new Menu(); // escena principal
+	m_escena = new Menu();
 }
-/// metodo principal
+
 void Juego::Jugar ( ) {
-	/// Bucle Principal
 	while(m_window.isOpen()) {
-		m_cronometro = m_reloj.getElapsedTime(); // obtengo tiempo transcurrido
+		m_cronometro = m_reloj.getElapsedTime();
 		if(m_cronometro.asSeconds() > 1/m_fps) {
 			ProcesarEventos();
-			m_reloj.restart(); // reinicio el reloj
+			m_reloj.restart();
 		}
 		Actualizar();
 		Dibujar();

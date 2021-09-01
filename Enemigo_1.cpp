@@ -7,7 +7,7 @@ Enemigo_1::Enemigo_1() {
 	m_size_rect.y = 0;
 	m_alto_sprite = 144;
 	m_ancho_sprite = 144;
-	
+
 	m_sonido1.loadFromFile("recursos/musica/zombie1.wav");
 	m_sound_zombie.setBuffer(m_sonido1);
 	m_sound_zombie.setVolume(20);
@@ -23,12 +23,9 @@ Enemigo_1::Enemigo_1() {
 void Enemigo_1::SetPosEnemigo (float x) {
 	m_posEnemigo.x = x;
 	m_posEnemigo.y = 412;
-	if(m_posEnemigo.x <= 0 or m_posEnemigo.x >= 1080) {
-		
-	} else {
-		m_posEnemigo.x -= 1950;
-	}
-	m_rect = {m_size_rect.x, m_size_rect.y, m_alto_sprite, m_ancho_sprite};
+	if(m_posEnemigo.x <= 0 or m_posEnemigo.x >= 1080) ;
+	else m_posEnemigo.x -= 1950;
+	m_rect = {m_size_rect.x, m_size_rect.y,m_alto_sprite, m_ancho_sprite};
 	m_sprite.setTexture(m_textura);
 	m_sprite.setTextureRect(m_rect);
 	m_sprite.setScale(0.75,0.75);
@@ -36,16 +33,12 @@ void Enemigo_1::SetPosEnemigo (float x) {
 }
 
 void Enemigo_1::Actualizar () {
-	if(m_vida<=0) {
-		Finalizar();
-	}
+	if(m_vida<=0) Finalizar();
 	Animaciones();
 }
 
 void Enemigo_1::Dibujar (sf::RenderWindow & w) {
-	if(m_vida>0) {
-		w.draw(m_sprite);
-	}
+	if(m_vida>0) w.draw(m_sprite);
 }
 
 void Enemigo_1::setPosPlayer (sf::Vector2f pos_player) {
@@ -57,17 +50,13 @@ void Enemigo_1::Finalizar ( ) {
 }
 
 void Enemigo_1::BajarVida ( ) {
-	if(m_vida>0) {
-		m_vida -= m_danio;
-	}
+	if(m_vida>0) m_vida -= m_danio;
 }
 
 bool Enemigo_1::Ataque ( ) {
 	m_rect = {m_size_rect.x+144*2,m_size_rect.y,m_alto_sprite, m_ancho_sprite};
 	m_sprite.setTextureRect(m_rect);
-	if(m_pos_player.y == m_sprite.getPosition().y and m_vida>0) {
-		return true;
-	}
+	if(m_pos_player.y == m_sprite.getPosition().y and m_vida>0) return true;
 	return false;
 }
 

@@ -61,6 +61,10 @@ void Menu::Actualizar (Juego &juego) {
 		m_musica_inicio.stop();
 		juego.CambiarEscena(new Creditos());
 	}
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+		m_musica_inicio.stop();
+		juego.CambiarEscena(new Creditos());
+	}
 }
 
 void Menu::Dibujar (RenderWindow & window) {

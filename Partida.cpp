@@ -21,7 +21,6 @@ Partida::Partida() : m_color_fondo(20,110,255) {
 		Enemigo_1 enemigo1;
 		m_enemigos1[i] = enemigo1;
 		m_enemigos1[i].SetPosEnemigo((rand()*rand())%(m_posHasta - m_posDesde) + m_posDesde);
-		
 		m_retraso1.resize(m_retraso1.size() + 1);
 		m_retraso1[i] = 0;
 	}
@@ -169,27 +168,26 @@ void Partida::ActualizarPuntaje ( ) {
 		m_puntaje_actual = m_crono.asSeconds();
 	}
 	if(m_player.getVida()<=0) {
-		/// llamo a 
+		/// llamo a
 		string nombre_player = "John";
 		int tiempo = 777;
 	}
 }
 
 void Partida::CrearEnemigos ( ) {
-	srand(time(NULL)*time(NULL));
 	m_posDesde = -3800;
 	m_posHasta = 3800;
 	for(size_t i=0;i<m_enemigos1.size();i++) {
 		if(m_enemigos1[i].getVida() <= 0) {
 			Enemigo_1 enemigo1;
-			enemigo1.SetPosEnemigo((rand()*rand())%(m_posHasta - m_posDesde) + m_posDesde);
+			enemigo1.SetPosEnemigo(m_posDesde);
 			m_enemigos1[i] = enemigo1;
 		}
 	}
 	for(size_t i=0;i<m_enemigos2.size();i++) {
 		if(m_enemigos2[i].getVida() <= 0) {
 			Enemigo_2 enemigo2;
-			enemigo2.SetPosEnemigo((rand()*rand())%(m_posHasta - m_posDesde) + m_posDesde);
+			enemigo2.SetPosEnemigo(m_posHasta);
 			m_enemigos2[i] = enemigo2;
 		}
 	}

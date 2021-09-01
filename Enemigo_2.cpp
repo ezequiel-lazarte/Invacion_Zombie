@@ -67,17 +67,7 @@ void Enemigo_2::BajarVida ( ) {
 bool Enemigo_2::Ataque ( ) {
 	/// aca se mostrarian una serie de sprites del atake del enemigo
 	int aux=0;
-	/// texturas
 	m_sprite.setTexture(m_texturas_adel[2]);
-//	if(aux==0) {
-//		m_sprite.setTexture();
-//	} else if(aux==1) {
-//		m_sprite.setTexture();
-//	} else if(aux==2) {
-//		
-//	} else if(aux==3) {
-//		
-//	}
 	if(m_pos_player.y == m_sprite.getPosition().y and m_vida>0) {
 		return true;
 	}
