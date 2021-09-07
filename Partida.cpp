@@ -14,8 +14,8 @@ Partida::Partida() : m_color_fondo(20,110,255) {
 	srand(time(NULL)*time(NULL));
 	m_posDesde = -3800;
 	m_posHasta = 3800;
-	m_numeroEnemigos1 = 13;
-	m_numeroEnemigos2 = 3;
+	m_numeroEnemigos1 = 5;
+	m_numeroEnemigos2 = 5;
 	for(int i=0;i<m_numeroEnemigos1;i++) {
 		m_enemigos1.resize(m_enemigos1.size() + 1);
 		Enemigo_1 enemigo1;
@@ -83,7 +83,6 @@ void Partida::Actualizar (Juego &juego) {
 		juego.CambiarEscena(new Menu());
 	}
 	if(Keyboard::isKeyPressed(Keyboard::Key::F)) {
-		m_player.Ataque();
 		for(int i=0;i<m_enemigos1.size();i++) {
 			if(m_player.Colision(m_enemigos1[i])) {
 				m_enemigos1[i].BajarVida();

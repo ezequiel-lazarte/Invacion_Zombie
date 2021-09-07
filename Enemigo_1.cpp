@@ -1,6 +1,8 @@
 #include "Enemigo_1.h"
 #include <SFML/System/Vector2.hpp>
 #include <ctime>
+#include <cmath>
+using namespace std;
 
 Enemigo_1::Enemigo_1() {
 	m_size_rect.x = 0;
@@ -74,25 +76,8 @@ int Enemigo_1::getVida ( ) {
 
 void Enemigo_1::Animaciones ( ) {
 	if(m_sprite.getPosition().x<m_pos_player.x) {
-		if(m_move_adel==0) {
-			m_rect = {m_size_rect.x*m_move_adel,m_size_rect.y,m_alto_sprite, m_ancho_sprite};
-			m_sprite.setTextureRect(m_rect);
-		} else if(m_move_adel==1) {
-			m_rect = {m_size_rect.x*m_move_adel,m_size_rect.y,m_alto_sprite, m_ancho_sprite};
-			m_sprite.setTextureRect(m_rect);
-		} else if(m_move_adel==2) {
-			m_rect = {m_size_rect.x*m_move_adel,m_size_rect.y,m_alto_sprite, m_ancho_sprite};
-			m_sprite.setTextureRect(m_rect);
-		} else if(m_move_adel==3) {
-			m_rect = {m_size_rect.x*m_move_adel,m_size_rect.y,m_alto_sprite, m_ancho_sprite};
-			m_sprite.setTextureRect(m_rect);
-		} else if(m_move_adel==4) {
-			m_rect = {m_size_rect.x*m_move_adel,m_size_rect.y,m_alto_sprite, m_ancho_sprite};
-			m_sprite.setTextureRect(m_rect);
-		} else if(m_move_adel==5) {
-			m_rect = {m_size_rect.x*m_move_adel,m_size_rect.y,m_alto_sprite, m_ancho_sprite};
-			m_sprite.setTextureRect(m_rect);
-		}
+		m_rect = {m_size_rect.x*(int)ceil(m_move_adel),m_size_rect.y, m_alto_sprite, m_ancho_sprite};
+		m_sprite.setTextureRect(m_rect);
 		m_sprite.move(m_move);
 		m_move_adel +=0.03125;
 		/// reinicio el contador
@@ -100,25 +85,8 @@ void Enemigo_1::Animaciones ( ) {
 			m_move_adel=0;
 		}
 	} else if(m_sprite.getPosition().x>m_pos_player.x) {
-		if(m_move_atras==0) {
-			m_rect = {m_size_rect.x*m_move_atras,m_size_rect.y+144,m_alto_sprite, m_ancho_sprite};
-			m_sprite.setTextureRect(m_rect);
-		} else if(m_move_atras==1) {
-			m_rect = {m_size_rect.x*m_move_atras,m_size_rect.y+144,m_alto_sprite, m_ancho_sprite};
-			m_sprite.setTextureRect(m_rect);
-		} else if(m_move_atras==2) {
-			m_rect = {m_size_rect.x*m_move_atras,m_size_rect.y+144,m_alto_sprite, m_ancho_sprite};
-			m_sprite.setTextureRect(m_rect);
-		} else if(m_move_atras==3) {
-			m_rect = {m_size_rect.x*m_move_atras,m_size_rect.y+144,m_alto_sprite, m_ancho_sprite};
-			m_sprite.setTextureRect(m_rect);
-		} else if(m_move_atras==4) {
-			m_rect = {m_size_rect.x*m_move_atras,m_size_rect.y+144,m_alto_sprite, m_ancho_sprite};
-			m_sprite.setTextureRect(m_rect);
-		} else if(m_move_atras==5) {
-			m_rect = {m_size_rect.x*m_move_atras,m_size_rect.y+144,m_alto_sprite, m_ancho_sprite};
-			m_sprite.setTextureRect(m_rect);
-		}
+		m_rect = {m_size_rect.x*(int)ceil(m_move_atras),m_size_rect.y+144, m_alto_sprite, m_ancho_sprite};
+		m_sprite.setTextureRect(m_rect);
 		m_sprite.move(-m_move);
 		m_move_atras+=0.03125;
 		/// reinicio el contador

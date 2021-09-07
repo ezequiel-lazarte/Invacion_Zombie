@@ -90,9 +90,6 @@ void Player::Actualizar () {
 }
 
 void Player::Dibujar (sf::RenderWindow & w) {
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::F)) {
-		/// ataca el player
-	}
 	w.draw(m_sprite);
 }
 
@@ -105,10 +102,6 @@ sf::Vector2f Player::getPos ( ) {
 }
 
 void Player::Finalizar ( ) {
-	
-}
-
-void Player::Ataque () { /// ataque se tiene que llamar
 	
 }
 
@@ -126,19 +119,7 @@ int Player::getVida ( ) {
 
 void Player::MovimientoGolpea ( ) {
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::F) and m_ultima_tecla == 1) {
-		if(m_cambiar_textura==0) {
-			m_sprite.setTexture(m_texturas_ataque_adel[m_cambiar_textura]);
-		} else if(m_cambiar_textura==1) {
-			m_sprite.setTexture(m_texturas_ataque_adel[m_cambiar_textura]);
-		} else if(m_cambiar_textura==2) {
-			m_sprite.setTexture(m_texturas_ataque_adel[m_cambiar_textura]);
-		} else if(m_cambiar_textura==3) {
-			m_sprite.setTexture(m_texturas_ataque_adel[m_cambiar_textura]);
-		} else if(m_cambiar_textura==4) {
-			m_sprite.setTexture(m_texturas_ataque_adel[m_cambiar_textura]);
-		} else if(m_cambiar_textura==5) {
-			m_sprite.setTexture(m_texturas_ataque_adel[m_cambiar_textura]);
-		}
+		m_sprite.setTexture(m_texturas_ataque_adel[m_cambiar_textura]);
 		
 		m_cambiar_textura +=0.125;
 		/// reinicio el contador
@@ -148,19 +129,7 @@ void Player::MovimientoGolpea ( ) {
 		/// reinicio
 		m_ultima_tecla = 1;
 	} else if(sf::Keyboard::isKeyPressed(sf::Keyboard::F) and m_ultima_tecla == 0) {
-		if(m_cambiar_textura==0) {
-			m_sprite.setTexture(m_texturas_ataque_atras[m_cambiar_textura]);
-		} else if(m_cambiar_textura==1) {
-			m_sprite.setTexture(m_texturas_ataque_atras[m_cambiar_textura]);
-		} else if(m_cambiar_textura==2) {
-			m_sprite.setTexture(m_texturas_ataque_atras[m_cambiar_textura]);
-		} else if(m_cambiar_textura==3) {
-			m_sprite.setTexture(m_texturas_ataque_atras[m_cambiar_textura]);
-		} else if(m_cambiar_textura==4) {
-			m_sprite.setTexture(m_texturas_ataque_atras[m_cambiar_textura]);
-		} else if(m_cambiar_textura==5) {
-			m_sprite.setTexture(m_texturas_ataque_atras[m_cambiar_textura]);
-		}
+		m_sprite.setTexture(m_texturas_ataque_atras[m_cambiar_textura]);
 		
 		m_cambiar_textura +=0.125;
 		/// reinicio el contador
@@ -174,23 +143,8 @@ void Player::MovimientoGolpea ( ) {
 
 void Player::MovimientoGolpeaCamina ( ) {
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::F) and sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-		if(m_cambiar_textura==0) {
-			m_sprite.setTexture(m_texturas_ataque_adel[m_cambiar_textura]);
-		} else if(m_cambiar_textura==1) {
-			m_sprite.setTexture(m_texturas_ataque_adel[m_cambiar_textura]);
-		} else if(m_cambiar_textura==2) {
-			m_sprite.setTexture(m_texturas_ataque_adel[m_cambiar_textura]);
-		} else if(m_cambiar_textura==3) {
-			m_sprite.setTexture(m_texturas_ataque_adel[m_cambiar_textura]);
-		} else if(m_cambiar_textura==4) {
-			m_sprite.setTexture(m_texturas_ataque_adel[m_cambiar_textura]);
-		} else if(m_cambiar_textura==5) {
-			m_sprite.setTexture(m_texturas_ataque_adel[m_cambiar_textura]);
-		}
-		
-		
+		m_sprite.setTexture(m_texturas_ataque_adel[m_cambiar_textura]);
 		m_sprite.move(m_move);
-		
 		
 		m_cambiar_textura +=0.125;
 		/// reinicio el contador
@@ -200,21 +154,7 @@ void Player::MovimientoGolpeaCamina ( ) {
 		/// reinicio
 		m_ultima_tecla = 1;
 	} else if(sf::Keyboard::isKeyPressed(sf::Keyboard::F) and sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-		if(m_cambiar_textura==0) {
-			m_sprite.setTexture(m_texturas_ataque_atras[m_cambiar_textura]);
-		} else if(m_cambiar_textura==1) {
-			m_sprite.setTexture(m_texturas_ataque_atras[m_cambiar_textura]);
-		} else if(m_cambiar_textura==2) {
-			m_sprite.setTexture(m_texturas_ataque_atras[m_cambiar_textura]);
-		} else if(m_cambiar_textura==3) {
-			m_sprite.setTexture(m_texturas_ataque_atras[m_cambiar_textura]);
-		} else if(m_cambiar_textura==4) {
-			m_sprite.setTexture(m_texturas_ataque_atras[m_cambiar_textura]);
-		} else if(m_cambiar_textura==5) {
-			m_sprite.setTexture(m_texturas_ataque_atras[m_cambiar_textura]);
-		}
-		
-		
+		m_sprite.setTexture(m_texturas_ataque_atras[m_cambiar_textura]);
 		m_sprite.move(-m_move);
 		
 		m_cambiar_textura +=0.125;
@@ -231,19 +171,7 @@ void Player::MovimientoGolpeaCamina ( ) {
 
 void Player::MovimientoCamina ( ) {
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::D) and !sf::Keyboard::isKeyPressed(sf::Keyboard::F)) {
-		if(adel==0) {
-			m_sprite.setTexture(m_texturas_adel[adel]);
-		} else if(adel==1) {
-			m_sprite.setTexture(m_texturas_adel[adel]);
-		} else if(adel==2) {
-			m_sprite.setTexture(m_texturas_adel[adel]);
-		} else if(adel==3) {
-			m_sprite.setTexture(m_texturas_adel[adel]);
-		} else if(adel==4) {
-			m_sprite.setTexture(m_texturas_adel[adel]);
-		} else if(adel==5) {
-			m_sprite.setTexture(m_texturas_adel[adel]);
-		}
+		m_sprite.setTexture(m_texturas_adel[adel]);
 		m_sprite.move(m_move);
 		adel +=0.125;
 		/// reinicio el contador
@@ -255,19 +183,7 @@ void Player::MovimientoCamina ( ) {
 		
 		m_ultima_tecla = 1;
 	} else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A) and !sf::Keyboard::isKeyPressed(sf::Keyboard::F)) {
-		if(atras==0) {
-			m_sprite.setTexture(m_texturas_atras[atras]);
-		} else if(atras==1) {
-			m_sprite.setTexture(m_texturas_atras[atras]);
-		} else if(atras==2) {
-			m_sprite.setTexture(m_texturas_atras[atras]);
-		} else if(atras==3) {
-			m_sprite.setTexture(m_texturas_atras[atras]);
-		} else if(atras==4) {
-			m_sprite.setTexture(m_texturas_atras[atras]);
-		} else if(atras==5) {
-			m_sprite.setTexture(m_texturas_atras[atras]);
-		}
+		m_sprite.setTexture(m_texturas_atras[atras]);
 		
 		m_sprite.move(-m_move);
 		atras +=0.125;
@@ -284,11 +200,7 @@ void Player::MovimientoCamina ( ) {
 
 void Player::MovimientoQuieto ( ) {
 	if(!sf::Keyboard::isKeyPressed(sf::Keyboard::D) and !sf::Keyboard::isKeyPressed(sf::Keyboard::F) and !sf::Keyboard::isKeyPressed(sf::Keyboard::A) and m_ultima_tecla==0) {
-		if(adel==0) {
-			m_sprite.setTexture(m_texturas_quieto[adel]);
-		} else if(adel==1) {
-			m_sprite.setTexture(m_texturas_quieto[adel]);
-		} 
+		m_sprite.setTexture(m_texturas_quieto[adel]);
 		
 		adel +=0.0625;
 		/// reinicio el contador
@@ -301,11 +213,7 @@ void Player::MovimientoQuieto ( ) {
 		m_ultima_tecla = 0;
 	}
 	if(!sf::Keyboard::isKeyPressed(sf::Keyboard::A) and !sf::Keyboard::isKeyPressed(sf::Keyboard::D) and !sf::Keyboard::isKeyPressed(sf::Keyboard::F) and m_ultima_tecla==1) {
-		if(atras==2) {
-			m_sprite.setTexture(m_texturas_quieto[atras]);
-		} else if(atras==3) {
-			m_sprite.setTexture(m_texturas_quieto[atras]);
-		}
+		m_sprite.setTexture(m_texturas_quieto[atras]);
 		
 		atras +=0.0625;
 		/// reinicio el contador

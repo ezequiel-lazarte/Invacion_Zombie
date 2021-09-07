@@ -16,7 +16,6 @@ public:
 	Player();
 	void Actualizar ();
 	void Dibujar (sf::RenderWindow & w);
-	void Ataque();
 	sf::Sprite &getSprite();
 	sf::Vector2f getPos();
 	void BajarVida();
