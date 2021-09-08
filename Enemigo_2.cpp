@@ -67,17 +67,7 @@ void Enemigo_2::BajarVida ( ) {
 bool Enemigo_2::Ataque ( ) {
 	/// aca se mostrarian una serie de sprites del atake del enemigo
 	int aux=0;
-	/// texturas
 	m_sprite.setTexture(m_texturas_adel[2]);
-//	if(aux==0) {
-//		m_sprite.setTexture();
-//	} else if(aux==1) {
-//		m_sprite.setTexture();
-//	} else if(aux==2) {
-//		
-//	} else if(aux==3) {
-//		
-//	}
 	if(m_pos_player.y == m_sprite.getPosition().y and m_vida>0) {
 		return true;
 	}
@@ -98,19 +88,8 @@ int Enemigo_2::getVida ( ) {
 
 void Enemigo_2::Animaciones ( ) {
 	if(m_sprite.getPosition().x<m_pos_player.x) {
-		if(m_move_adel==0) {
-			m_sprite.setTexture(m_texturas_adel[m_move_adel]);
-		} else if(m_move_adel==1) {
-			m_sprite.setTexture(m_texturas_adel[m_move_adel]);
-		} else if(m_move_adel==2) {
-			m_sprite.setTexture(m_texturas_adel[m_move_adel]);
-		} else if(m_move_adel==3) {
-			m_sprite.setTexture(m_texturas_adel[m_move_adel]);
-		} else if(m_move_adel==4) {
-			m_sprite.setTexture(m_texturas_adel[m_move_adel]);
-		} else if(m_move_adel==5) {
-			m_sprite.setTexture(m_texturas_adel[m_move_adel]);
-		}
+		m_sprite.setTexture(m_texturas_adel[m_move_adel]);
+		
 		m_sprite.move(m_move);
 		m_move_adel +=0.03125;
 		/// reinicio el contador
@@ -118,20 +97,8 @@ void Enemigo_2::Animaciones ( ) {
 			m_move_adel=0;
 		}
 	} else if(m_sprite.getPosition().x>m_pos_player.x) {
+		m_sprite.setTexture(m_texturas_atras[m_move_atras]);
 		
-		if(m_move_atras==0) {
-			m_sprite.setTexture(m_texturas_atras[m_move_atras]);
-		} else if(m_move_atras==1) {
-			m_sprite.setTexture(m_texturas_atras[m_move_atras]);
-		} else if(m_move_atras==2) {
-			m_sprite.setTexture(m_texturas_atras[m_move_atras]);
-		} else if(m_move_atras==3) {
-			m_sprite.setTexture(m_texturas_atras[m_move_atras]);
-		} else if(m_move_atras==4) {
-			m_sprite.setTexture(m_texturas_atras[m_move_atras]);
-		} else if(m_move_atras==5) {
-			m_sprite.setTexture(m_texturas_atras[m_move_atras]);
-		}
 		m_sprite.move(-m_move);
 		m_move_atras+=0.03125;
 		/// reinicio el contador

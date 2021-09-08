@@ -14,14 +14,13 @@ Partida::Partida() : m_color_fondo(20,110,255) {
 	srand(time(NULL)*time(NULL));
 	m_posDesde = -3800;
 	m_posHasta = 3800;
-	m_numeroEnemigos1 = 13;
-	m_numeroEnemigos2 = 3;
+	m_numeroEnemigos1 = 5;
+	m_numeroEnemigos2 = 5;
 	for(int i=0;i<m_numeroEnemigos1;i++) {
 		m_enemigos1.resize(m_enemigos1.size() + 1);
 		Enemigo_1 enemigo1;
 		m_enemigos1[i] = enemigo1;
 		m_enemigos1[i].SetPosEnemigo((rand()*rand())%(m_posHasta - m_posDesde) + m_posDesde);
-		
 		m_retraso1.resize(m_retraso1.size() + 1);
 		m_retraso1[i] = 0;
 	}
@@ -84,7 +83,6 @@ void Partida::Actualizar (Juego &juego) {
 		juego.CambiarEscena(new Menu());
 	}
 	if(Keyboard::isKeyPressed(Keyboard::Key::F)) {
-		m_player.Ataque();
 		for(int i=0;i<m_enemigos1.size();i++) {
 			if(m_player.Colision(m_enemigos1[i])) {
 				m_enemigos1[i].BajarVida();
@@ -169,14 +167,13 @@ void Partida::ActualizarPuntaje ( ) {
 		m_puntaje_actual = m_crono.asSeconds();
 	}
 	if(m_player.getVida()<=0) {
-		/// llamo a 
+		/// llamo a
 		string nombre_player = "John";
 		int tiempo = 777;
 	}
 }
 
 void Partida::CrearEnemigos ( ) {
-	srand(time(NULL)*time(NULL));
 	m_posDesde = -3800;
 	m_posHasta = 3800;
 	for(size_t i=0;i<m_enemigos1.size();i++) {
