@@ -32,7 +32,6 @@ void GameOver::Actualizar (Juego & juego) {
 		juego.CambiarEscena(new GuardarPuntaje());
 	}
 }
-
 void GameOver::Dibujar (sf::RenderWindow & window) {
 	window.clear();
 	window.draw(m_gameOver);
