@@ -5,7 +5,7 @@
 using namespace std;
 using namespace sf;
 
-Juego::Juego() : m_window(VideoMode(1080,520), "Invación Zombie") {
+Juego::Juego() : m_window(VideoMode(1080,520), "Invasión Zombie") {
 	m_fps = 60;
 	m_window.setFramerateLimit(m_fps);
 	m_escena = new Menu();
