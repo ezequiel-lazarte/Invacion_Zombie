@@ -16,7 +16,6 @@ public:
 	void Actualizar();
 	void Dibujar();
 	void CambiarEscena(Escena *Proxima_Escena);
-	int & ObtenerFps();
 private:
 	RenderWindow m_window;
 	Escena *m_escena;

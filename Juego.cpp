@@ -46,7 +46,3 @@ void Juego::CambiarEscena (Escena *Proxima_Escena) {
 	m_proxima_escena = Proxima_Escena;
 }
 
-int & Juego::ObtenerFps ( ) {
-	return m_fps;
-}
-

@@ -33,8 +33,8 @@ private:
 	vector<sf::Texture> m_texturas_ataque_atras;
 	vector<sf::Texture> m_texturas_ataque_adel;
 	vector<sf::Texture> m_texturas_quieto; /// 0 y 1 son atras, 2 y 3 son adel
-	int m_ultima_tecla;
-	int m_vida;
+	size_t m_ultima_tecla;
+	size_t m_vida;
 	float m_cambiar_textura;
 	float adel, atras; // contador para cambiar de sprite
 	float m_gravedad;

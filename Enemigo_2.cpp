@@ -1,6 +1,4 @@
 #include "Enemigo_2.h"
-#include <SFML/System/Vector2.hpp>
-#include <ctime>
 
 Enemigo_2::Enemigo_2() {
 	m_alto_sprite = 144;
@@ -29,9 +27,7 @@ Enemigo_2::Enemigo_2() {
 void Enemigo_2::SetPosEnemigo (float x) {
 	m_posEnemigo.x = x;
 	m_posEnemigo.y = 412;
-	if(m_posEnemigo.x > 0 or m_posEnemigo.x < 1080) {
-		m_posEnemigo.x += 950;
-	}
+	if(m_posEnemigo.x >= 0 and m_posEnemigo.x < 1080) m_posEnemigo.x -= 1950;
 	m_sprite.setPosition(m_posEnemigo.x, m_posEnemigo.y);
 }
 

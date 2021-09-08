@@ -18,7 +18,7 @@ private:
 	Color m_color_fondo;
 	sf::Uint8 rojo, verde, azul;
 	float gravedad;
-	int ultima_textura; /// 0 para sol y 1 para luna
+	int ultima_textura, diferencia; /// 0 para sol y 1 para luna
 };
 
 #endif

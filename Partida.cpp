@@ -9,18 +9,18 @@
 using namespace std;
 
 Partida::Partida() : m_color_fondo(20,110,255) {
-	m_volumen = 10;
+	m_volumen = 30;
 	m_musica_fondo.setVolume(m_volumen);
-	srand(time(NULL)*time(NULL));
+	srand(time(NULL));
 	m_posDesde = -3800;
 	m_posHasta = 3800;
-	m_numeroEnemigos1 = 5;
-	m_numeroEnemigos2 = 5;
+	m_numeroEnemigos1 = 0;
+	m_numeroEnemigos2 = 3;
 	for(int i=0;i<m_numeroEnemigos1;i++) {
 		m_enemigos1.resize(m_enemigos1.size() + 1);
 		Enemigo_1 enemigo1;
 		m_enemigos1[i] = enemigo1;
-		m_enemigos1[i].SetPosEnemigo((rand()*rand())%(m_posHasta - m_posDesde) + m_posDesde);
+		m_enemigos1[i].SetPosEnemigo(rand()%(m_posHasta - m_posDesde) + m_posDesde);
 		m_retraso1.resize(m_retraso1.size() + 1);
 		m_retraso1[i] = 0;
 	}
@@ -28,7 +28,7 @@ Partida::Partida() : m_color_fondo(20,110,255) {
 		m_enemigos2.resize(m_enemigos2.size() + 1);
 		Enemigo_2 enemigo2;
 		m_enemigos2[i] = enemigo2;
-		m_enemigos2[i].SetPosEnemigo((rand()*rand())%(m_posHasta - m_posDesde) + m_posDesde);
+		m_enemigos2[i].SetPosEnemigo(rand()%(m_posHasta - m_posDesde) + m_posDesde);
 		
 		m_retraso2.resize(m_retraso2.size() + 1);
 		m_retraso2[i] = 0;
@@ -69,8 +69,6 @@ void Partida::Actualizar (Juego &juego) {
 	m_crono = m_reloj.getElapsedTime();
 	aux = m_crono.asSeconds();
 	m_tiempo.setString(to_string(aux));
-	m_fps = juego.ObtenerFps();
-	/// Keyboard
 	if(Keyboard::isKeyPressed(Keyboard::Key::Escape)) {
 		m_musica_fondo.stop();
 		for(int i=0;i<m_enemigos1.size();i++) {

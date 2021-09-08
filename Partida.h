@@ -48,7 +48,6 @@ private:
 	float m_puntaje_actual; // me guardo el puntaje del jugador
 	float m_volumen;
 	int m_numeroEnemigos1, m_numeroEnemigos2;
-	int m_fps;
 	int aux;
 	int m_posDesde, m_posHasta;
 };

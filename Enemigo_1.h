@@ -18,14 +18,13 @@ public:
 	void BajarVida();
 	void Finalizar();
 	int getVida();
-	bool Ataque();
 	void setPosPlayer(sf::Vector2f pos_player);
 	sf::Vector2f getPos();
 private:
 	sf::SoundBuffer m_sonido1;
 	sf::Sound m_sound_zombie;
 	sf::Vector2f m_move, m_pos_player, m_posEnemigo;
-	int m_move_adel, m_move_atras, m_vida;
+	float m_move_sprite;
 };
 
 #endif
