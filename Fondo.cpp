@@ -5,7 +5,7 @@ Fondo::Fondo() : rojo(0), verde(0), azul(0) {
 	m_textura.loadFromFile("recursos/fondos/escenario/fondo.png");
 	m_sprite.setTexture(m_textura);
 	m_proporcion = {1024,356};/// ancho y alto
-	int diferencia = 520-m_proporcion.y;
+	diferencia = 520-m_proporcion.y;
 	m_sprite.setPosition(0,diferencia);
 	ultima_textura = 1;
 	// sol
@@ -21,7 +21,7 @@ Fondo::Fondo() : rojo(0), verde(0), azul(0) {
 	/// colores
 	rojo =0;
 	verde = 100;
-	azul = 200;
+	azul = 255;
 	m_color_fondo = {rojo,verde,azul};
 }
 
@@ -35,32 +35,30 @@ void Fondo::Actualizar ( ) {
 			m_sol.setTexture(m_textura_luna);
 			ultima_textura = 0;
 			verde =0;
-			azul =0;
-			m_color_fondo = {rojo,verde,azul}; 
+			azul =0; 
 		} else { // dia
 			m_sol.setTexture(m_textura_sol);
 			ultima_textura = 1;
 			verde =100;
-			azul =255;
-			m_color_fondo = {rojo,verde,azul}; 
+			azul =255; 
 		}
+		m_color_fondo = {rojo,verde,azul}; 
 		m_sol.setPosition(m_pos_sol);
 		m_move_sol.y = -.2;
 	}
 	/// cambio de noche a dia
-	if(ultima_textura==1) {
-		if(m_sol.getPosition().x>720 and verde>0 and azul>0) {
-			verde -=.13;
-			azul -=.26;
-			m_color_fondo = {rojo,verde,azul}; 
+	if(ultima_textura==1) { // se hace de noche
+		if(m_sol.getPosition().x>920 and verde>=0 and azul>=0) {
+			verde -=.1;
+			azul -=.255;
 		}
-	} else {
-		if(m_sol.getPosition().x>720 and verde<100 and azul<255) {
-			verde +=.13;
-			azul +=.26;
-			m_color_fondo = {rojo,verde,azul}; 
+	} else { // se hace de dia
+		if(m_sol.getPosition().x>880 and verde<100 and azul<255) {
+			verde +=.1*12;
+			azul +=.255*12;
 		}
 	}
+	m_color_fondo = {rojo,verde,azul}; 
 }
 
 void Fondo::Dibujar (sf::RenderWindow & w) {
