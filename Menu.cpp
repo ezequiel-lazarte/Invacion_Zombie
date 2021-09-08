@@ -17,7 +17,7 @@ Menu::Menu(){
 	m_fuente.loadFromFile("recursos/fuentes/Cave-Story.ttf");
 	m_t1.setFont(m_fuente);
 	m_t1.setFillColor(m_color);
-	m_t1.setString("Invacion Zombie");
+	m_t1.setString("Invasion Zombie");
 	m_t1.setPosition(200,-20);
 	m_t1.setCharacterSize(120);
 	

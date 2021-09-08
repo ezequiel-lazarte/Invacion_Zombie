@@ -1,6 +1,7 @@
 #include "GameOver.h"
 #include "Menu.h"
 #include "Creditos.h"
+#include "GuardarPuntaje.h"
 
 GameOver::GameOver() {
 	m_text_gameOver.loadFromFile("recursos/GameOver/gameover.png");
@@ -20,7 +21,7 @@ GameOver::GameOver() {
 	/// textos
 	m_fuente.loadFromFile("recursos/fuentes/cave-story.ttf");
 	m_t1.setFont(m_fuente);
-	m_t1.setString("Haga Click para continuar");
+	m_t1.setString("Haga Click para guardar el puntaje");
 	m_t1.setPosition(400,460);
 }
 
@@ -28,7 +29,7 @@ void GameOver::Actualizar (Juego & juego) {
 	if(Mouse::isButtonPressed(Mouse::Left)) {
 		m_musica_gameOver.stop();
 		m_voz_gameover.stop();
-		juego.CambiarEscena(new Creditos());
+		juego.CambiarEscena(new GuardarPuntaje());
 	}
 }
 
