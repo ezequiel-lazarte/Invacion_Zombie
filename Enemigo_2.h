@@ -2,7 +2,6 @@
 #define ENEMIGO_2_H
 #include "Entidad.h"
 #include <vector>
-#include <SFML/System/Vector2.hpp>
 #include <SFML/Audio/Sound.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
 using namespace std;

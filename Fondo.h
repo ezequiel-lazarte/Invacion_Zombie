@@ -11,6 +11,7 @@ public:
 	Fondo();
 	void Actualizar ( );
 	void Dibujar (sf::RenderWindow & w);
+	int GetNumeroNoches();
 private:
 	Vector2f m_proporcion, m_move_sol, m_pos_sol;
 	Sprite m_sol;
@@ -18,7 +19,7 @@ private:
 	Color m_color_fondo;
 	sf::Uint8 rojo, verde, azul;
 	float gravedad;
-	int ultima_textura, diferencia; /// 0 para sol y 1 para luna
+	int ultima_textura, diferencia, m_nro_noches; /// 0 para sol y 1 para luna
 };
 
 #endif

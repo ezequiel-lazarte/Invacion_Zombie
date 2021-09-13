@@ -23,6 +23,7 @@ Fondo::Fondo() : rojo(0), verde(0), azul(0) {
 	verde = 100;
 	azul = 255;
 	m_color_fondo = {rojo,verde,azul};
+	m_nro_noches = 0;
 }
 
 void Fondo::Actualizar ( ) {
@@ -32,6 +33,7 @@ void Fondo::Actualizar ( ) {
 	
 	if(m_sol.getPosition().x>=1100) {
 		if(ultima_textura==1) { // noche
+			m_nro_noches++;
 			m_sol.setTexture(m_textura_luna);
 			ultima_textura = 0;
 			verde =0;
@@ -66,3 +68,8 @@ void Fondo::Dibujar (sf::RenderWindow & w) {
 	w.draw(m_sol);
 	//w.draw(m_sprite);
 }
+
+int Fondo::GetNumeroNoches ( ) {
+	return m_nro_noches;
+}
+

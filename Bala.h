@@ -1,9 +1,6 @@
 #ifndef BALA_H
 #define BALA_H
 #include "Entidad.h"
-#include <SFML/System/Vector2.hpp>
-#include <SFML/Graphics/Texture.hpp>
-#include <SFML/Graphics/Sprite.hpp>
 
 class Bala {
 public:

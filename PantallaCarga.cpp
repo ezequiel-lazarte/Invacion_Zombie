@@ -24,34 +24,11 @@ PantallaCarga::PantallaCarga() {
 }
 
 void PantallaCarga::Actualizar (Juego & juego) {
-	if(m_cambiar_textura==0) {
-		m_sprite.setTexture(m_texturas[m_cambiar_textura]);
-	} else if(m_cambiar_textura==1) {
-		m_sprite.setTexture(m_texturas[m_cambiar_textura]);
-	} else if(m_cambiar_textura==2) {
-		m_sprite.setTexture(m_texturas[m_cambiar_textura]);
-	} else if(m_cambiar_textura==3) {
-		m_sprite.setTexture(m_texturas[m_cambiar_textura]);
-	} else if(m_cambiar_textura==4) {
-		m_sprite.setTexture(m_texturas[m_cambiar_textura]);
-	} else if(m_cambiar_textura==5) {
-		m_sprite.setTexture(m_texturas[m_cambiar_textura]);
-	} else if(m_cambiar_textura==6) {
-		m_sprite.setTexture(m_texturas[m_cambiar_textura]);
-	} else if(m_cambiar_textura==7) {
-		m_sprite.setTexture(m_texturas[m_cambiar_textura]);
-	} else if(m_cambiar_textura==8) {
-		m_sprite.setTexture(m_texturas[m_cambiar_textura]);
-	}
-	/// reinicio el contador
-	if(m_cambiar_textura>=3) {
-		m_cambiar_textura=0;
-	}
+	if(m_crono.asSeconds() >= 1) juego.CambiarEscena(new Partida);
+	m_sprite.setTexture(m_texturas[m_cambiar_textura]);
+	if(m_cambiar_textura>=7) m_cambiar_textura=0;
 	m_cambiar_textura +=1;
 	m_crono = m_reloj.getElapsedTime();
-	if(m_crono.asSeconds() >= 0) {
-		juego.CambiarEscena(new Partida);
-	}
 }
 
 void PantallaCarga::Dibujar (sf::RenderWindow & window) {
