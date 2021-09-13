@@ -12,7 +12,6 @@ GuardarPuntaje:: GuardarPuntaje(){
 	m_fondo.setTexture(m_textura_fondo);
 	m_fondo.setScale(1.1,1.3);
 	
-	
 	m_buffer.loadFromFile("recursos/musica/puntajes.wav");
 	m_musica.setBuffer(m_buffer);
 	m_musica.play();
@@ -29,18 +28,7 @@ GuardarPuntaje:: GuardarPuntaje(){
 	m_textoEntrada.setFont(m_fuente);
 	m_textoEntrada.setFillColor(sf::Color {180,0,0});
 	m_textoEntrada.setPosition(260,-60);
-
-	
 }
-
-
-	
-
-	
-	
-	
-
-
 
 void GuardarPuntaje::Actualizar (Juego & juego) {
 	
@@ -65,7 +53,6 @@ void GuardarPuntaje::Actualizar (Juego & juego) {
 		juego.CambiarEscena(new Menu());
 		
 	}
-	
 }
 
 void GuardarPuntaje::CambiarVolumenMusica(float vol){
@@ -120,10 +107,6 @@ void GuardarPuntaje::reset() {
 	value.clear(); 
 }
 
-
-
-
-
 void GuardarPuntaje::Dibujar (sf::RenderWindow & window){
 	window.draw(m_titulo);
 	window.clear({0,0,0});
@@ -132,8 +115,3 @@ void GuardarPuntaje::Dibujar (sf::RenderWindow & window){
 	window.draw(m_textoEntrada);
 	window.display();
 }
-
-
-
-
-

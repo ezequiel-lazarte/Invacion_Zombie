@@ -11,13 +11,6 @@
 using namespace std;
 
 class GuardarPuntaje : public Escena, sf::Text{
-	Clock clock;
-	string value;
-	bool is_down[sf::Keyboard::KeyCount];
-	void TestKey(sf::Keyboard::Key k, char c);
-	unsigned int max_chars;
-	bool editable;
-	bool single_word;
 public:
 	GuardarPuntaje();
 	void Actualizar (Juego & juego) override;
@@ -43,7 +36,6 @@ public:
 	void reset();
 	
 private:
-	
 	Texture m_textura_fondo;
 	Sprite m_fondo;
 	SoundBuffer m_buffer;
@@ -51,7 +43,13 @@ private:
 	Text m_titulo;
 	Text m_textoEntrada;
 	Font m_fuente;
-	
+	Clock clock;
+	string value;
+	bool is_down[sf::Keyboard::KeyCount];
+	void TestKey(sf::Keyboard::Key k, char c);
+	unsigned int max_chars;
+	bool editable;
+	bool single_word;
 };
 
 

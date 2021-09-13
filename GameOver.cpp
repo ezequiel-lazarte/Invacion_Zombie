@@ -22,7 +22,7 @@ GameOver::GameOver() {
 	m_fuente.loadFromFile("recursos/fuentes/cave-story.ttf");
 	m_t1.setFont(m_fuente);
 	m_t1.setString("Haga Click para guardar el puntaje");
-	m_t1.setPosition(400,460);
+	m_t1.setPosition(380,460);
 }
 
 void GameOver::Actualizar (Juego & juego) {

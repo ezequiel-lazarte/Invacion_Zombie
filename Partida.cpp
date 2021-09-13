@@ -1,9 +1,6 @@
 #include "Partida.h"
 #include "Menu.h"
-#include <SFML/System/Clock.hpp>
-#include <SFML/System/Time.hpp>
 #include "GameOver.h"
-#include <SFML/Graphics/Color.hpp>
 #include "Enemigo_1.h"
 #include <iostream>
 using namespace std;
@@ -12,13 +9,14 @@ Partida::Partida() : m_color_fondo(20,110,255) {
 	m_volumen = 30;
 	m_musica_fondo.setVolume(m_volumen);
 	srand(time(NULL));
-	m_posDesde = -3800;
-	m_posHasta = 3800;
-	m_numeroEnemigos1 = 0;
-	m_numeroEnemigos2 = 3;
+	m_posDesde = -2500;
+	m_posHasta = 2500;
+	m_numeroEnemigos1 = 15;
+	m_numeroEnemigos2 = 5;
+	m_texture_aux = m_recursos.getEnemigo_1();
 	for(int i=0;i<m_numeroEnemigos1;i++) {
 		m_enemigos1.resize(m_enemigos1.size() + 1);
-		Enemigo_1 enemigo1;
+		enemigo1.setTexture(m_texture_aux);
 		m_enemigos1[i] = enemigo1;
 		m_enemigos1[i].SetPosEnemigo(rand()%(m_posHasta - m_posDesde) + m_posDesde);
 		m_retraso1.resize(m_retraso1.size() + 1);
@@ -177,6 +175,7 @@ void Partida::CrearEnemigos ( ) {
 	for(size_t i=0;i<m_enemigos1.size();i++) {
 		if(m_enemigos1[i].getVida() <= 0) {
 			Enemigo_1 enemigo1;
+			enemigo1.setTexture(m_recursos.getEnemigo_1());
 			enemigo1.SetPosEnemigo(m_posDesde);
 			m_enemigos1[i] = enemigo1;
 		}
