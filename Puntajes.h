@@ -11,7 +11,6 @@ using namespace std;
 
 struct Puntaje {
 	string nameplayer;
-	int tiempo;
 };
 
 bool CompararPuntajes(Puntaje p1, Puntaje p2);
@@ -22,7 +21,7 @@ public:
 	void Actualizar (Juego & juego) override;
 	void LeerDatos();
 	void Dibujar (sf::RenderWindow & window) override;
-	void GuardarUnPuntajeNuevo(string nameplayer, int tiempo);
+	void GuardarUnPuntajeNuevo(string nameplayer);
 	void CambiarVolumenMusica(float vol);
 private:
 	Texture m_textura_fondo;

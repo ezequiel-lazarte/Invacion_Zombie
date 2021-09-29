@@ -31,8 +31,9 @@ void Juego::Jugar ( ) {
 void Juego::ProcesarEventos ( ) {
 	Event evento;
 	while(m_window.pollEvent(evento)) {
-		if(evento.type == Event::Closed)
+		if(evento.type == Event::Closed){
 			m_window.close();
+		}else{ m_escena-> Procesar_evento(evento);}
 	}
 }
 void Juego::Actualizar ( ) {
