@@ -9,6 +9,7 @@ public:
 	Escena();
 	virtual void Actualizar(Juego &juego)=0;
 	virtual void Dibujar(sf::RenderWindow &window)=0;
+	virtual void Procesar_evento(Event evento);
 private:
 };
 
