@@ -1,5 +1,6 @@
 #include "Puntajes.h"
 #include "Menu.h"
+#include "ImputBox.h"
 #include <fstream>
 #include <iostream>
 #include <cstring>
@@ -18,7 +19,7 @@ Puntajes::Puntajes()  {
 	m_fuente.loadFromFile("recursos/fuentes/Cave-Story.ttf");
 	m_titulo.setFont(m_fuente);
 	
-	m_binaryname = "Binarios/Puntajes.dat";
+	m_binaryname = "Puntajes/Puntajes.dat";
 	
 	m_titulo.setPosition(260,-30);
 	m_titulo.setFillColor(sf::Color {180,0,0});
@@ -27,7 +28,7 @@ Puntajes::Puntajes()  {
 	/// Vector de Puntajes
 	m_nro_puntajes = 5;
 	Puntaje aux1;
-	aux1.tiempo = 0;
+	
 	aux1.nameplayer = "Vacio";
 	
 	for(int i=0;i<m_nro_puntajes;i++) {
@@ -37,7 +38,7 @@ Puntajes::Puntajes()  {
 	string aux;
 	Text t1;
 	for(int i=0;i<m_nro_puntajes;i++) {
-		aux = "Top " + to_string(i+1) + ": " + m_puntajes[i].nameplayer + " \nTiempo: " + to_string(m_puntajes[i].tiempo);
+		aux = "Top " + to_string(i+1) + ": " + m_puntajes[i].nameplayer + " \nTiempo: ";
 		t1.setFont(m_fuente);
 		t1.setCharacterSize(30);
 		t1.setPosition(30,85*(i+1));
@@ -72,7 +73,7 @@ void Puntajes::LeerDatos ( ) { // listo ya tengo los datos en un vector de struc
 		for(int i=0;i<m_nro_puntajes;i++) { /// supongo que esta en una linea el puntaje y al lado su nombre con un total de 5 datos a leer
 			m_archi.read(auxchar,sizeof(auxchar));
 			aux.nameplayer = auxchar;
-			m_archi.read(reinterpret_cast<char*>(&aux.tiempo), sizeof(aux.tiempo));
+			//m_archi.read(reinterpret_cast<char*>(&aux.tiempo), sizeof(aux.tiempo));
 			m_puntajes[i] = aux;
 		}
 	} else {
@@ -83,22 +84,28 @@ void Puntajes::LeerDatos ( ) { // listo ya tengo los datos en un vector de struc
 			strcpy(auxchar, aux.nameplayer.c_str());
 			
 			m_archi.write(auxchar,sizeof(auxchar));
-			m_archi.write(reinterpret_cast<char*>(&aux.tiempo), sizeof(aux.tiempo));
+			//m_archi.write(reinterpret_cast<char*>(&aux.tiempo), sizeof(aux.tiempo));
 		}
 	}
 }
 
-void Puntajes::GuardarUnPuntajeNuevo (string nameplayer, int tiempo) {
-	Puntaje aux = {nameplayer, tiempo};
+void Puntajes::GuardarUnPuntajeNuevo (string nameplayer) {
+	cout<< nameplayer;
+	Puntaje aux = {nameplayer};
 	m_puntajes.push_back(aux);
 	sort(m_puntajes.begin(),m_puntajes.end(), CompararPuntajes);
 	m_puntajes.pop_back();
 }
 bool CompararPuntajes(Puntaje p1, Puntaje p2) {
-	if(p1.tiempo < p2.tiempo)
+	if(p1.nameplayer.size()< p2.nameplayer.size()){
+		return true;
+	}else{
+		return false;
+	}
+	/*if(p1.tiempo < p2.tiempo)
 		return true;
 	else
-		return false;
+		return false;*/
 }
 
 void Puntajes::Dibujar (sf::RenderWindow & window) {

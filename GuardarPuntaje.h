@@ -6,6 +6,7 @@
 #include <SFML/Audio/Sound.hpp>
 #include "Escena.h"
 #include "Juego.h"
+#include "Puntajes.h"
 #include <string>
 
 using namespace std;
@@ -23,15 +24,15 @@ public:
 	
 	
 	
+	Font m_fuente;
 private:
 	Texture m_textura_fondo;
 	Sprite m_fondo;
 	SoundBuffer m_buffer;
 	Sound m_musica;
 	Text m_titulo;
-	Font m_fuente;
-
-	
+	Juego *m_juego;
+	bool abierto;
 };
 
 

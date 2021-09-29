@@ -5,12 +5,13 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Font.hpp>
+#include "ImputBox.h"
 using namespace std;
 
 
 
 GuardarPuntaje:: GuardarPuntaje(){
-	
+	abierto = false;
 	
 	
 	m_textura_fondo.loadFromFile("recursos/fondos/puntajes.jpg");
@@ -36,7 +37,7 @@ GuardarPuntaje:: GuardarPuntaje(){
 
 void GuardarPuntaje::Actualizar (Juego & juego) {
 	
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return)){
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return)&& abierto ==true){
 	m_musica.stop();
 	juego.CambiarEscena(new Menu());
 	}
@@ -47,12 +48,6 @@ void GuardarPuntaje::CambiarVolumenMusica(float vol){
 }
 
 
-
-
-
-
-
-
 void GuardarPuntaje::Dibujar (sf::RenderWindow & window){
 	window.clear({0,0,0});
 	window.draw(m_fondo);
@@ -61,7 +56,12 @@ void GuardarPuntaje::Dibujar (sf::RenderWindow & window){
 }
 
 void GuardarPuntaje:: Procesar_evento(sf::Event evento){
+	InputText A(m_fuente, 30, sf::Color::Red);
+	A.ventana(evento);
 	
+	
+	//m_musica.stop();
+	//m_juego->CambiarEscena(new Menu());
 }
 
 
