@@ -14,9 +14,7 @@ Enemigo_1::Enemigo_1() {
 	
 	m_move_sprite = 0;
 	m_move = {1.3,0};
-	m_danio = 80;
 	m_textura.loadFromFile("recursos/enemigos/enemigo1/textura_enemigo_1.png");
-	m_vida = 300;
 }
 
 void Enemigo_1::SetPosEnemigo (float x) {
@@ -77,5 +75,13 @@ void Enemigo_1::Animaciones ( ) {
 
 void Enemigo_1::setTexture (sf::Texture &t) {
 	m_sprite.setTexture(t);
+}
+
+void Enemigo_1::setVida (int vida) {
+	m_vida = vida;
+}
+
+void Enemigo_1::setDanio (int danio) {
+	m_danio = danio;
 }
 

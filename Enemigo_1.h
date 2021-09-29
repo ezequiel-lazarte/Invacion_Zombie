@@ -16,9 +16,11 @@ public:
 	void Animaciones();
 	void BajarVida();
 	void Finalizar();
-	void setTexture(sf::Texture &t);
-	int getVida();
 	void setPosPlayer(sf::Vector2f pos_player);
+	void setTexture(sf::Texture &t);
+	void setVida(int vida);
+	void setDanio(int danio);
+	int getVida();
 	sf::Vector2f getPos();
 private:
 	sf::SoundBuffer m_sonido1;

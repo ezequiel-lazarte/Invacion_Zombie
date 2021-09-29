@@ -6,7 +6,6 @@
 #include "Escena.h"
 #include "Juego.h"
 #include "Enemigo_1.h"
-#include "Enemigo_2.h"
 #include "Resources.h"
 #include <ctime>
 #include <vector>
@@ -24,10 +23,7 @@ public:
 	void CambiarVolumenMusica(float vol);
 	void ActualizarPuntaje();
 private:
-	vector<Enemigo_1> m_enemigos1;
-	vector<Enemigo_2> m_enemigos2;
-	vector<int> m_retraso1;
-	vector<int> m_retraso2;
+	vector<Enemigo_1> m_enemigos;
 	Color m_color_fondo;
 	Fondo m_fondo_1;
 	Player m_player;
