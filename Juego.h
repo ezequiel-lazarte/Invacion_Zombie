@@ -16,6 +16,7 @@ public:
 	void Actualizar();
 	void Dibujar();
 	void CambiarEscena(Escena *Proxima_Escena);
+	
 private:
 	RenderWindow m_window;
 	Escena *m_escena;
