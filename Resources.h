@@ -11,6 +11,7 @@ public:
 	sf::Texture &getBala();
 	sf::Texture &getCreditos();
 	sf::Texture &getEnemigo_1();
+	sf::Texture &getEnemigo_2();
 	sf::Texture &getFondo();
 	sf::Texture &getGameOver();
 	sf::Texture &getGuardarPuntajes();
@@ -22,17 +23,19 @@ public:
 	sf::SoundBuffer &getBufferCreditos();
 	sf::SoundBuffer &getBufferEnemigo_1();
 	sf::SoundBuffer &getBufferGameOver();
+	sf::SoundBuffer &getBufferVozGameOver();
 	sf::SoundBuffer &getBufferMenu();
 	sf::SoundBuffer &getBufferPartida();
 	sf::SoundBuffer &getBufferPuntajes();
 	sf::Font &getFont();
+	~Resources();
 private:
 	sf::Texture m_texture;
 	sf::SoundBuffer m_buffer;
 	sf::Font m_font;
-	vector<sf::Texture> m_t;
-	vector<sf::SoundBuffer> m_s;
-	vector<sf::Font> m_f;
+	sf::Texture *m_t;
+	sf::SoundBuffer *m_s;
+	sf::Font *m_f;
 };
 
 #endif
