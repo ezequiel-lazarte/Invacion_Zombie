@@ -3,6 +3,7 @@
 #include "Escena.h"
 #include <SFML/Audio/Sound.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
+#include "Resources.h"
 
 using namespace sf;
 
@@ -12,6 +13,7 @@ public:
 	void Actualizar (Juego & juego);
 	void Dibujar (sf::RenderWindow & window);
 	void CambiarVolumenMusica(float vol);
+	~Creditos();
 private:
 	SoundBuffer m_buffer;
 	Sound m_musica;
@@ -21,6 +23,7 @@ private:
 	Font m_fuente;
 	Texture m_textura;
 	Sprite m_sprite;
+	Resources *m_resources;
 };
 
 #endif

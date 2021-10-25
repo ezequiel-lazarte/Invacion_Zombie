@@ -7,14 +7,12 @@ Enemigo_1::Enemigo_1() {
 	m_alto_sprite = 144;
 	m_ancho_sprite = 144;
 	m_rect = {m_size_rect.x+144, m_size_rect.y, m_alto_sprite, m_ancho_sprite};
-
-	m_sonido1.loadFromFile("recursos/musica/zombie1.wav");
+	
 	m_sound_zombie.setBuffer(m_sonido1);
 	m_sound_zombie.setVolume(20);
 	
 	m_move_sprite = 0;
 	m_move = {1.3,0};
-	m_textura.loadFromFile("recursos/enemigos/enemigo1/textura_enemigo_1.png");
 }
 
 void Enemigo_1::SetPosEnemigo (float x) {

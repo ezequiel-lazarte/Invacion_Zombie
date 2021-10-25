@@ -1,45 +1,10 @@
 #ifndef IMPUTBOX_H
 #define IMPUTBOX_H
 #include <string>
+#include <SFML/Graphics/Font.hpp>
 using namespace std;
-/**
-* Esta clase sirve para facilitar la entrada de strings en una ventana de sfml-2.x.
-* Hereda de sf::Text, así que se usa como un sf::Text. 
-* 	- Se lo crea pasandole una fuente, un tamaño y un color (los dos últimos opcionales).
-* 	- Se le puede cambiar el formato al texto con los mismos métodos que sf::Text. 
-* 	- Se lo dibuja con el método draw de la ventana igual que con los sprites.
-* 	- Lo importante es pasarle los eventos del bucle de eventos mediante el método 
-* 	  processEvent, que retorna true si era un evento de su interes, o false en caso 
-* 		contrario.
-* 	- Y además antes de dibujarlo hay que llamar a su método update, en caso contrario 
-* 	  no se verá nada.
-* 	
-* 	Ejemplode uso:
-*				...
-*				// crear una instancia
-* 			InputText text_entrada(font,30,sf::Color::Black);
-* 			text_entrada.setPosition(120,50);
-*				...
-* 			// bucle principal
-* 			while(w.isOpen()) { // w seria la ventana
-* 				// procesar eventos
-* 				Event e;
-* 				while(w.pollEvent(e)) {
-* 					if (text_entrada.processEvent(e)) {} // si retorna true, es porque procesó el evento
-* 					else if (e.type == ....
-* 					...
-* 				}
-* 				// dibujar
-* 				text_entrada.update(); // para que el texto se dibuje correctamente (hay que llamar a update ante de pasarselo a draw)
-* 				w.draw(text_entrada);
-* 				...
-* 				w.display();
-* 			}
-*
-* Version: 2014-02-19
-**/
 
-class InputText:public sf::Text {
+class InputText : public sf::Text {
 	sf::Clock clock;
 	std::string value;
 	bool is_down[sf::Keyboard::KeyCount];
@@ -53,14 +18,19 @@ class InputText:public sf::Text {
 	bool single_word;
 public:
 	void ventana(sf::Event e);
-	InputText(const sf::Font &font, int size=30, sf::Color color=sf::Color::Black) {
+	InputText() {
 		for(int i=0;i<sf::Keyboard::KeyCount;i++) is_down[i]=true;
 		max_chars=0;
 		single_word=false;
 		editable=true;
+	}
+	void setStyles(sf::Font &font, int size=30, sf::Color color=sf::Color::Black) {
 		setFont(font);
 		setCharacterSize(size);
-		setColor(color);
+		setFillColor(color);
+	}
+	int getSizeNamePlayer() {
+		return value.length();
 	}
 	bool processEvent(const sf::Event &event) {
 		if (!editable) return false;

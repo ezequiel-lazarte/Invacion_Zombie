@@ -1,84 +1,56 @@
 #include "Resources.h"
+#include "Funciones.h"
 
-Resources::Resources ( ) {
-	m_t = new sf::Texture[12];
-	m_s = new sf::SoundBuffer[7];
-	m_f = new sf::Font[1];
-	m_texture.loadFromFile("recursos/player/bala/bala.png");
-	*(m_t) = m_texture;
-	m_texture.loadFromFile("recursos/fondos/creditos/creditos.jpg");
-	*(m_t+1) = m_texture;
-	m_texture.loadFromFile("recursos/enemigos/enemigo1/textura_enemigo_1.png");
-	*(m_t+2) = m_texture;
-	m_texture.loadFromFile("recursos/fondos/escenario/fondo.png");
-	*(m_t+3) = m_texture;
-	m_texture.loadFromFile("recursos/GameOver/gameover.png");
-	*(m_t+4) = m_texture;
-	m_texture.loadFromFile("recursos/fondos/puntajes.jpg");
-	*(m_t+5) = m_texture;
-	m_texture.loadFromFile("recursos/fondos/escenario/sol.png");
-	*(m_t+6) = m_texture;
-	m_texture.loadFromFile("recursos/fondos/escenario/luna.png");
-	*(m_t+7) = m_texture;
-	m_texture.loadFromFile("recursos/fondos/fondo.jpg");
-	*(m_t+8) = m_texture;
-	m_texture.loadFromFile("recursos/fondos/fondo.jpg");
-	*(m_t+8) = m_texture;
-	m_texture.loadFromFile("recursos/player/corazon.png");
-	*(m_t+9) = m_texture;
-	m_texture.loadFromFile("recursos/fondos/puntajes.jpg");
-	*(m_t+10) = m_texture;
-	m_texture.loadFromFile("recursos/enemigos/enemigo1/textura_enemigo_1.png");
-	*(m_t+11) = m_texture;
+Resources::Resources ( ) : m_pos(-1) {
 	
-	m_buffer.loadFromFile("recursos/musica/creditos.wav");
-	*(m_s) = m_buffer;
-	m_buffer.loadFromFile("recursos/musica/zombie1.wav");
-	*(m_s+1) = m_buffer;
-	m_buffer.loadFromFile("recursos/gameOver/gameover.wav");
-	*(m_s+2) = m_buffer;
-	m_buffer.loadFromFile("recursos/gameOver/voz_gameover.wav");
-	*(m_s+3) = m_buffer;
-	m_buffer.loadFromFile("recursos/musica/Bewitched.wav");
-	*(m_s+4) = m_buffer;
-	m_buffer.loadFromFile("recursos/musica/Lost.wav");
-	*(m_s+5) = m_buffer;
-	m_buffer.loadFromFile("recursos/musica/puntajes.wav");
-	*(m_s+6) = m_buffer;
-	m_font.loadFromFile("recursos/fuentes/Cave-Story.ttf");
-	*(m_f) = m_font;
 }
 
 sf::Texture &Resources::getBala ( ) {
-	return m_t[0];
+	m_texture.loadFromFile("recursos/player/bala/bala.png");
+	m_pos = 0;
+	return getTexture_or_insert(m_t, m_texture, m_pos);
 }
 
 sf::Texture & Resources::getCreditos ( ) {
-	return m_t[1];
+	m_texture.loadFromFile("recursos/fondos/creditos/creditos.jpg");
+	m_pos = 1;
+	return getTexture_or_insert(m_t, m_texture, m_pos);
 }
 
 sf::Texture &Resources::getEnemigo_1 ( ) {
-	return m_t[2];
+	m_texture.loadFromFile("recursos/enemigos/enemigo1/textura_enemigo_1.png");
+	m_pos = 2;
+	return getTexture_or_insert(m_t, m_texture, m_pos);
 }
 
 sf::Texture &Resources::getEnemigo_2 ( ) {
-	return m_t[11];
+	m_texture.loadFromFile("recursos/enemigos/enemigo2/textura_enemigo_2.png");
+	m_pos = 11;
+	return getTexture_or_insert(m_t, m_texture, m_pos);
 }
 
 sf::Texture &Resources::getFondo ( ) {
-	return m_t[3];
+	m_texture.loadFromFile("recursos/fondos/escenario/fondo.png");
+	m_pos = 3;
+	return getTexture_or_insert(m_t, m_texture, m_pos);
 }
 
 sf::Texture &Resources::getGameOver ( ) {
-	return m_t[4];
+	m_texture.loadFromFile("recursos/GameOver/gameover.png");
+	m_pos = 4;
+	return getTexture_or_insert(m_t, m_texture, m_pos);
 }
 
 sf::Texture &Resources::getGuardarPuntajes ( ) {
-	return m_t[5];
+	m_texture.loadFromFile("recursos/fondos/puntajes.jpg");
+	m_pos = 5;
+	return getTexture_or_insert(m_t, m_texture, m_pos);
 }
 
 sf::Texture &Resources::getMenu ( ) {
-	return m_t[8];
+	m_texture.loadFromFile("recursos/fondos/fondo.jpg");
+	m_pos = 8;
+	return getTexture_or_insert(m_t, m_texture, m_pos);
 }
 
 sf::Texture &Resources::getPantallaCarga ( ) {
@@ -86,7 +58,9 @@ sf::Texture &Resources::getPantallaCarga ( ) {
 }
 
 sf::Texture &Resources::getPartida ( ) {
-	return m_t[3];
+	m_texture.loadFromFile("recursos/fondos/escenario/fondo.png");
+	m_pos = 3;
+	return getTexture_or_insert(m_t, m_texture, m_pos);
 }
 
 sf::Texture &Resources::getPlayer ( ) {
@@ -94,44 +68,73 @@ sf::Texture &Resources::getPlayer ( ) {
 }
 
 sf::Texture &Resources::getPuntajes ( ) {
-	return m_t[10];
+	m_texture.loadFromFile("recursos/fondos/puntajes.jpg");
+	m_pos = 5;
+	return getTexture_or_insert(m_t, m_texture, m_pos);
+}
+
+sf::Texture & Resources::getCorazon ( ) {
+	m_texture.loadFromFile("recursos/player/corazon.png");
+	m_pos = 9;
+	return getTexture_or_insert(m_t, m_texture, m_pos);
+}
+
+sf::Texture & Resources::getSol ( ) {
+	m_texture.loadFromFile("recursos/fondos/escenario/sol.png");
+	m_pos = 6;
+	return getTexture_or_insert(m_t, m_texture, m_pos);
+}
+
+sf::Texture & Resources::getLuna ( ) {
+	m_texture.loadFromFile("recursos/fondos/escenario/luna.png");
+	m_pos = 7;
+	return getTexture_or_insert(m_t, m_texture, m_pos);
 }
 
 sf::SoundBuffer & Resources::getBufferCreditos ( ) {
-	return m_s[0];
+	m_buffer.loadFromFile("recursos/musica/creditos.wav");
+	m_pos = 0;
+	return getBuffer_or_insert(m_s, m_buffer, m_pos);
 }
 
 sf::SoundBuffer & Resources::getBufferEnemigo_1 ( ) {
-	return m_s[1];
+	m_buffer.loadFromFile("recursos/musica/zombie1.wav");
+	m_pos = 1;
+	return getBuffer_or_insert(m_s, m_buffer, m_pos);
 }
 
 sf::SoundBuffer & Resources::getBufferGameOver ( ) {
-	return m_s[2];
+	m_buffer.loadFromFile("recursos/gameOver/gameover.wav");
+	m_pos = 2;
+	return getBuffer_or_insert(m_s, m_buffer, m_pos);
 }
 
 sf::SoundBuffer & Resources::getBufferVozGameOver ( ) {
-	return m_s[3];
+	m_buffer.loadFromFile("recursos/gameOver/voz_gameover.wav");
+	m_pos = 3;
+	return getBuffer_or_insert(m_s, m_buffer, m_pos);
 }
 
 sf::SoundBuffer & Resources::getBufferMenu ( ) {
-	return m_s[4];
+	m_buffer.loadFromFile("recursos/musica/Bewitched.wav");
+	m_pos = 4;
+	return getBuffer_or_insert(m_s, m_buffer, m_pos);
 }
 
 sf::SoundBuffer & Resources::getBufferPartida ( ) {
-	return m_s[5];
+	m_buffer.loadFromFile("recursos/musica/Lost.wav");
+	m_pos = 5;
+	return getBuffer_or_insert(m_s, m_buffer, m_pos);
 }
 
 sf::SoundBuffer & Resources::getBufferPuntajes ( ) {
-	return m_s[6];
+	m_buffer.loadFromFile("recursos/musica/puntajes.wav");
+	m_pos = 6;
+	return getBuffer_or_insert(m_s, m_buffer, m_pos);
 }
 
 sf::Font & Resources::getFont ( ) {
-	return m_f[0];
+	m_font.loadFromFile("recursos/fuentes/Cave-Story.ttf");
+	m_pos = 0;
+	return getFont_or_insert(m_f, m_font, m_pos);
 }
-
-Resources::~Resources ( ) {
-	delete []m_t;
-	delete []m_s;
-	delete []m_f;
-}
-

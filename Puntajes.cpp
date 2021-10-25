@@ -7,6 +7,7 @@
 using namespace std;
 
 Puntajes::Puntajes()  {
+	m_resources = new Resources;
 	m_textura_fondo.loadFromFile("recursos/fondos/puntajes.jpg");
 	m_fondo.setTexture(m_textura_fondo);
 	m_fondo.setScale(1.1,1.3);
@@ -116,4 +117,8 @@ void Puntajes::Dibujar (sf::RenderWindow & window) {
 		window.draw(m_posiciones[i]);
 	}
 	window.display();
+}
+
+Puntajes::~Puntajes() {
+	delete m_resources;
 }

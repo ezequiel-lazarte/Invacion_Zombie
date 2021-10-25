@@ -11,13 +11,9 @@ using namespace std;
 
 
 GuardarPuntaje:: GuardarPuntaje(){
-	abierto = false;
-	
-	
 	m_textura_fondo.loadFromFile("recursos/fondos/puntajes.jpg");
 	m_fondo.setTexture(m_textura_fondo);
 	m_fondo.setScale(1.1,1.3);
-	
 	
 	m_buffer.loadFromFile("recursos/musica/puntajes.wav");
 	m_musica.setBuffer(m_buffer);
@@ -31,22 +27,20 @@ GuardarPuntaje:: GuardarPuntaje(){
 	m_titulo.setFillColor(sf::Color {180,0,0});
 	m_titulo.setString("Guardar Puntaje");
 	m_titulo.setCharacterSize(90);
-
+	
 }
 
 
 void GuardarPuntaje::Actualizar (Juego & juego) {
-	
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return)&& abierto ==true){
-	m_musica.stop();
-	juego.CambiarEscena(new Menu());
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
+		m_musica.stop();
+		juego.CambiarEscena(new Menu());
 	}
 }
 
-void GuardarPuntaje::CambiarVolumenMusica(float vol){
+void GuardarPuntaje::CambiarVolumenMusica(float vol) {
 	m_musica.setVolume(vol);
 }
-
 
 void GuardarPuntaje::Dibujar (sf::RenderWindow & window){
 	window.clear({0,0,0});
@@ -56,12 +50,7 @@ void GuardarPuntaje::Dibujar (sf::RenderWindow & window){
 }
 
 void GuardarPuntaje:: Procesar_evento(sf::Event evento){
-	InputText A(m_fuente, 30, sf::Color::Red);
-	A.ventana(evento);
-	
-	
-	//m_musica.stop();
-	//m_juego->CambiarEscena(new Menu());
+	/*m_inputText.ventana(evento);*/
 }
 
 

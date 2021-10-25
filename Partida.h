@@ -22,16 +22,16 @@ public:
 	void Dibujar(RenderWindow &window) override;
 	void CambiarVolumenMusica(float vol);
 	void ActualizarPuntaje();
+	~Partida();
 private:
 	vector<Enemigo_1> m_enemigos;
 	Color m_color_fondo;
 	Fondo m_fondo_1;
 	Player m_player;
-	Enemigo_1 enemigo1;
+	Enemigo_1 enemigo;
 	SoundBuffer m_buffer;
 	Sound m_musica_fondo;
-	Texture m_textura_corazon, m_texture_aux;
-	Resources m_recursos;
+	Resources *m_recursos;
 	Sprite m_corazon;
 	Clock m_reloj;
 	Time m_crono;
