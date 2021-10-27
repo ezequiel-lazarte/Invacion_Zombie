@@ -7,6 +7,7 @@
 #include <fstream>
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Audio/Sound.hpp>
+#include "Resources.h"
 using namespace std;
 
 struct Puntaje {
@@ -23,6 +24,7 @@ public:
 	void Dibujar (sf::RenderWindow & window) override;
 	void GuardarUnPuntajeNuevo(string nameplayer);
 	void CambiarVolumenMusica(float vol);
+	~Puntajes();
 private:
 	Texture m_textura_fondo;
 	Sprite m_fondo;
@@ -34,6 +36,7 @@ private:
 	string m_binaryname;
 	fstream m_archi;
 	vector<Puntaje> m_puntajes;
+	Resources *m_resources;
 	int m_nro_puntajes;
 };
 

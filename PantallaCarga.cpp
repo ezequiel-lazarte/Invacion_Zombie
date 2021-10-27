@@ -3,9 +3,11 @@
 #include "Partida.h"
 #include <iostream>
 #include <SFML/Graphics/Color.hpp>
+#include "Resources.h"
 using namespace std;
 using namespace sf;
 PantallaCarga::PantallaCarga() {
+	m_resources = new Resources;
 	sf::Texture aux;
 	for(int i=0;i<8;i++) {
 		aux.loadFromFile("recursos/pantallacarga/soldado/sprite_"+to_string(i+1)+".png");
@@ -38,3 +40,6 @@ void PantallaCarga::Dibujar (sf::RenderWindow & window) {
 	window.display();
 }
 
+PantallaCarga::~PantallaCarga() {
+	delete m_resources;
+}

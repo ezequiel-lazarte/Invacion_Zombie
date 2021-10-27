@@ -2,6 +2,7 @@
 #include "Menu.h"
 
 Creditos::Creditos() {
+	m_resources = new Resources;
 	m_buffer.loadFromFile("recursos/musica/creditos.wav");
 	m_musica.setBuffer(m_buffer);
 	m_musica.play();
@@ -48,4 +49,8 @@ void Creditos::Dibujar (sf::RenderWindow & window) {
 
 void Creditos::CambiarVolumenMusica (float vol) {
 	m_musica.setVolume(vol);
+}
+
+Creditos::~Creditos() {
+	delete m_resources;
 }

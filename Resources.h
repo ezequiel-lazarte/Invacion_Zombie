@@ -3,39 +3,52 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
+#include <map>
 using namespace std;
+
+typedef sf::Texture texture_t;
+typedef sf::SoundBuffer sound_t;
+typedef sf::Font font_t;
+typedef map<int, texture_t>::iterator iterator_t;
+typedef map<int, sound_t>::iterator iterator_s;
+typedef map<int, font_t>::iterator iterator_f;
 
 class Resources {
 public:
 	Resources();
-	sf::Texture &getBala();
-	sf::Texture &getCreditos();
-	sf::Texture &getEnemigo_1();
-	sf::Texture &getEnemigo_2();
-	sf::Texture &getFondo();
-	sf::Texture &getGameOver();
-	sf::Texture &getGuardarPuntajes();
-	sf::Texture &getMenu();
-	sf::Texture &getPantallaCarga();
-	sf::Texture &getPartida();
-	sf::Texture &getPlayer();
-	sf::Texture &getPuntajes();
-	sf::SoundBuffer &getBufferCreditos();
-	sf::SoundBuffer &getBufferEnemigo_1();
-	sf::SoundBuffer &getBufferGameOver();
-	sf::SoundBuffer &getBufferVozGameOver();
-	sf::SoundBuffer &getBufferMenu();
-	sf::SoundBuffer &getBufferPartida();
-	sf::SoundBuffer &getBufferPuntajes();
-	sf::Font &getFont();
-	~Resources();
+	texture_t &getBala();
+	texture_t &getCreditos();
+	texture_t &getEnemigo_1();
+	texture_t &getEnemigo_2();
+	texture_t &getFondo();
+	texture_t &getGameOver();
+	texture_t &getGuardarPuntajes();
+	texture_t &getMenu();
+	texture_t &getPantallaCarga();
+	texture_t &getPartida();
+	texture_t &getPlayer();
+	texture_t &getPuntajes();
+	texture_t &getCorazon();
+	texture_t &getSol();
+	texture_t &getLuna();
+	sound_t &getBufferCreditos();
+	sound_t &getBufferEnemigo_1();
+	sound_t &getBufferGameOver();
+	sound_t &getBufferVozGameOver();
+	sound_t &getBufferMenu();
+	sound_t &getBufferPartida();
+	sound_t &getBufferPuntajes();
+	font_t &getFont();
 private:
-	sf::Texture m_texture;
-	sf::SoundBuffer m_buffer;
-	sf::Font m_font;
-	sf::Texture *m_t;
-	sf::SoundBuffer *m_s;
-	sf::Font *m_f;
+	texture_t m_texture;
+	sound_t m_buffer;
+	font_t m_font;
+
+	map<int, texture_t> m_t;
+	map<int, sound_t> m_s;
+	map<int, font_t> m_f;
+	
+	int m_pos;
 };
 
 #endif

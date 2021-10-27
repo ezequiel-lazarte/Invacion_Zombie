@@ -3,9 +3,11 @@
 #include "GameOver.h"
 #include "Enemigo_1.h"
 #include <iostream>
+#include "Resources.h"
 using namespace std;
 
 Partida::Partida() : m_color_fondo(20,110,255) {
+	m_recursos = new Resources;
 	m_volumen = 30;
 	m_musica_fondo.setVolume(m_volumen);
 	srand(time(NULL));
@@ -13,31 +15,28 @@ Partida::Partida() : m_color_fondo(20,110,255) {
 	m_posHasta = 2500;
 	m_numeroEnemigos1 = 7;
 	m_numeroEnemigos2 = 7;
-	m_texture_aux = m_recursos.getEnemigo_1();
 	for(int i=0;i<m_numeroEnemigos1;i++) {
 		m_enemigos.resize(m_enemigos.size() + 1);
-		enemigo1.setTexture(m_texture_aux);
-		enemigo1.setVida(80);
-		enemigo1.setDanio(300);
-		m_enemigos[i] = enemigo1;
+		enemigo.setTexture(m_recursos->getEnemigo_1());
+		enemigo.setVida(80);
+		enemigo.setDanio(300);
+		m_enemigos[i] = enemigo;
 		m_enemigos[i].SetPosEnemigo(rand()%(m_posHasta - m_posDesde) + m_posDesde);
 	}
 	for(int i=m_numeroEnemigos1;i<m_numeroEnemigos2;i++) {
 		m_enemigos.resize(m_enemigos.size() + 1);
-		Enemigo_1 enemigo2;
-		enemigo1.setVida(30);
-		enemigo1.setDanio(800);
-		m_enemigos[i] = enemigo2;
+		enemigo.setTexture(m_recursos->getEnemigo_2());
+		enemigo.setVida(30);
+		enemigo.setDanio(800);
+		m_enemigos[i] = enemigo;
 		m_enemigos[i].SetPosEnemigo(rand()%(m_posHasta - m_posDesde) + m_posDesde);
 	}
-	m_buffer.loadFromFile("recursos/musica/Lost.wav");
-	m_musica_fondo.setBuffer(m_buffer);
+	m_musica_fondo.setBuffer(m_recursos->getBufferPartida());
 	m_musica_fondo.play();
 	m_musica_fondo.setLoop(true);
 	m_crono = m_reloj.restart();
 	
-	m_fuente.loadFromFile("recursos/fuentes/cave-story.ttf");
-	m_vida_player.setFont(m_fuente);
+	m_vida_player.setFont(m_recursos->getFont());
 	
 	m_vida_player.setString(to_string(m_player.getVida()));
 	m_vida_player.setPosition(50,10);
@@ -56,8 +55,7 @@ Partida::Partida() : m_color_fondo(20,110,255) {
 	m_tiempo.setCharacterSize(30);
 	m_tiempo.setFillColor(Color::Red);
 	
-	m_textura_corazon.loadFromFile("recursos/player/corazon.png");
-	m_corazon.setTexture(m_textura_corazon);
+	m_corazon.setTexture(m_recursos->getCorazon());
 	m_corazon.setPosition(10,12);
 	m_corazon.setScale(.13,.13);
 }
@@ -93,7 +91,7 @@ void Partida::Actualizar (Juego &juego) {
 			m_enemigos[i].Finalizar();
 		}
 		m_player.Finalizar();
-		juego.CambiarEscena(new GameOver());
+		juego.CambiarEscena(new GameOver);
 	}
 	CrearEnemigos();
 	/// vida jugador
@@ -140,22 +138,25 @@ void Partida::CrearEnemigos ( ) {
 	m_posHasta = 3800;
 	for(size_t i=0;i<m_numeroEnemigos1;i++) {
 		if(m_enemigos[i].getVida() <= 0) {
-			Enemigo_1 enemigo1;
-			enemigo1.setVida(80);
-			enemigo1.setDanio(300);
-			enemigo1.setTexture(m_recursos.getEnemigo_1());
-			enemigo1.SetPosEnemigo(m_posDesde);
-			m_enemigos[i] = enemigo1;
+			enemigo.setVida(80);
+			enemigo.setDanio(300);
+			enemigo.setTexture(m_recursos->getEnemigo_1());
+			enemigo.SetPosEnemigo(m_posDesde);
+			m_enemigos[i] = enemigo;
 		}
 	}
 	for(size_t i=m_numeroEnemigos1;i<m_enemigos.size();i++) {
 		if(m_enemigos[i].getVida() <= 0) {
-			Enemigo_1 enemigo2;
-			enemigo1.setVida(30);
-			enemigo1.setDanio(800);
-			enemigo2.SetPosEnemigo(m_posHasta);
-			m_enemigos[i] = enemigo2;
+			enemigo.setVida(30);
+			enemigo.setDanio(800);
+			enemigo.setTexture(m_recursos->getEnemigo_2());
+			enemigo.SetPosEnemigo(m_posHasta);
+			m_enemigos[i] = enemigo;
 		}
 	}
+}
+
+Partida::~Partida() {
+	delete m_recursos;
 }
 

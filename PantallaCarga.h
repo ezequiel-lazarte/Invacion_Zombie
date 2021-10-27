@@ -10,6 +10,7 @@
 #include <vector>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Text.hpp>
+#include "Resources.h"
 using namespace std;
 
 class PantallaCarga : public Escena {
@@ -17,7 +18,9 @@ public:
 	PantallaCarga();
 	void Actualizar(Juego &juego);
 	void Dibujar(sf::RenderWindow &window);
+	~PantallaCarga();
 private:
+	Resources * m_resources;
 	Clock m_reloj;
 	Time m_crono;
 	vector<sf::Texture> m_texturas;

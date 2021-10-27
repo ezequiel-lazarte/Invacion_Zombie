@@ -7,6 +7,8 @@
 #include "Creditos.h"
 #include "PantallaCarga.h"
 
+Resources *Menu::m_resources = new Resources;
+
 Menu::Menu(){
 	m_buffer.loadFromFile("recursos/musica/Bewitched.wav");
 	m_musica_inicio.setBuffer(m_buffer);
@@ -51,19 +53,19 @@ Menu::Menu(){
 void Menu::Actualizar (Juego &juego) {
 	if(m_mouse.isButtonPressed(m_mouse.Left)) {
 		m_musica_inicio.stop();
-		juego.CambiarEscena(new PantallaCarga());
+		juego.CambiarEscena(new PantallaCarga);
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::P)) {
 		m_musica_inicio.stop();
-		juego.CambiarEscena(new Puntajes());
+		juego.CambiarEscena(new Puntajes);
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::H)) {
 		m_musica_inicio.stop();
-		juego.CambiarEscena(new Creditos());
+		juego.CambiarEscena(new Creditos);
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
 		m_musica_inicio.stop();
-		juego.CambiarEscena(new Creditos());
+		juego.CambiarEscena(new Creditos);
 	}
 }
 
@@ -81,3 +83,6 @@ void Menu::CambiarVolumenMusica (float vol) {
 	m_musica_inicio.setVolume(vol);
 }
 
+Menu::~Menu() {
+	delete m_resources;
+}

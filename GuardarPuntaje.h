@@ -15,15 +15,9 @@ class GuardarPuntaje : public Escena{
 public:
 	GuardarPuntaje();
 	void Actualizar (Juego & juego) override;
-	
 	void Dibujar (sf::RenderWindow & window) override;
-	
 	void CambiarVolumenMusica(float vol);
-	
 	void Procesar_evento(sf::Event evento);
-	
-	
-	
 	Font m_fuente;
 private:
 	Texture m_textura_fondo;
@@ -31,8 +25,6 @@ private:
 	SoundBuffer m_buffer;
 	Sound m_musica;
 	Text m_titulo;
-	Juego *m_juego;
-	bool abierto;
 };
 
 
