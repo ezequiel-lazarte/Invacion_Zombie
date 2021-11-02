@@ -6,8 +6,9 @@
 #include "Resources.h"
 using namespace std;
 using namespace sf;
-PantallaCarga::PantallaCarga() {
-	m_resources = new Resources;
+PantallaCarga::PantallaCarga(int &volumen, Resources *recursos) {
+	m_volumen = volumen;
+	m_recursos = recursos;
 	sf::Texture aux;
 	for(int i=0;i<8;i++) {
 		aux.loadFromFile("recursos/pantallacarga/soldado/sprite_"+to_string(i+1)+".png");
@@ -17,8 +18,7 @@ PantallaCarga::PantallaCarga() {
 	m_sprite.setPosition(835,400);
 	m_sprite.setScale(.3,.3);
 	m_cambiar_textura = 0;
-	m_fuente.loadFromFile("recursos/fuentes/cave-story.ttf");
-	m_t1.setFont(m_fuente);
+	m_t1.setFont(m_recursos->getFont());
 	m_t1.setString("Cargando...");
 	m_t1.setFillColor(Color::Red);
 	m_t1.setCharacterSize(40);
@@ -26,7 +26,7 @@ PantallaCarga::PantallaCarga() {
 }
 
 void PantallaCarga::Actualizar (Juego & juego) {
-	if(m_crono.asSeconds() >= 1) juego.CambiarEscena(new Partida);
+	if(m_crono.asSeconds() >= 6) juego.CambiarEscena(new Partida(m_volumen, m_recursos));
 	m_sprite.setTexture(m_texturas[m_cambiar_textura]);
 	if(m_cambiar_textura>=7) m_cambiar_textura=0;
 	m_cambiar_textura +=1;
@@ -38,8 +38,4 @@ void PantallaCarga::Dibujar (sf::RenderWindow & window) {
 	window.draw(m_sprite);
 	window.draw(m_t1);
 	window.display();
-}
-
-PantallaCarga::~PantallaCarga() {
-	delete m_resources;
 }

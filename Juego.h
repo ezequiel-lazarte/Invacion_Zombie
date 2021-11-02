@@ -3,8 +3,7 @@
 #include "Fondo.h"
 #include <SFML/Graphics.hpp>
 #include "Escena.h"
-#include <SFML/System/Time.hpp>
-#include <SFML/System/Clock.hpp>
+#include "Resources.h"
 using namespace sf;
 class Escena;
 
@@ -16,15 +15,13 @@ public:
 	void Actualizar();
 	void Dibujar();
 	void CambiarEscena(Escena *Proxima_Escena);
-	
+	~Juego();
 private:
 	RenderWindow m_window;
 	Escena *m_escena;
 	Escena *m_proxima_escena = nullptr;
-	Clock m_reloj;
-	Time m_cronometro;
-	int m_fps;
-	
+	Resources *m_recursos;
+	int m_fps, m_volumen;
 };
 
 #endif

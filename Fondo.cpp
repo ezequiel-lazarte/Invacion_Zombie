@@ -2,8 +2,8 @@
 #include <SFML/Graphics/Color.hpp>
 
 Fondo::Fondo() : rojo(0), verde(0), azul(0) {
-	m_textura.loadFromFile("recursos/fondos/escenario/fondo.png");
-	m_sprite.setTexture(m_textura);
+	m_fondo.loadFromFile("recursos/fondos/escenario/fondo.png");
+	m_sprite.setTexture(m_fondo);
 	m_proporcion = {1024,356};/// ancho y alto
 	diferencia = 520-m_proporcion.y;
 	m_sprite.setPosition(0,diferencia);
@@ -17,7 +17,6 @@ Fondo::Fondo() : rojo(0), verde(0), azul(0) {
 	m_move_sol = {.5,-.2};
 	gravedad = 0.00016;
 	// luna
-	m_textura_luna.loadFromFile("recursos/fondos/escenario/luna.png");
 	/// colores
 	rojo =0;
 	verde = 100;
@@ -34,11 +33,13 @@ void Fondo::Actualizar ( ) {
 	if(m_sol.getPosition().x>=1100) {
 		if(ultima_textura==1) { // noche
 			m_nro_noches++;
-			m_sol.setTexture(m_textura_luna);
+			m_textura_sol.loadFromFile("recursos/fondos/escenario/luna.png");
+			m_sol.setTexture(m_textura_sol);
 			ultima_textura = 0;
 			verde =0;
 			azul =0; 
 		} else { // dia
+			m_textura_sol.loadFromFile("recursos/fondos/escenario/sol.png");
 			m_sol.setTexture(m_textura_sol);
 			ultima_textura = 1;
 			verde =100;

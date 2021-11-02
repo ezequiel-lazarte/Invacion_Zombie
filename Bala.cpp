@@ -1,9 +1,9 @@
 #include "Bala.h"
 
-Bala::Bala ( ): m_pos(0,0) {
+Bala::Bala (Resources *recursos): m_pos(0,0) {
+	m_recursos = recursos;
 	m_velocidad = 3;
-	m_textura.loadFromFile("recursos/player/bala/bala.png");
-	m_sprite.setTexture(m_textura);
+	m_sprite.setTexture(m_recursos->getBala());
 }
 
 void Bala::Actualizar (sf::Vector2f pos) {

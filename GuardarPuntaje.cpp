@@ -10,18 +10,17 @@ using namespace std;
 
 
 
-GuardarPuntaje:: GuardarPuntaje(){
-	m_textura_fondo.loadFromFile("recursos/fondos/puntajes.jpg");
-	m_fondo.setTexture(m_textura_fondo);
+GuardarPuntaje:: GuardarPuntaje(int &volumen, Resources *recursos){
+	m_recursos = recursos;
+	m_volumen = volumen;
+	m_fondo.setTexture(m_recursos->getGuardarPuntajes());
 	m_fondo.setScale(1.1,1.3);
 	
-	m_buffer.loadFromFile("recursos/musica/puntajes.wav");
-	m_musica.setBuffer(m_buffer);
+	m_musica.setBuffer(m_recursos->getBufferPuntajes());
 	m_musica.play();
 	m_musica.setLoop(true);
 	
-	m_fuente.loadFromFile("recursos/fuentes/Cave-Story.ttf");
-	m_titulo.setFont(m_fuente);
+	m_titulo.setFont(m_recursos->getFont());
 	
 	m_titulo.setPosition(260,-30);
 	m_titulo.setFillColor(sf::Color {180,0,0});
@@ -34,12 +33,8 @@ GuardarPuntaje:: GuardarPuntaje(){
 void GuardarPuntaje::Actualizar (Juego & juego) {
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
 		m_musica.stop();
-		juego.CambiarEscena(new Menu());
+		juego.CambiarEscena(new Menu(m_volumen, m_recursos));
 	}
-}
-
-void GuardarPuntaje::CambiarVolumenMusica(float vol) {
-	m_musica.setVolume(vol);
 }
 
 void GuardarPuntaje::Dibujar (sf::RenderWindow & window){
@@ -52,6 +47,3 @@ void GuardarPuntaje::Dibujar (sf::RenderWindow & window){
 void GuardarPuntaje:: Procesar_evento(sf::Event evento){
 	/*m_inputText.ventana(evento);*/
 }
-
-
-

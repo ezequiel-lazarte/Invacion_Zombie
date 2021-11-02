@@ -9,21 +9,18 @@ using namespace sf;
 
 class Creditos : public Escena {
 public:
-	Creditos();
+	Creditos(int &volumen, Resources *recursos);
 	void Actualizar (Juego & juego);
 	void Dibujar (sf::RenderWindow & window);
 	void CambiarVolumenMusica(float vol);
-	~Creditos();
 private:
-	SoundBuffer m_buffer;
 	Sound m_musica;
 	Vector2f m_move;
 	Color m_color;
 	Text m_t1, m_t2;
-	Font m_fuente;
-	Texture m_textura;
 	Sprite m_sprite;
-	Resources *m_resources;
+	Resources *m_recursos;
+	int m_volumen;
 };
 
 #endif

@@ -6,19 +6,17 @@
 #include <cstring>
 using namespace std;
 
-Puntajes::Puntajes()  {
-	m_resources = new Resources;
-	m_textura_fondo.loadFromFile("recursos/fondos/puntajes.jpg");
-	m_fondo.setTexture(m_textura_fondo);
+Puntajes::Puntajes(int &volumen, Resources *recursos)  {
+	m_volumen = volumen;
+	m_recursos = recursos;
+	m_fondo.setTexture(m_recursos->getPuntajes());
 	m_fondo.setScale(1.1,1.3);
 	
-	m_buffer.loadFromFile("recursos/musica/puntajes.wav");
-	m_musica.setBuffer(m_buffer);
+	m_musica.setBuffer(m_recursos->getBufferPuntajes());
 	m_musica.play();
 	m_musica.setLoop(true);
 	
-	m_fuente.loadFromFile("recursos/fuentes/Cave-Story.ttf");
-	m_titulo.setFont(m_fuente);
+	m_titulo.setFont(m_recursos->getFont());
 	
 	m_binaryname = "Puntajes/Puntajes.dat";
 	
@@ -40,7 +38,7 @@ Puntajes::Puntajes()  {
 	Text t1;
 	for(int i=0;i<m_nro_puntajes;i++) {
 		aux = "Top " + to_string(i+1) + ": " + m_puntajes[i].nameplayer + " \nTiempo: ";
-		t1.setFont(m_fuente);
+		t1.setFont(m_recursos->getFont());
 		t1.setCharacterSize(30);
 		t1.setPosition(30,85*(i+1));
 		t1.setString(aux);
@@ -58,7 +56,7 @@ Puntajes::Puntajes()  {
 void Puntajes::Actualizar (Juego & juego) {
 	if(Keyboard::isKeyPressed(Keyboard::Escape)) {
 		m_musica.stop();
-		juego.CambiarEscena(new Menu());
+		juego.CambiarEscena(new Menu(m_volumen, m_recursos));
 	}
 }
 
@@ -117,8 +115,4 @@ void Puntajes::Dibujar (sf::RenderWindow & window) {
 		window.draw(m_posiciones[i]);
 	}
 	window.display();
-}
-
-Puntajes::~Puntajes() {
-	delete m_resources;
 }
