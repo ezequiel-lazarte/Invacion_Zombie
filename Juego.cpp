@@ -7,24 +7,21 @@ using namespace sf;
 
 Juego::Juego() : m_window(VideoMode(1080,520), "Invasión Zombie") {
 	m_fps = 60;
+	m_volumen = 50;
+	m_recursos = new Resources;
 	m_window.setFramerateLimit(m_fps);
-	m_escena = new Menu();
+	m_escena = new Menu(m_volumen, m_recursos);
 }
 
 void Juego::Jugar ( ) {
 	while(m_window.isOpen()) {
-		m_cronometro = m_reloj.getElapsedTime();
-		if(m_cronometro.asSeconds() > 1/m_fps) {
-			ProcesarEventos();
-			m_reloj.restart();
-		}
+		ProcesarEventos();
 		Actualizar();
 		Dibujar();
 		if(m_proxima_escena) {
 			delete m_escena;
 			m_escena = m_proxima_escena;
 			m_proxima_escena = nullptr;
-			
 		}
 	}
 }
@@ -45,5 +42,9 @@ void Juego::Dibujar () {
 
 void Juego::CambiarEscena (Escena *Proxima_Escena) {
 	m_proxima_escena = Proxima_Escena;
+}
+
+Juego::~Juego ( ) {
+	delete m_recursos;
 }
 

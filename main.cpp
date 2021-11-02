@@ -3,7 +3,7 @@
 
 using namespace sf;
 
-int main(int argc, char *argv[]){
+int main(){
 	Juego g;
 	g.Jugar();
 	return 0;
