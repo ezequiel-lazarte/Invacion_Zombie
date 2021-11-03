@@ -31,6 +31,7 @@ public:
 	texture_t &getCorazon();
 	texture_t &getSol();
 	texture_t &getLuna();
+	texture_t &getButtonsMenu();
 	sound_t &getBufferCreditos();
 	sound_t &getBufferEnemigo_1();
 	sound_t &getBufferGameOver();

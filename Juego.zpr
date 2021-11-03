@@ -21,7 +21,7 @@ path=main.cpp
 cursor=5:9
 [source]
 path=Juego.cpp
-cursor=15:23
+cursor=16:27
 open=true
 [source]
 path=Entidad.cpp

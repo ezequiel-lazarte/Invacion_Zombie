@@ -40,6 +40,10 @@ void Juego::Dibujar () {
 	m_escena->Dibujar(m_window);
 }
 
+RenderWindow & Juego::getWindow ( ) {
+	return m_window;
+}
+
 void Juego::CambiarEscena (Escena *Proxima_Escena) {
 	m_proxima_escena = Proxima_Escena;
 }
@@ -47,4 +51,3 @@ void Juego::CambiarEscena (Escena *Proxima_Escena) {
 Juego::~Juego ( ) {
 	delete m_recursos;
 }
-
