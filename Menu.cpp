@@ -51,21 +51,21 @@ Menu::Menu(int &volumen, Resources *recursos){
 	m_color = {0,0,0};
 	m_play.setFont(m_recursos->getFont());
 	m_play.setString("Play");
-	m_play.setColor(m_color);
+	m_play.setFillColor(m_color);
 	m_play.setPosition(520, 182);
 	m_play.setCharacterSize(25);
 	
 	m_color = {0,0,0};
 	m_scores.setFont(m_recursos->getFont());
 	m_scores.setString("Puntajes");
-	m_scores.setColor(m_color);
+	m_scores.setFillColor(m_color);
 	m_scores.setPosition(505, 242);
 	m_scores.setCharacterSize(25);
 	
 	m_color = {0,0,0};
 	m_credits.setFont(m_recursos->getFont());
 	m_credits.setString("Creditos");
-	m_credits.setColor(m_color);
+	m_credits.setFillColor(m_color);
 	m_credits.setPosition(505, 302);
 	m_credits.setCharacterSize(25);
 }
@@ -76,7 +76,7 @@ void Menu::Actualizar (Juego &juego) {
 		m_musica_inicio.stop();
 		/// en juego implementar el metodo finalizar
 	}
-	if(sf::Mouse::Right == sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
+	if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 		if(485 < m_pos_mouse.x && m_pos_mouse.x < 592) {
 			if(182 < m_pos_mouse.y && m_pos_mouse.y < 218) {
 				m_musica_inicio.stop();

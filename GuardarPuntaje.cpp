@@ -10,7 +10,7 @@ using namespace std;
 
 
 
-GuardarPuntaje:: GuardarPuntaje(int &volumen, Resources *recursos){
+GuardarPuntaje:: GuardarPuntaje(int &volumen, Resources *recursos, sf::Event evento){
 	m_recursos = recursos;
 	m_volumen = volumen;
 	m_fondo.setTexture(m_recursos->getGuardarPuntajes());
@@ -26,6 +26,9 @@ GuardarPuntaje:: GuardarPuntaje(int &volumen, Resources *recursos){
 	m_titulo.setFillColor(sf::Color {180,0,0});
 	m_titulo.setString("Guardar Puntaje");
 	m_titulo.setCharacterSize(90);
+	
+	InputText A(m_recursos->getFont(),30,sf::Color::Black);
+	A.ventana(evento);
 	
 }
 
@@ -44,6 +47,3 @@ void GuardarPuntaje::Dibujar (sf::RenderWindow & window){
 	window.display();
 }
 
-void GuardarPuntaje:: Procesar_evento(sf::Event evento){
-	/*m_inputText.ventana(evento);*/
-}

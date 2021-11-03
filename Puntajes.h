@@ -31,7 +31,7 @@ private:
 	vector<Text> m_posiciones;
 	string m_binaryname;
 	fstream m_archi;
-	vector<Puntaje> m_puntajes;
+	static vector<Puntaje> m_puntajes;
 	Resources *m_recursos;
 	int m_nro_puntajes, m_volumen;
 };

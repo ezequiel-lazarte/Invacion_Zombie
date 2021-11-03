@@ -18,13 +18,11 @@ public:
 	void Dibujar (sf::RenderWindow & window);
 	void Finalizar();
 	void CambiarVolumenMusica(float vol);
-	void Procesar_evento(Event evento);
 private:
 	sf::Sprite m_gameOver;
 	Sound m_musica_gameOver;
 	Sound m_voz_gameover;
 	sf::Text m_t1, m_text;
-	InputText m_inputText;
 	sf::Clock m_reloj;
 	sf::Time m_crono;
 	sf::RenderWindow *m_window;

@@ -5,7 +5,7 @@
 #include <iostream>
 #include <cstring>
 using namespace std;
-
+vector<Puntaje> Puntajes::m_puntajes ={};
 Puntajes::Puntajes(int &volumen, Resources *recursos)  {
 	m_volumen = volumen;
 	m_recursos = recursos;

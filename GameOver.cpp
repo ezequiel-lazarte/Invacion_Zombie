@@ -23,10 +23,6 @@ GameOver::GameOver(int &volumen, Resources *recursos) {
 	
 	m_crono = m_reloj.restart();
 	
-	m_inputText.setStyles(m_recursos->getFont(), 10);
-	m_inputText.setPosition(120,50);
-	m_inputText.setMaxChars(10); // no mas de 10 caracteres
-	m_inputText.setSingleWord(true); // no permitir ingresar espacios, para que sea solo una palabra
 	
 	m_text.setFont(m_recursos->getFont());
 	m_text.setString("Ingrese su usuario (hasta 10 letras):");
@@ -40,10 +36,11 @@ void GameOver::Actualizar (Juego & juego) {
 	if(m_crono.asSeconds() >= 2) {
 		
 	}
-	if(Mouse::isButtonPressed(Mouse::Left) and m_inputText.getSizeNamePlayer() > 0) {
+	if(Mouse::isButtonPressed(Mouse::Left)) {
 		m_musica_gameOver.stop();
 		m_voz_gameover.stop();
-		juego.CambiarEscena(new GuardarPuntaje(m_volumen, m_recursos));
+		sf::Event evento;
+		juego.CambiarEscena(new GuardarPuntaje(m_volumen, m_recursos, evento));
 	}
 }
 
@@ -51,7 +48,6 @@ void GameOver::Dibujar (sf::RenderWindow & window) {
 	m_window = &window;
 	window.clear();
 	window.draw(m_text);
-	window.draw(m_inputText);
 	window.draw(m_gameOver);
 	window.draw(m_t1);
 	window.display();
@@ -67,19 +63,3 @@ void GameOver::Finalizar ( ) {
 	m_voz_gameover.stop();
 }
 
-void GameOver::Procesar_evento (Event evento) {
-	while(m_window->isOpen()) {
-		while(m_window->pollEvent(evento)) {
-			if(evento.type == Event::Closed)
-				m_window->close();	
-			else if (evento.type==sf::Event::KeyPressed && evento.key.code==sf::Keyboard::Return) { // si apretó enter, se toma la palabra y se la agrega a la lista
-				string string_ingresado = m_inputText.getValue(); // obtener la palabra que se ingresó
-				Puntajes B(m_volumen, m_recursos);
-				B.GuardarUnPuntajeNuevo(string_ingresado);
-				return;
-				
-			} else m_inputText.processEvent(evento); // para que el texto tome las teclas que pulsamos
-		}
-		m_inputText.update(); // para que el texto se dibuje correctamente (hay que hacer esta llamada despues de processEvent y antes del draw)
-	}
-}
