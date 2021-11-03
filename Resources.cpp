@@ -23,12 +23,6 @@ sf::Texture &Resources::getEnemigo_1 ( ) {
 	return getTexture_or_insert(m_t, m_texture, m_pos);
 }
 
-sf::Texture &Resources::getEnemigo_2 ( ) {
-	m_texture.loadFromFile("recursos/enemigos/enemigo2/textura_enemigo_2.png");
-	m_pos = 11;
-	return getTexture_or_insert(m_t, m_texture, m_pos);
-}
-
 sf::Texture &Resources::getFondo ( ) {
 	m_texture.loadFromFile("recursos/fondos/escenario/fondo.png");
 	m_pos = 3;
@@ -44,12 +38,6 @@ sf::Texture &Resources::getGameOver ( ) {
 sf::Texture &Resources::getGuardarPuntajes ( ) {
 	m_texture.loadFromFile("recursos/fondos/puntajes.jpg");
 	m_pos = 5;
-	return getTexture_or_insert(m_t, m_texture, m_pos);
-}
-
-sf::Texture &Resources::getMenu ( ) {
-	m_texture.loadFromFile("recursos/fondos/fondo.jpg");
-	m_pos = 8;
 	return getTexture_or_insert(m_t, m_texture, m_pos);
 }
 
@@ -73,12 +61,6 @@ sf::Texture &Resources::getPuntajes ( ) {
 	return getTexture_or_insert(m_t, m_texture, m_pos);
 }
 
-sf::Texture & Resources::getCorazon ( ) {
-	m_texture.loadFromFile("recursos/player/corazon.png");
-	m_pos = 9;
-	return getTexture_or_insert(m_t, m_texture, m_pos);
-}
-
 sf::Texture & Resources::getSol ( ) {
 	m_texture.loadFromFile("recursos/fondos/escenario/sol.png");
 	m_pos = 6;
@@ -88,6 +70,30 @@ sf::Texture & Resources::getSol ( ) {
 sf::Texture & Resources::getLuna ( ) {
 	m_texture.loadFromFile("recursos/fondos/escenario/luna.png");
 	m_pos = 7;
+	return getTexture_or_insert(m_t, m_texture, m_pos);
+}
+
+sf::Texture &Resources::getMenu ( ) {
+	m_texture.loadFromFile("recursos/fondos/fondo.jpg");
+	m_pos = 8;
+	return getTexture_or_insert(m_t, m_texture, m_pos);
+}
+
+sf::Texture & Resources::getCorazon ( ) {
+	m_texture.loadFromFile("recursos/player/corazon.png");
+	m_pos = 9;
+	return getTexture_or_insert(m_t, m_texture, m_pos);
+}
+
+sf::Texture &Resources::getEnemigo_2 ( ) {
+	m_texture.loadFromFile("recursos/enemigos/enemigo2/textura_enemigo_2.png");
+	m_pos = 11;
+	return getTexture_or_insert(m_t, m_texture, m_pos);
+}
+
+texture_t & Resources::getButtonsMenu ( ) {
+	m_texture.loadFromFile("recursos/botones/buttons.png");
+	m_pos = 12;
 	return getTexture_or_insert(m_t, m_texture, m_pos);
 }
 
@@ -138,3 +144,4 @@ sf::Font & Resources::getFont ( ) {
 	m_pos = 0;
 	return getFont_or_insert(m_f, m_font, m_pos);
 }
+
