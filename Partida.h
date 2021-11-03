@@ -6,15 +6,9 @@
 #include "Escena.h"
 #include "Juego.h"
 #include "Enemigo_1.h"
+#include "Resources.h"
 #include <ctime>
-#include <SFML/Graphics/Text.hpp>
-#include <SFML/Graphics/Font.hpp>
-#include <SFML/Graphics/Sprite.hpp>
-#include <SFML/Graphics/Texture.hpp>
 #include <vector>
-#include <SFML/Audio/SoundBuffer.hpp>
-#include <SFML/Audio/Sound.hpp>
-#include "Enemigo_2.h"
 using namespace std;
 
 class Juego;
@@ -22,34 +16,26 @@ using namespace sf;
 
 class Partida : public Escena{
 public:
-	Partida();
+	Partida(int &volumen, Resources *recursos);
 	void Actualizar(Juego &juego) override;
 	void CrearEnemigos();
 	void Dibujar(RenderWindow &window) override;
-	void CambiarVolumenMusica(float vol);
 	void ActualizarPuntaje();
 private:
+	vector<Enemigo_1> m_enemigos;
 	Color m_color_fondo;
 	Fondo m_fondo_1;
 	Player m_player;
-	vector<Enemigo_1> m_enemigos1;
-	vector<Enemigo_2> m_enemigos2;
-	vector<int> m_retraso1;
-	vector<int> m_retraso2;
-	SoundBuffer m_buffer;
+	Enemigo_1 enemigo;
 	Sound m_musica_fondo;
+	Resources *m_recursos;
+	Sprite m_corazon;
 	Clock m_reloj;
 	Time m_crono;
 	Text m_vida_player, m_tiempo, m_t1;
-	Font m_fuente;
-	Texture m_textura_corazon;
-	Sprite m_corazon;
 	string nameplayer; // nombre del jugador
 	float m_puntaje_actual; // me guardo el puntaje del jugador
-	float m_volumen;
-	int m_numeroEnemigos1, m_numeroEnemigos2;
-	int aux;
-	int m_posDesde, m_posHasta;
+	int m_numeroEnemigos1, m_numeroEnemigos2, aux, m_posDesde, m_posHasta, m_volumen;
 };
 
 #endif

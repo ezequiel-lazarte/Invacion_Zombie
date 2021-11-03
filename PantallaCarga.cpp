@@ -3,9 +3,12 @@
 #include "Partida.h"
 #include <iostream>
 #include <SFML/Graphics/Color.hpp>
+#include "Resources.h"
 using namespace std;
 using namespace sf;
-PantallaCarga::PantallaCarga() {
+PantallaCarga::PantallaCarga(int &volumen, Resources *recursos) {
+	m_volumen = volumen;
+	m_recursos = recursos;
 	sf::Texture aux;
 	for(int i=0;i<8;i++) {
 		aux.loadFromFile("recursos/pantallacarga/soldado/sprite_"+to_string(i+1)+".png");
@@ -15,8 +18,7 @@ PantallaCarga::PantallaCarga() {
 	m_sprite.setPosition(835,400);
 	m_sprite.setScale(.3,.3);
 	m_cambiar_textura = 0;
-	m_fuente.loadFromFile("recursos/fuentes/cave-story.ttf");
-	m_t1.setFont(m_fuente);
+	m_t1.setFont(m_recursos->getFont());
 	m_t1.setString("Cargando...");
 	m_t1.setFillColor(Color::Red);
 	m_t1.setCharacterSize(40);
@@ -24,34 +26,11 @@ PantallaCarga::PantallaCarga() {
 }
 
 void PantallaCarga::Actualizar (Juego & juego) {
-	if(m_cambiar_textura==0) {
-		m_sprite.setTexture(m_texturas[m_cambiar_textura]);
-	} else if(m_cambiar_textura==1) {
-		m_sprite.setTexture(m_texturas[m_cambiar_textura]);
-	} else if(m_cambiar_textura==2) {
-		m_sprite.setTexture(m_texturas[m_cambiar_textura]);
-	} else if(m_cambiar_textura==3) {
-		m_sprite.setTexture(m_texturas[m_cambiar_textura]);
-	} else if(m_cambiar_textura==4) {
-		m_sprite.setTexture(m_texturas[m_cambiar_textura]);
-	} else if(m_cambiar_textura==5) {
-		m_sprite.setTexture(m_texturas[m_cambiar_textura]);
-	} else if(m_cambiar_textura==6) {
-		m_sprite.setTexture(m_texturas[m_cambiar_textura]);
-	} else if(m_cambiar_textura==7) {
-		m_sprite.setTexture(m_texturas[m_cambiar_textura]);
-	} else if(m_cambiar_textura==8) {
-		m_sprite.setTexture(m_texturas[m_cambiar_textura]);
-	}
-	/// reinicio el contador
-	if(m_cambiar_textura>=3) {
-		m_cambiar_textura=0;
-	}
+	if(m_crono.asSeconds() >= 0) juego.CambiarEscena(new Partida(m_volumen, m_recursos));
+	m_sprite.setTexture(m_texturas[m_cambiar_textura]);
+	if(m_cambiar_textura>=7) m_cambiar_textura=0;
 	m_cambiar_textura +=1;
 	m_crono = m_reloj.getElapsedTime();
-	if(m_crono.asSeconds() >= 0) {
-		juego.CambiarEscena(new Partida);
-	}
 }
 
 void PantallaCarga::Dibujar (sf::RenderWindow & window) {
@@ -60,4 +39,3 @@ void PantallaCarga::Dibujar (sf::RenderWindow & window) {
 	window.draw(m_t1);
 	window.display();
 }
-

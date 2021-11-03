@@ -8,23 +8,25 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Audio/Sound.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
-using namespace sf;
+#include "Resources.h"
 
 class Menu : public Escena{
 public:
-	Menu();
+	Menu(int &volumen, Resources *recursos);
 	void Actualizar(Juego &juego) override;
 	void Dibujar(RenderWindow &window) override;
-	void CambiarVolumenMusica(float vol=0);
+	void CambiarVolumenMusica(float vol=50);
 private:
-	Font m_fuente;
-	Text m_t1, m_t2, m_t3, m_t4;
-	Color m_color, m_color2, m_color3, m_color4;
-	SoundBuffer m_buffer;
-	Sound m_musica_inicio;
-	Mouse m_mouse;
-	Texture m_textura_fondo;
-	Sprite m_fondo;
+	sf::Color m_color, m_color2, m_color3, m_color4;
+	sf::Sound m_musica_inicio;
+	sf::Mouse m_mouse;
+	sf::Texture m_button;
+	sf::Text m_t1, m_play, m_credits, m_scores;
+	sf::Sprite m_fondo, m_buttonPlay, m_buttonCredits, m_buttonScores;
+	sf::IntRect m_rect;
+	sf::Vector2i m_size_rect, m_pos_mouse;
+	Resources *m_recursos;
+	int m_volumen;
 };
 
 #endif

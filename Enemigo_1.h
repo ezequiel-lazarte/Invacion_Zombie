@@ -2,7 +2,6 @@
 #define ENEMIGO_1_H
 #include "Entidad.h"
 #include <vector>
-#include <SFML/System/Vector2.hpp>
 #include <SFML/Audio/Sound.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
 using namespace std;
@@ -17,8 +16,11 @@ public:
 	void Animaciones();
 	void BajarVida();
 	void Finalizar();
-	int getVida();
 	void setPosPlayer(sf::Vector2f pos_player);
+	void setTexture(sf::Texture &t);
+	void setVida(int vida);
+	void setDanio(int danio);
+	int getVida();
 	sf::Vector2f getPos();
 private:
 	sf::SoundBuffer m_sonido1;

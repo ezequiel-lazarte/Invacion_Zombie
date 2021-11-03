@@ -10,21 +10,22 @@
 #include <vector>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Text.hpp>
+#include "Resources.h"
 using namespace std;
 
 class PantallaCarga : public Escena {
 public:
-	PantallaCarga();
+	PantallaCarga(int &volumen, Resources *recursos);
 	void Actualizar(Juego &juego);
 	void Dibujar(sf::RenderWindow &window);
 private:
+	Resources *m_recursos;
 	Clock m_reloj;
 	Time m_crono;
 	vector<sf::Texture> m_texturas;
 	Sprite m_sprite;
 	Text m_t1;
-	Font m_fuente;
-	int m_cambiar_textura;
+	int m_cambiar_textura, m_volumen;
 };
 
 #endif
