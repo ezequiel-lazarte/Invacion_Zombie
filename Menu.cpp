@@ -46,6 +46,13 @@ Menu::Menu(int &volumen, Resources *recursos){
 	m_buttonCredits.setPosition(480, 300);
 	m_buttonCredits.setScale(0.2,0.2);
 	
+	m_rect = {0, 595, 600, 202};
+	m_buttonExit.setTexture(m_recursos->getButtonsMenu());
+	m_buttonExit.setTextureRect(m_rect);
+	m_buttonExit.setPosition(480, 360);
+	m_buttonExit.setScale(0.2,0.2);
+	
+	
 	/// Textos de los botones
 	
 	m_color = {0,0,0};
@@ -59,23 +66,26 @@ Menu::Menu(int &volumen, Resources *recursos){
 	m_scores.setFont(m_recursos->getFont());
 	m_scores.setString("Puntajes");
 	m_scores.setFillColor(m_color);
-	m_scores.setPosition(505, 242);
+	m_scores.setPosition(505, 240);
 	m_scores.setCharacterSize(25);
 	
 	m_color = {0,0,0};
 	m_credits.setFont(m_recursos->getFont());
 	m_credits.setString("Creditos");
 	m_credits.setFillColor(m_color);
-	m_credits.setPosition(505, 302);
+	m_credits.setPosition(505, 300);
 	m_credits.setCharacterSize(25);
+	
+	m_color = {0,0,0};
+	m_exit.setFont(m_recursos->getFont());
+	m_exit.setString("Salir");
+	m_exit.setFillColor(m_color);
+	m_exit.setPosition(520, 360);
+	m_exit.setCharacterSize(25);
 }
 void Menu::Actualizar (Juego &juego) {
 	m_pos_mouse = sf::Mouse::getPosition(juego.getWindow());
 	
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-		m_musica_inicio.stop();
-		/// en juego implementar el metodo finalizar
-	}
 	if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 		if(485 < m_pos_mouse.x && m_pos_mouse.x < 592) {
 			if(182 < m_pos_mouse.y && m_pos_mouse.y < 218) {
@@ -95,7 +105,12 @@ void Menu::Actualizar (Juego &juego) {
 				juego.CambiarEscena(new Creditos(m_volumen, m_recursos));
 			}
 		}
-		/// aca implementar para el boton salir
+		if(485 < m_pos_mouse.x && m_pos_mouse.x < 592) {
+			if(360 < m_pos_mouse.y && m_pos_mouse.y < 396) {
+				m_musica_inicio.stop();
+				juego.getWindow().close();
+			}
+		}
 	}
 }
 
@@ -106,9 +121,11 @@ void Menu::Dibujar (RenderWindow & window) {
 	window.draw(m_buttonPlay);
 	window.draw(m_buttonScores);
 	window.draw(m_buttonCredits);
+	window.draw(m_buttonExit);
 	window.draw(m_play);
 	window.draw(m_scores);
 	window.draw(m_credits);
+	window.draw(m_exit);
 	window.display();
 }
 

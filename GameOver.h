@@ -22,10 +22,12 @@ private:
 	sf::Sprite m_gameOver;
 	Sound m_musica_gameOver;
 	Sound m_voz_gameover;
-	sf::Text m_t1, m_text;
-	sf::Clock m_reloj;
-	sf::Time m_crono;
+	sf::Text m_guardarPuntaje, m_text;
 	sf::RenderWindow *m_window;
+	sf::IntRect m_rect;
+	sf::Vector2i m_size_rect, m_pos_mouse;
+	sf::Texture m_button;
+	sf::Sprite m_buttonSave;
 	Resources *m_recursos;
 	int m_volumen;
 };

@@ -21,8 +21,8 @@ private:
 	sf::Sound m_musica_inicio;
 	sf::Mouse m_mouse;
 	sf::Texture m_button;
-	sf::Text m_t1, m_play, m_credits, m_scores;
-	sf::Sprite m_fondo, m_buttonPlay, m_buttonCredits, m_buttonScores;
+	sf::Text m_t1, m_play, m_credits, m_scores, m_exit;
+	sf::Sprite m_fondo, m_buttonPlay, m_buttonCredits, m_buttonScores, m_buttonExit;
 	sf::IntRect m_rect;
 	sf::Vector2i m_size_rect, m_pos_mouse;
 	Resources *m_recursos;
