@@ -5,7 +5,7 @@
 using namespace std;
 
 Partida::Partida(int &volumen, Resources *recursos) : 
-		m_color_fondo(20,110,255) {
+		m_color_fondo(20,110,255), m_player(volumen, recursos) { 
 	m_volumen = volumen;
 	m_recursos = recursos;
 	srand(time(NULL));
@@ -71,11 +71,12 @@ void Partida::Actualizar (Juego &juego) {
 		m_player.Finalizar();
 		juego.CambiarEscena(new Menu(m_volumen, m_recursos));
 	}
-	if(Keyboard::isKeyPressed(Keyboard::Key::F)) {
-		for(int i=0;i<m_enemigos.size();i++) {
-			if(m_player.Colision(m_enemigos[i])) {
-				m_enemigos[i].BajarVida();
-			}
+	for(int i=0;i<m_enemigos.size();i++) {
+		if(m_player.Colision(m_enemigos[i]) && m_player.getVida()>0 && Keyboard::isKeyPressed(Keyboard::Key::F)) {
+			m_player.golpe();
+		}
+		if(Keyboard::isKeyPressed(Keyboard::Key::F) && m_player.Colision(m_enemigos[i])) {
+			m_enemigos[i].BajarVida();
 		}
 	}
 	if(m_player.getVida()>0) {
@@ -93,7 +94,6 @@ void Partida::Actualizar (Juego &juego) {
 		juego.CambiarEscena(new GameOver(m_volumen, m_recursos));
 	}
 	CrearEnemigos();
-	/// vida jugador
 	m_vida_player.setString(to_string(m_player.getVida()));
 	m_player.Actualizar();
 	for(size_t i=0;i<m_enemigos.size();i++) {

@@ -8,12 +8,15 @@
 #include <vector>
 #include <SFML/Audio/Music.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
+#include "Resources.h"
+#include <SFML/Audio/Sound.hpp>
+#include "Bala.h"
 
 using namespace std;
 
 class Player : public Entidad {
 public:
-	Player();
+	Player(int &volumen, Resources *recursos);
 	void Actualizar ();
 	void Dibujar (sf::RenderWindow & w);
 	sf::Sprite &getSprite();
@@ -24,10 +27,14 @@ public:
 	void MovimientoGolpeaCamina();
 	void MovimientoCamina();
 	void MovimientoQuieto();
+	void golpe();
+	void generarDisparo();
+	bool armaDeFuego();
 	void Finalizar();
 private:
 	sf::Vector2f m_pos_inicial;
 	sf::Vector2f m_move;
+	sf::Sound m_golpe;
 	vector<sf::Texture> m_texturas_adel;
 	vector<sf::Texture> m_texturas_atras;
 	vector<sf::Texture> m_texturas_ataque_atras;
@@ -35,9 +42,14 @@ private:
 	vector<sf::Texture> m_texturas_quieto; /// 0 y 1 son atras, 2 y 3 son adel
 	size_t m_ultima_tecla;
 	size_t m_vida;
+	Resources *m_recursos;
+	Bala *m_bala;
+	int m_volumen, m_alto_sprite;
 	float m_cambiar_textura;
 	float adel, atras; // contador para cambiar de sprite
 	float m_gravedad;
+	int m_arma;
+	char m_lado;
 };
 
 #endif

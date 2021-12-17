@@ -7,8 +7,14 @@
 using namespace std;
 using namespace sf;
 
-Player::Player() {
+Player::Player(int &volumen, Resources *recursos) {
+	m_recursos = recursos;
+	m_volumen = volumen*0.5;
+	m_golpe.setBuffer(m_recursos->getBufferGolpe());
+	m_golpe.setVolume(m_volumen);
 	string recurso;
+	m_arma = 1;
+	m_bala = NULL;
 	sf::Texture textura;
 	for(int i=0;i<6;i++) { 
 		/// adelante
@@ -53,20 +59,40 @@ Player::Player() {
 	
 	m_cambiar_textura=0;
 	m_ultima_tecla =0;
+	m_lado = 'L';
 }
 
 void Player::Actualizar () {
 	if(Keyboard::isKeyPressed(Keyboard::A)) { /// 0 para la A y 1 para la D
 		m_ultima_tecla = 0;
-	} else if(Keyboard::isKeyPressed(Keyboard::A)) {
+		m_lado = 'L';
+	} else if(Keyboard::isKeyPressed(Keyboard::D)) {
 		m_ultima_tecla = 1;
+		m_lado = 'R';
+	}
+	/// si el jugador toca el num 1 se ponen los puños si usa el 2 se pone el arma
+	if(Keyboard::isKeyPressed(Keyboard::Num1)) {
+		m_arma = 1;
+		/// se saca el arma y se dejan los puños
+	}
+	if(Keyboard::isKeyPressed(Keyboard::Num2)) {
+		m_arma = 2;
+		/// se pone el arma
 	}
 	sf::Vector2f player_pos = m_sprite.getPosition();
 	MovimientoQuieto();
 	MovimientoGolpea();
 	MovimientoGolpeaCamina();
 	MovimientoCamina();
-	
+	if(m_bala != NULL && m_arma == 2) {
+		m_bala->Actualizar();
+	}
+	if(m_bala != NULL && (m_bala->getPosition().x > 2000 || m_bala->getPosition().x < 0)) {
+		delete m_bala;
+	}
+	if(m_arma == 2 && Keyboard::isKeyPressed(Keyboard::F)) {
+		generarDisparo();
+	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) and player_pos.y > (m_pos_inicial.y-m_alto_sprite)) {
 		m_sprite.move(0,m_move.y-m_gravedad);
 		m_gravedad -= .10;
@@ -88,6 +114,8 @@ void Player::Actualizar () {
 
 void Player::Dibujar (sf::RenderWindow & w) {
 	w.draw(m_sprite);
+	/// la bala se tendria que dibujar cuando se dispare
+	if(m_arma == 2 && m_bala != NULL) m_bala->Dibujar(w);
 }
 
 sf::Sprite & Player::getSprite ( ) {
@@ -99,6 +127,7 @@ sf::Vector2f Player::getPos ( ) {
 }
 
 void Player::Finalizar ( ) {
+	m_golpe.stop();
 	// este metodo es por si agregamos sonidos (caminar, correr) al jugador
 }
 
@@ -118,6 +147,7 @@ void Player::MovimientoGolpea ( ) {
 		m_cambiar_textura +=0.125;
 		if(m_cambiar_textura>=5) m_cambiar_textura=0;
 		m_ultima_tecla = 1;
+		m_lado = 'R';
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::F) and m_ultima_tecla == 0) {
 		m_sprite.setTexture(m_texturas_ataque_atras[m_cambiar_textura]);
@@ -125,6 +155,7 @@ void Player::MovimientoGolpea ( ) {
 		m_cambiar_textura +=0.125;
 		if(m_cambiar_textura>=5) m_cambiar_textura=0;
 		m_ultima_tecla = 0;
+		m_lado = 'L';
 	}
 	
 }
@@ -137,6 +168,7 @@ void Player::MovimientoGolpeaCamina ( ) {
 		m_cambiar_textura +=0.125;
 		if(m_cambiar_textura>=5) m_cambiar_textura=0;
 		m_ultima_tecla = 1;
+		m_lado = 'R';
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::F) and sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
 		m_sprite.setTexture(m_texturas_ataque_atras[m_cambiar_textura]);
@@ -145,6 +177,7 @@ void Player::MovimientoGolpeaCamina ( ) {
 		if(m_cambiar_textura>=5) m_cambiar_textura=0;
 		
 		m_ultima_tecla = 0;
+		m_lado = 'L';
 	}
 }
 
@@ -157,6 +190,7 @@ void Player::MovimientoCamina ( ) {
 		atras = 0;
 		
 		m_ultima_tecla = 1;
+		m_lado = 'R';
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::A) and !sf::Keyboard::isKeyPressed(sf::Keyboard::F)) {
 		m_sprite.setTexture(m_texturas_atras[atras]);
@@ -167,6 +201,7 @@ void Player::MovimientoCamina ( ) {
 		adel = 0;
 		
 		m_ultima_tecla = 0;
+		m_lado = 'L';
 	}
 }
 
@@ -179,6 +214,7 @@ void Player::MovimientoQuieto ( ) {
 		atras = 2;
 		
 		m_ultima_tecla = 0;
+		m_lado = 'L';
 	}
 	if(!sf::Keyboard::isKeyPressed(sf::Keyboard::A) and !sf::Keyboard::isKeyPressed(sf::Keyboard::D) and !sf::Keyboard::isKeyPressed(sf::Keyboard::F) and m_ultima_tecla==1) {
 		m_sprite.setTexture(m_texturas_quieto[atras]);
@@ -188,6 +224,20 @@ void Player::MovimientoQuieto ( ) {
 		adel = 0;
 		
 		m_ultima_tecla = 1;
+		m_lado = 'R';
 	}
+}
+
+void Player::golpe ( ) {
+	m_golpe.play();
+}
+
+void Player::generarDisparo () {
+	m_bala = new Bala(m_recursos);
+	m_bala->setPos(m_sprite.getPosition(), m_lado);
+}
+
+bool Player::armaDeFuego ( ) {
+	return (m_arma==1) ? false : true;
 }
 

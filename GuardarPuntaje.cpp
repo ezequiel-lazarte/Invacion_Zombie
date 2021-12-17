@@ -1,6 +1,6 @@
 #include "GuardarPuntaje.h"
 #include "Puntajes.h"
-#include "Menu.h"
+#include "Menu/Menu.h"
 #include "Juego.h"
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>

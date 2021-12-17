@@ -39,6 +39,7 @@ public:
 	sound_t &getBufferMenu();
 	sound_t &getBufferPartida();
 	sound_t &getBufferPuntajes();
+	sound_t &getBufferGolpe();
 	font_t &getFont();
 private:
 	texture_t m_texture;

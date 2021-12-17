@@ -139,9 +139,14 @@ sf::SoundBuffer & Resources::getBufferPuntajes ( ) {
 	return getBuffer_or_insert(m_s, m_buffer, m_pos);
 }
 
+sf::SoundBuffer & Resources::getBufferGolpe ( ) {
+	m_buffer.loadFromFile("recursos/musica/golpe.wav");
+	m_pos = 7;
+	return getBuffer_or_insert(m_s, m_buffer, m_pos);
+}
+
 sf::Font & Resources::getFont ( ) {
 	m_font.loadFromFile("recursos/fuentes/Cave-Story.ttf");
 	m_pos = 0;
 	return getFont_or_insert(m_f, m_font, m_pos);
 }
-

@@ -1,5 +1,5 @@
 #include "GameOver.h"
-#include "Menu.h"
+#include "Menu/Menu.h"
 #include "Creditos.h"
 #include "GuardarPuntaje.h"
 
@@ -7,7 +7,7 @@ GameOver::GameOver(int &volumen, Resources *recursos) {
 	m_recursos = recursos;
 	m_gameOver.setTexture(m_recursos->getGameOver());
 	m_gameOver.setScale(1.1,1.1);
-	m_gameOver.setPosition(-25,0);
+	m_gameOver.setPosition(-25,0); 
 	
 	m_musica_gameOver.setBuffer(m_recursos->getBufferGameOver());
 	m_musica_gameOver.play();

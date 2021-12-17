@@ -1,5 +1,5 @@
 #include "Creditos.h"
-#include "Menu.h"
+#include "Menu/Menu.h"
 
 Creditos::Creditos(int &volumen, Resources *recursos) {
 	m_volumen = volumen;

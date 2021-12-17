@@ -1,6 +1,6 @@
 #include "Juego.h"
 #include <iostream>
-#include "Menu.h"
+#include "Menu/Menu.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 using namespace std;
 using namespace sf;
