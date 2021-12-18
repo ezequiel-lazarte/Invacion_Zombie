@@ -145,6 +145,12 @@ sf::SoundBuffer & Resources::getBufferGolpe ( ) {
 	return getBuffer_or_insert(m_s, m_buffer, m_pos);
 }
 
+sf::SoundBuffer & Resources::getBufferDisparo() {
+	m_buffer.loadFromFile("recursos/musica/disparo.wav");
+	m_pos = 8;
+	return getBuffer_or_insert(m_s, m_buffer, m_pos);
+}
+
 sf::Font & Resources::getFont ( ) {
 	m_font.loadFromFile("recursos/fuentes/Cave-Story.ttf");
 	m_pos = 0;

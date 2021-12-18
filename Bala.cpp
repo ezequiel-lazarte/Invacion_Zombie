@@ -1,8 +1,9 @@
 #include "Bala.h"
 #include <SFML/System/Vector2.hpp>
 
-Bala::Bala (Resources *recursos): m_pos(0,0) {
+Bala::Bala (Resources *recursos, int volumen): m_pos(0,0) {
 	m_recursos = recursos;
+	m_volumen = volumen;
 	m_velocidad = 3;
 	m_sprite.setTexture(m_recursos->getBala());
 	m_sprite.setScale(0.02, 0.02);

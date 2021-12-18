@@ -2,20 +2,20 @@
 #define BALA_H
 #include "Entidad.h"
 #include "Resources.h"
+#include <SFML/Audio/Sound.hpp>
 
-class Bala {
+class Bala : public Entidad {
 public:
-	Bala(Resources *recursos);
+	Bala(Resources *recursos, int volumen);
 	void Actualizar();
 	void Dibujar(sf::RenderWindow & w);
 	void setPos(sf::Vector2f pos, char lado);
 	sf::Vector2f getPosition();
 	void finalizar();
 private:
-	sf::Sprite m_sprite;
 	sf::Vector2f m_pos;
 	Resources *m_recursos;
-	int m_velocidad;
+	int m_velocidad, m_volumen;
 	char m_lado;
 };
 

@@ -28,13 +28,17 @@ public:
 	void MovimientoCamina();
 	void MovimientoQuieto();
 	void golpe();
+	void sonidoDisparo();
 	void generarDisparo();
 	bool armaDeFuego();
+	void borrarBala(vector<Bala>::iterator it);
+	vector<Bala> getDisparos();
+	int getArma();
 	void Finalizar();
 private:
 	sf::Vector2f m_pos_inicial;
 	sf::Vector2f m_move;
-	sf::Sound m_golpe;
+	sf::Sound m_golpe, m_disparo;
 	vector<sf::Texture> m_texturas_adel;
 	vector<sf::Texture> m_texturas_atras;
 	vector<sf::Texture> m_texturas_ataque_atras;

@@ -23,6 +23,8 @@ public:
 	void ActualizarPuntaje();
 private:
 	vector<Enemigo_1> m_enemigos;
+	vector<Bala> m_disparos;
+	vector<Bala>::iterator itDisparo;
 	Color m_color_fondo;
 	Fondo m_fondo_1;
 	Player m_player;

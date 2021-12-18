@@ -10,6 +10,8 @@ using namespace sf;
 Player::Player(int &volumen, Resources *recursos) {
 	m_recursos = recursos;
 	m_volumen = volumen*0.5;
+	m_disparo.setBuffer(m_recursos->getBufferDisparo());
+	m_disparo.setVolume(m_volumen);
 	m_golpe.setBuffer(m_recursos->getBufferGolpe());
 	m_golpe.setVolume(m_volumen);
 	string recurso;
@@ -91,6 +93,7 @@ void Player::Actualizar () {
 		}
 	}
 	if(m_arma == 2 && Keyboard::isKeyPressed(Keyboard::F)) {
+		m_disparo.play();
 		generarDisparo();
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) and player_pos.y > (m_pos_inicial.y-m_alto_sprite)) {
@@ -130,7 +133,7 @@ sf::Vector2f Player::getPos ( ) {
 
 void Player::Finalizar ( ) {
 	m_golpe.stop();
-	// este metodo es por si agregamos sonidos (caminar, correr) al jugador
+	m_disparo.stop();
 }
 
 void Player::BajarVida ( ) {
@@ -234,13 +237,30 @@ void Player::golpe ( ) {
 	m_golpe.play();
 }
 
+void Player::sonidoDisparo ( ) {
+	m_disparo.play();
+}
+
 void Player::generarDisparo () {
-	Bala bala(m_recursos);
+//	m_disparo.play();
+	Bala bala(m_recursos, m_volumen);
 	bala.setPos(m_sprite.getPosition(), m_lado);
 	m_balas.push_back(bala);
 }
 
 bool Player::armaDeFuego ( ) {
 	return (m_arma==1) ? false : true;
+}
+
+int Player::getArma ( ) {
+	return m_arma;
+}
+
+vector<Bala> Player::getDisparos ( ) {
+	return m_balas;
+}
+
+void Player::borrarBala (vector<Bala>::iterator it) {
+	m_balas.erase(it);
 }
 

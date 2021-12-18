@@ -72,11 +72,21 @@ void Partida::Actualizar (Juego &juego) {
 		juego.CambiarEscena(new Menu(m_volumen, m_recursos));
 	}
 	for(int i=0;i<m_enemigos.size();i++) {
-		if(m_player.Colision(m_enemigos[i]) && m_player.getVida()>0 && Keyboard::isKeyPressed(Keyboard::Key::F)) {
+		if(m_player.Colision(m_enemigos[i]) && m_player.getVida()>0 && Keyboard::isKeyPressed(Keyboard::Key::F) && m_player.getArma() == 1) {
 			m_player.golpe();
+		}
+		if(m_player.getVida()>0 && Keyboard::isKeyPressed(Keyboard::Key::F) && m_player.getArma() == 2) {
+			m_player.sonidoDisparo();
 		}
 		if(Keyboard::isKeyPressed(Keyboard::Key::F) && m_player.Colision(m_enemigos[i])) {
 			m_enemigos[i].BajarVida();
+		}
+		m_disparos = m_player.getDisparos();
+		for(auto it=m_disparos.begin(); it != m_disparos.end(); it++) {
+			if(m_enemigos[i].Colision(*it)) {
+				m_enemigos[i].BajarVida();
+				m_player.borrarBala(it);
+			}
 		}
 	}
 	if(m_player.getVida()>0) {

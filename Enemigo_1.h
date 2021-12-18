@@ -11,7 +11,7 @@ public:
 	Enemigo_1();
 	void SetPosEnemigo(float x);
 	void Actualizar();
-	void Dibujar (sf::RenderWindow & w);
+	void Dibujar(sf::RenderWindow & w);
 	void CambiarVolumenMusica(float vol);
 	void Animaciones();
 	void BajarVida();
