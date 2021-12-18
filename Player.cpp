@@ -14,7 +14,6 @@ Player::Player(int &volumen, Resources *recursos) {
 	m_golpe.setVolume(m_volumen);
 	string recurso;
 	m_arma = 1;
-	m_bala = NULL;
 	sf::Texture textura;
 	for(int i=0;i<6;i++) { 
 		/// adelante
@@ -84,11 +83,12 @@ void Player::Actualizar () {
 	MovimientoGolpea();
 	MovimientoGolpeaCamina();
 	MovimientoCamina();
-	if(m_bala != NULL && m_arma == 2) {
-		m_bala->Actualizar();
-	}
-	if(m_bala != NULL && (m_bala->getPosition().x > 2000 || m_bala->getPosition().x < 0)) {
-		delete m_bala;
+	for(auto it=m_balas.begin(); it != m_balas.end(); it++) {
+		it->Actualizar();
+		if(it->getPosition().x > 1090 || it->getPosition().x < 0) {
+			it = m_balas.erase(it);
+			it--;
+		}
 	}
 	if(m_arma == 2 && Keyboard::isKeyPressed(Keyboard::F)) {
 		generarDisparo();
@@ -115,7 +115,9 @@ void Player::Actualizar () {
 void Player::Dibujar (sf::RenderWindow & w) {
 	w.draw(m_sprite);
 	/// la bala se tendria que dibujar cuando se dispare
-	if(m_arma == 2 && m_bala != NULL) m_bala->Dibujar(w);
+	for(int i=0; i<m_balas.size(); i++) {
+		m_balas[i].Dibujar(w);
+	}
 }
 
 sf::Sprite & Player::getSprite ( ) {
@@ -233,8 +235,9 @@ void Player::golpe ( ) {
 }
 
 void Player::generarDisparo () {
-	m_bala = new Bala(m_recursos);
-	m_bala->setPos(m_sprite.getPosition(), m_lado);
+	Bala bala(m_recursos);
+	bala.setPos(m_sprite.getPosition(), m_lado);
+	m_balas.push_back(bala);
 }
 
 bool Player::armaDeFuego ( ) {

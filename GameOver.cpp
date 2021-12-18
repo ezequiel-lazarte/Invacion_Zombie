@@ -1,5 +1,5 @@
 #include "GameOver.h"
-#include "Menu/Menu.h"
+#include "Menu.h"
 #include "Creditos.h"
 #include "GuardarPuntaje.h"
 

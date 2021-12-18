@@ -1,5 +1,5 @@
 #include "Puntajes.h"
-#include "Menu/Menu.h"
+#include "Menu.h"
 #include "ImputBox.h"
 #include <fstream>
 #include <iostream>

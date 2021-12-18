@@ -43,7 +43,7 @@ private:
 	size_t m_ultima_tecla;
 	size_t m_vida;
 	Resources *m_recursos;
-	Bala *m_bala;
+	vector<Bala> m_balas;
 	int m_volumen, m_alto_sprite;
 	float m_cambiar_textura;
 	float adel, atras; // contador para cambiar de sprite
