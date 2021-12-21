@@ -12,8 +12,8 @@ Partida::Partida(int &volumen, Resources *recursos) :
 	srand(time(NULL));
 	m_posDesde = -2500;
 	m_posHasta = 2500;
-	m_numeroEnemigos1 = 7;
-	m_numeroEnemigos2 = 15;
+	m_numeroEnemigos1 = 10;
+	m_numeroEnemigos2 = 20;
 	for(int i=0;i<m_numeroEnemigos1;i++) {
 		m_enemigos.resize(m_enemigos.size() + 1);
 		enemigo.setTexture(m_recursos->getEnemigo_1());
@@ -77,13 +77,14 @@ void Partida::Actualizar (Juego &juego) {
 		if(m_player.Colision(m_enemigos[i]) && m_player.getVida()>0 && Keyboard::isKeyPressed(Keyboard::Key::F) && m_player.getArma() == 1) {
 			m_player.golpe();
 		}
-		if(Keyboard::isKeyPressed(Keyboard::Key::F) && m_player.Colision(m_enemigos[i])) {
+		if(Keyboard::isKeyPressed(Keyboard::Key::F) && m_player.Colision(m_enemigos[i]) && m_player.getArma() == 1) {
 			m_enemigos[i].BajarVida();
 		}
 		m_disparos = m_player.getDisparos();
 		for(vector<Bala>::iterator it=m_disparos.begin(); it != m_disparos.end(); it++) {
 			if(m_enemigos[i].Colision(*it)) {
 				m_enemigos[i].BajarVida();
+				m_player.sonidoImpacto();
 				//m_player.borrarBala(it);
 			}
 		}

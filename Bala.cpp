@@ -1,5 +1,6 @@
 #include "Bala.h"
 #include <SFML/System/Vector2.hpp>
+#include <iostream>
 
 Bala::Bala (Resources *recursos, int volumen): m_pos(0,0) {
 	m_recursos = recursos;

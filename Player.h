@@ -23,13 +23,18 @@ public:
 	sf::Vector2f getPos();
 	void BajarVida();
 	int getVida();
+	void movimientoTeclas();
+	void controlMovimientos();
+	void controlArmas();
 	void MovimientoGolpea();
 	void MovimientoGolpeaCamina();
 	void MovimientoCamina();
 	void MovimientoQuieto();
 	void golpe();
+	void disparar();
 	void sonidoDisparo();
 	void sonidoPaso();
+	void sonidoImpacto();
 	void generarDisparo();
 	bool armaDeFuego();
 	void borrarBala(vector<Bala>::iterator it);
@@ -40,7 +45,8 @@ public:
 private:
 	sf::Vector2f m_pos_inicial;
 	sf::Vector2f m_move;
-	sf::Sound m_golpe, m_disparo, m_paso;
+	sf::Sound m_golpe, m_disparo, m_paso, m_impacto_bala, m_recarga_pistola;
+	sf::Clock m_clock;
 	vector<sf::Texture> m_texturas_adel;
 	vector<sf::Texture> m_texturas_atras;
 	vector<sf::Texture> m_texturas_ataque_atras;
@@ -51,11 +57,12 @@ private:
 	Resources *m_recursos;
 	vector<Bala> m_balas;
 	int m_volumen, m_alto_sprite;
-	float m_cambiar_textura;
+	float m_cambiar_textura, m_tiempoDespues, m_tiempoAhora, m_tiempoRecarga;
 	float adel, atras; // contador para cambiar de sprite
 	float m_gravedad;
 	int m_arma;
 	char m_lado;
+	bool m_si_disparo;;
 };
 
 #endif

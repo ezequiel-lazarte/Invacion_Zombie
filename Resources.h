@@ -45,6 +45,8 @@ public:
 	sound_t &getBufferGolpe();
 	sound_t &getBufferDisparo();
 	sound_t &getBufferPaso();
+	sound_t &getBufferImpacto();
+	sound_t &getBufferRecargaPistola();
 	///fonts
 	font_t &getFont();
 private:

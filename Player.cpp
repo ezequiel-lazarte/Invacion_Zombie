@@ -17,6 +17,10 @@ Player::Player(int &volumen, Resources *recursos) {
 	m_golpe.setVolume(m_volumen);
 	m_paso.setBuffer(m_recursos->getBufferPaso());
 	m_paso.setVolume(m_volumen+90);
+	m_impacto_bala.setBuffer(m_recursos->getBufferImpacto());
+	m_impacto_bala.setVolume(m_volumen);
+	m_recarga_pistola.setBuffer(m_recursos->getBufferRecargaPistola());
+	m_recarga_pistola.setVolume(m_volumen+50);
 	
 	string recurso;
 	m_arma = 1;
@@ -65,58 +69,22 @@ Player::Player(int &volumen, Resources *recursos) {
 	m_cambiar_textura=0;
 	m_ultima_tecla =0;
 	m_lado = 'L';
+	
+	m_clock.restart();
+	m_tiempoAhora = m_tiempoDespues = m_tiempoRecarga = 0;
+	
+	m_si_disparo = false;
 }
 
 void Player::Actualizar () {
-	if(Keyboard::isKeyPressed(Keyboard::A)) { /// 0 para la A y 1 para la D
-		m_ultima_tecla = 0;
-		m_lado = 'L';
-	} else if(Keyboard::isKeyPressed(Keyboard::D)) {
-		m_ultima_tecla = 1;
-		m_lado = 'R';
-	}
-	/// si el jugador toca el num 1 se ponen los puños si usa el 2 se pone el arma
-	if(Keyboard::isKeyPressed(Keyboard::Num1)) {
-		m_arma = 1;
-		/// se saca el arma y se dejan los puños
-	}
-	if(Keyboard::isKeyPressed(Keyboard::Num2)) {
-		m_arma = 2;
-		/// se pone el arma
-	}
-	sf::Vector2f player_pos = m_sprite.getPosition();
+	controlMovimientos();
+	movimientoTeclas();
+	controlArmas();
 	MovimientoQuieto();
 	MovimientoGolpea();
 	MovimientoGolpeaCamina();
 	MovimientoCamina();
-	for(auto it=m_balas.begin(); it != m_balas.end(); it++) {
-		it->Actualizar();
-		if(it->getPosition().x > 1090 || it->getPosition().x < 0) {
-			it = m_balas.erase(it);
-			it--;
-		}
-	}
-	if(m_arma == 2 && Keyboard::isKeyPressed(Keyboard::F)) {
-		m_disparo.play();
-		generarDisparo();
-	}
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) and player_pos.y > (m_pos_inicial.y-m_alto_sprite)) {
-		m_sprite.move(0,m_move.y-m_gravedad);
-		m_gravedad -= .10;
-	} else if(player_pos.y<m_pos_inicial.y) {
-		m_gravedad = 6;
-		player_pos.y += m_gravedad;
-		m_gravedad = 0;
-		m_sprite.setPosition(player_pos);
-	}
-	if(m_gravedad<0 and player_pos.y == m_pos_inicial.y) m_gravedad = 6;
-	player_pos = m_sprite.getPosition();
-	int limite_x = 1080-m_ancho_sprite;
-	
-	if(player_pos.x < -35) player_pos.x = -35;
-	if(player_pos.x > limite_x) player_pos.x = limite_x;
-	if(player_pos.y > m_pos_inicial.y) player_pos.y = m_pos_inicial.y;
-	m_sprite.setPosition(player_pos);
+	disparar();
 }
 
 void Player::Dibujar (sf::RenderWindow & w) {
@@ -170,7 +138,7 @@ void Player::MovimientoGolpea ( ) {
 }
 
 void Player::MovimientoGolpeaCamina ( ) {
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::F) and sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::F) && sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
 		m_sprite.setTexture(m_texturas_ataque_adel[m_cambiar_textura]);
 		m_sprite.move(m_move);
 		
@@ -179,7 +147,7 @@ void Player::MovimientoGolpeaCamina ( ) {
 		m_ultima_tecla = 1;
 		m_lado = 'R';
 	}
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::F) and sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::F) && sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
 		m_sprite.setTexture(m_texturas_ataque_atras[m_cambiar_textura]);
 		m_sprite.move(-m_move);
 		m_cambiar_textura +=0.125;
@@ -272,7 +240,75 @@ void Player::sonidoPaso () {
 	m_paso.play();
 }
 
+void Player::sonidoImpacto ( ) {
+	m_impacto_bala.play();
+}
+
 sf::Vector2f Player::getPosInicial ( ) {
 	return m_pos_inicial;
+}
+
+void Player::disparar ( ) {
+	m_tiempoAhora = m_clock.getElapsedTime().asSeconds();
+	for(auto it=m_balas.begin(); it != m_balas.end(); it++) {
+		it->Actualizar();
+		if(it->getPosition().x > 1090 || it->getPosition().x < 0) {
+			it = m_balas.erase(it);
+			it--;
+		}
+	}
+	if(m_arma == 2 && Keyboard::isKeyPressed(Keyboard::F) && m_tiempoAhora >= m_tiempoDespues+2) {
+		generarDisparo();
+		m_tiempoDespues = m_tiempoAhora;
+		m_tiempoRecarga = m_tiempoAhora;
+		m_si_disparo = true;
+	}
+	if(m_tiempoAhora >= m_tiempoRecarga+1 && m_si_disparo) {
+		m_recarga_pistola.play();
+		m_si_disparo = false;
+	}
+}
+
+void Player::controlArmas ( ) {
+	/// si el jugador toca el num 1 se ponen los puños si usa el 2 se pone el arma
+	if(Keyboard::isKeyPressed(Keyboard::Num1)) {
+		m_arma = 1;
+		/// se saca el arma y se dejan los puños
+	}
+	if(Keyboard::isKeyPressed(Keyboard::Num2)) {
+		m_arma = 2;
+		/// se pone el arma
+	}
+}
+
+void Player::movimientoTeclas ( ) {
+	if(Keyboard::isKeyPressed(Keyboard::A)) { /// 0 para la A y 1 para la D
+		m_ultima_tecla = 0;
+		m_lado = 'L';
+	} else if(Keyboard::isKeyPressed(Keyboard::D)) {
+		m_ultima_tecla = 1;
+		m_lado = 'R';
+	}
+}
+
+void Player::controlMovimientos ( ) {
+	sf::Vector2f player_pos = m_sprite.getPosition();
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) and player_pos.y > (m_pos_inicial.y-m_alto_sprite)) {
+		m_sprite.move(0,m_move.y-m_gravedad);
+		m_gravedad -= .10;
+	} else if(player_pos.y<m_pos_inicial.y) {
+		m_gravedad = 6;
+		player_pos.y += m_gravedad;
+		m_gravedad = 0;
+		m_sprite.setPosition(player_pos);
+	}
+	if(m_gravedad<0 and player_pos.y == m_pos_inicial.y) m_gravedad = 6;
+	player_pos = m_sprite.getPosition();
+	int limite_x = 1080-m_ancho_sprite;
+	
+	if(player_pos.x < -35) player_pos.x = -35;
+	if(player_pos.x > limite_x) player_pos.x = limite_x;
+	if(player_pos.y > m_pos_inicial.y) player_pos.y = m_pos_inicial.y;
+	m_sprite.setPosition(player_pos);
 }
 

@@ -168,6 +168,18 @@ sf::SoundBuffer & Resources::getBufferPaso() {
 	return getBuffer_or_insert(m_s, m_buffer, m_pos);
 }
 
+sf::SoundBuffer & Resources::getBufferImpacto() {
+	m_buffer.loadFromFile("recursos/sounds/impacto_bala.wav");
+	m_pos = 10;
+	return getBuffer_or_insert(m_s, m_buffer, m_pos);
+}
+
+sf::SoundBuffer & Resources::getBufferRecargaPistola() {
+	m_buffer.loadFromFile("recursos/sounds/recarga_pistola.wav");
+	m_pos = 11;
+	return getBuffer_or_insert(m_s, m_buffer, m_pos);
+}
+
 /** ****************** ************ ***** FONTS ***** ************ ****************** **/
 
 sf::Font & Resources::getFont ( ) {
