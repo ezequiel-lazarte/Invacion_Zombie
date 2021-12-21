@@ -232,8 +232,9 @@ vector<Bala> Player::getDisparos ( ) {
 	return m_balas;
 }
 
-void Player::borrarBala (vector<Bala>::iterator it) {
-	if(it != m_balas.end()) m_balas.erase(it);
+void Player::borrarBala (int pos) {
+	vector<Bala>::iterator it = m_balas.begin()+pos;
+	m_balas.erase(it);
 }
 
 void Player::sonidoPaso () {

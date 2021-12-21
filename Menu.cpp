@@ -132,3 +132,4 @@ void Menu::Dibujar (RenderWindow & window) {
 void Menu::CambiarVolumenMusica (float vol) {
 	m_volumen = vol;
 }
+

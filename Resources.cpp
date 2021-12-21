@@ -26,7 +26,7 @@ sf::Texture &Resources::getEnemigo_1 ( ) {
 }
 
 sf::Texture &Resources::getFondo ( ) {
-	m_texture.loadFromFile("recursos/fondos/escenario/fondo.png");
+	m_texture.loadFromFile("recursos/fondos/escenario/fondo_v4.png");
 	m_pos = 3;
 	return getTexture_or_insert(m_t, m_texture, m_pos);
 }

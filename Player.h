@@ -37,7 +37,7 @@ public:
 	void sonidoImpacto();
 	void generarDisparo();
 	bool armaDeFuego();
-	void borrarBala(vector<Bala>::iterator it);
+	void borrarBala(int pos);
 	sf::Vector2f getPosInicial();
 	vector<Bala> getDisparos();
 	int getArma();

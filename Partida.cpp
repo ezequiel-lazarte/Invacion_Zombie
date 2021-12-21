@@ -81,11 +81,11 @@ void Partida::Actualizar (Juego &juego) {
 			m_enemigos[i].BajarVida();
 		}
 		m_disparos = m_player.getDisparos();
-		for(vector<Bala>::iterator it=m_disparos.begin(); it != m_disparos.end(); it++) {
-			if(m_enemigos[i].Colision(*it)) {
+		for(int j=0; j < m_player.getDisparos().size(); j++) {
+			if(m_enemigos[i].Colision(m_player.getDisparos()[j])) {
 				m_enemigos[i].BajarVida();
 				m_player.sonidoImpacto();
-				//m_player.borrarBala(it);
+				m_player.borrarBala(j);
 			}
 		}
 	}
