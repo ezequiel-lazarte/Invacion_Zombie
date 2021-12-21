@@ -1,6 +1,8 @@
 #ifndef IMPUTBOX_H
 #define IMPUTBOX_H
 #include <string>
+#include "DatosDePartida.h"
+
 using namespace std;
 /**
 * Esta clase sirve para facilitar la entrada de strings en una ventana de sfml-2.x.
@@ -51,9 +53,10 @@ class InputText:public sf::Text {
 	unsigned int max_chars;
 	bool editable;
 	bool single_word;
+	DatosDePartida data;
 public:
-	void ventana(sf::Event e);
-	
+	void ventana(sf::Event e, DatosDePartida *data);
+	InputText() {}
 	InputText(const sf::Font &font, int size=30, sf::Color color=sf::Color::Black) {
 		for(int i=0;i<sf::Keyboard::KeyCount;i++) is_down[i]=true;
 		max_chars=0;

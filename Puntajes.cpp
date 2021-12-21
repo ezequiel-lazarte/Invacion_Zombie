@@ -88,12 +88,14 @@ void Puntajes::LeerDatos ( ) { // listo ya tengo los datos en un vector de struc
 	}
 }
 
-void Puntajes::GuardarUnPuntajeNuevo (string nameplayer) {
-	cout<< nameplayer;
-	Puntaje aux = {nameplayer};
+void Puntajes::GuardarUnPuntajeNuevo () {
+	if(m_data == NULL) return;
+	cout << "Nombre: " << m_data->getNombrePlayer() << endl << "Tiempo: " << m_data->getTiempo() << endl;
+	Puntaje aux = {m_data->getNombrePlayer(), m_data->getTiempo()};
 	m_puntajes.push_back(aux);
 	sort(m_puntajes.begin(),m_puntajes.end(), CompararPuntajes);
 	m_puntajes.pop_back();
+	delete m_data;
 }
 bool CompararPuntajes(Puntaje p1, Puntaje p2) {
 	if(p1.nameplayer.size()< p2.nameplayer.size()){
@@ -116,3 +118,8 @@ void Puntajes::Dibujar (sf::RenderWindow & window) {
 	}
 	window.display();
 }
+
+void Puntajes::setData (DatosDePartida * data) {
+	m_data = data;
+}
+

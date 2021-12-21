@@ -13,6 +13,7 @@ public:
 	void Actualizar ( );
 	void Dibujar (sf::RenderWindow & w);
 	int GetNumeroNoches();
+	~Fondo();
 private:
 	Vector2f m_proporcion, m_move_sol, m_pos_sol;
 	Sprite m_sol;

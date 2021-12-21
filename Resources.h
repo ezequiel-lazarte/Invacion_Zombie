@@ -16,6 +16,7 @@ typedef map<int, font_t>::iterator iterator_f;
 class Resources {
 public:
 	Resources();
+	/// textures
 	texture_t &getBala();
 	texture_t &getCreditos();
 	texture_t &getEnemigo_1();
@@ -32,6 +33,8 @@ public:
 	texture_t &getSol();
 	texture_t &getLuna();
 	texture_t &getButtonsMenu();
+	texture_t &getPlayerCamina();
+	///sounds
 	sound_t &getBufferCreditos();
 	sound_t &getBufferEnemigo_1();
 	sound_t &getBufferGameOver();
@@ -41,6 +44,8 @@ public:
 	sound_t &getBufferPuntajes();
 	sound_t &getBufferGolpe();
 	sound_t &getBufferDisparo();
+	sound_t &getBufferPaso();
+	///fonts
 	font_t &getFont();
 private:
 	texture_t m_texture;

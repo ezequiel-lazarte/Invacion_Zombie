@@ -10,10 +10,14 @@ using namespace sf;
 Player::Player(int &volumen, Resources *recursos) {
 	m_recursos = recursos;
 	m_volumen = volumen*0.5;
+	
 	m_disparo.setBuffer(m_recursos->getBufferDisparo());
 	m_disparo.setVolume(m_volumen);
 	m_golpe.setBuffer(m_recursos->getBufferGolpe());
 	m_golpe.setVolume(m_volumen);
+	m_paso.setBuffer(m_recursos->getBufferPaso());
+	m_paso.setVolume(m_volumen+90);
+	
 	string recurso;
 	m_arma = 1;
 	sf::Texture textura;
@@ -44,7 +48,7 @@ Player::Player(int &volumen, Resources *recursos) {
 	
 	m_alto_sprite = 320/3;
 	m_ancho_sprite = 320/5;
-	m_move = {5,0};
+	m_move = {4,0};
 	m_gravedad = 6;
 	m_pos_inicial.x = 1080/2;
 	m_pos_inicial.y = 520-m_alto_sprite*.9;
@@ -242,7 +246,7 @@ void Player::sonidoDisparo ( ) {
 }
 
 void Player::generarDisparo () {
-//	m_disparo.play();
+	m_disparo.play();
 	Bala bala(m_recursos, m_volumen);
 	bala.setPos(m_sprite.getPosition(), m_lado);
 	m_balas.push_back(bala);
@@ -261,6 +265,14 @@ vector<Bala> Player::getDisparos ( ) {
 }
 
 void Player::borrarBala (vector<Bala>::iterator it) {
-	m_balas.erase(it);
+	if(it != m_balas.end()) m_balas.erase(it);
+}
+
+void Player::sonidoPaso () {
+	m_paso.play();
+}
+
+sf::Vector2f Player::getPosInicial ( ) {
+	return m_pos_inicial;
 }
 

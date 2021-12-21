@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "Escena.h"
 #include "Resources.h"
+
 using namespace sf;
 class Escena;
 

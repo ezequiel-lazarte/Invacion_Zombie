@@ -8,26 +8,31 @@
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Audio/Sound.hpp>
 #include "Resources.h"
+#include "ImputBox.h"
+#include "DatosDePartida.h"
 using namespace std;
 
 struct Puntaje {
 	string nameplayer;
+	int tiempo;
 };
 
 bool CompararPuntajes(Puntaje p1, Puntaje p2);
 
 class Puntajes : public Escena {
-public:
+public: 
 	Puntajes(int &volumen, Resources *recursos);
 	void Actualizar (Juego & juego) override;
 	void LeerDatos();
 	void Dibujar (sf::RenderWindow & window) override;
-	void GuardarUnPuntajeNuevo(string nameplayer);
+	void GuardarUnPuntajeNuevo();
 	void CambiarVolumenMusica(float vol);
+	void setData(DatosDePartida *data);
 private:
 	Sprite m_fondo;
 	Sound m_musica;
 	Text m_titulo;
+	DatosDePartida *m_data;
 	vector<Text> m_posiciones;
 	string m_binaryname;
 	fstream m_archi;

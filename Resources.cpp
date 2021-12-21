@@ -5,6 +5,8 @@ Resources::Resources ( ) : m_pos(-1) {
 	
 }
 
+/** ****************** ************ ***** TEXTURES ***** ************ ****************** **/
+
 sf::Texture &Resources::getBala ( ) {
 	m_texture.loadFromFile("recursos/player/bala/bala.png");
 	m_pos = 0;
@@ -97,11 +99,20 @@ texture_t & Resources::getButtonsMenu ( ) {
 	return getTexture_or_insert(m_t, m_texture, m_pos);
 }
 
+texture_t & Resources::getPlayerCamina ( ) {
+	m_texture.loadFromFile("recursos/player/player_caminar.png");
+	m_pos = 13;
+	return getTexture_or_insert(m_t, m_texture, m_pos);
+}
+
+/** ****************** ************ ***** SOUNDS EFECTS ***** ************ ****************** **/
+
 sf::SoundBuffer & Resources::getBufferCreditos ( ) {
 	m_buffer.loadFromFile("recursos/musica/creditos.wav");
 	m_pos = 0;
 	return getBuffer_or_insert(m_s, m_buffer, m_pos);
 }
+
 
 sf::SoundBuffer & Resources::getBufferEnemigo_1 ( ) {
 	m_buffer.loadFromFile("recursos/musica/zombie1.wav");
@@ -150,6 +161,14 @@ sf::SoundBuffer & Resources::getBufferDisparo() {
 	m_pos = 8;
 	return getBuffer_or_insert(m_s, m_buffer, m_pos);
 }
+
+sf::SoundBuffer & Resources::getBufferPaso() {
+	m_buffer.loadFromFile("recursos/musica/paso.wav");
+	m_pos = 9;
+	return getBuffer_or_insert(m_s, m_buffer, m_pos);
+}
+
+/** ****************** ************ ***** FONTS ***** ************ ****************** **/
 
 sf::Font & Resources::getFont ( ) {
 	m_font.loadFromFile("recursos/fuentes/Cave-Story.ttf");

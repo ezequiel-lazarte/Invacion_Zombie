@@ -9,6 +9,8 @@
 #include "Resources.h"
 #include <ctime>
 #include <vector>
+#include "Puntajes.h"
+#include "DatosDePartida.h"
 using namespace std;
 
 class Juego;
@@ -25,12 +27,14 @@ private:
 	vector<Enemigo_1> m_enemigos;
 	vector<Bala> m_disparos;
 	vector<Bala>::iterator itDisparo;
+	Vector2f m_pos_player;
 	Color m_color_fondo;
 	Fondo m_fondo_1;
 	Player m_player;
 	Enemigo_1 enemigo;
 	Sound m_musica_fondo;
 	Resources *m_recursos;
+	DatosDePartida *m_data;
 	Sprite m_corazon;
 	Clock m_reloj;
 	Time m_crono;

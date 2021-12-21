@@ -8,7 +8,7 @@ using namespace std;
 using namespace sf;
 
 
-void InputText::ventana(sf::Event e){
+void InputText::ventana(sf::Event e, DatosDePartida *data){
 	
 	// crea una ventana
 	RenderWindow w(VideoMode(1080,520), " ");
@@ -42,6 +42,7 @@ void InputText::ventana(sf::Event e){
 				if (e.type==sf::Event::KeyPressed && e.key.code==sf::Keyboard::Return) { // si apretó enter, se toma la palabra y se la agrega a la lista
 					string string_ingresado = text_entrada.getValue();// obtener la palabra que se ingresó
 					cout<<string_ingresado;
+					data->setNombrePlayer(string_ingresado);
 					//Puntajes B;
 					//B.GuardarUnPuntajeNuevo(string_ingresado);
 					return;
@@ -50,7 +51,6 @@ void InputText::ventana(sf::Event e){
 					text_entrada.processEvent(e); // para que el texto tome las teclas que pulsamos
 				}
 			}
-			
 			// dibujar
 			w.clear(Color(255,255,255,255));
 			text_entrada.update(); // para que el texto se dibuje correctamente (hay que hacer esta llamada despues de processEvent y antes del draw)

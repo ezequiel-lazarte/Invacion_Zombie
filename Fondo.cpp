@@ -4,6 +4,7 @@
 Fondo::Fondo() : rojo(0), verde(0), azul(0) {
 	m_fondo.loadFromFile("recursos/fondos/escenario/fondo.png");
 	m_sprite.setTexture(m_fondo);
+	m_sprite.setScale(1.06,1);
 	m_proporcion = {1024,356};/// ancho y alto
 	diferencia = 520-m_proporcion.y;
 	m_sprite.setPosition(0,diferencia);
@@ -18,7 +19,7 @@ Fondo::Fondo() : rojo(0), verde(0), azul(0) {
 	gravedad = 0.00016;
 	// luna
 	/// colores
-	rojo =0;
+	rojo = 0;
 	verde = 100;
 	azul = 255;
 	m_color_fondo = {rojo,verde,azul};
@@ -67,10 +68,14 @@ void Fondo::Actualizar ( ) {
 void Fondo::Dibujar (sf::RenderWindow & w) {
 	w.clear(m_color_fondo);
 	w.draw(m_sol);
-	//w.draw(m_sprite);
+	w.draw(m_sprite);
 }
 
 int Fondo::GetNumeroNoches ( ) {
 	return m_nro_noches;
+}
+
+Fondo::~Fondo ( ) {
+	m_recursos = NULL;
 }
 

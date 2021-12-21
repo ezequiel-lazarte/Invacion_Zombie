@@ -10,10 +10,11 @@
 #include "ImputBox.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "Resources.h"
+#include "GameOver.h"
 
 class GameOver : public Escena {
 public:
-	GameOver(int &volumen, Resources *recursos);
+	GameOver(int &volumen, Resources *recursos, DatosDePartida *data);
 	void Actualizar (Juego & juego);
 	void Dibujar (sf::RenderWindow & window);
 	void Finalizar();

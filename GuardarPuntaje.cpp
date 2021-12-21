@@ -10,7 +10,9 @@ using namespace std;
 
 
 
-GuardarPuntaje:: GuardarPuntaje(int &volumen, Resources *recursos, sf::Event evento){
+GuardarPuntaje:: GuardarPuntaje(int &volumen, Resources *recursos, sf::Event evento, DatosDePartida *data) {
+	m_puntajes = new Puntajes(volumen, recursos);
+	m_puntajes->setData(data);
 	m_recursos = recursos;
 	m_volumen = volumen;
 	m_fondo.setTexture(m_recursos->getGuardarPuntajes());
@@ -28,10 +30,8 @@ GuardarPuntaje:: GuardarPuntaje(int &volumen, Resources *recursos, sf::Event eve
 	m_titulo.setCharacterSize(90);
 	
 	InputText A(m_recursos->getFont(),30,sf::Color::Black);
-	A.ventana(evento);
-	
+	A.ventana(evento, data);
 }
-
 
 void GuardarPuntaje::Actualizar (Juego & juego) {
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
@@ -45,5 +45,10 @@ void GuardarPuntaje::Dibujar (sf::RenderWindow & window){
 	window.draw(m_fondo);
 	window.draw(m_titulo);
 	window.display();
+}
+
+
+GuardarPuntaje::~GuardarPuntaje ( ) {
+	delete m_puntajes;
 }
 

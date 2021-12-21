@@ -10,6 +10,7 @@ Juego::Juego() : m_window(VideoMode(1080,520), "Invasión Zombie") {
 	m_volumen = 50;
 	m_recursos = new Resources;
 	m_window.setFramerateLimit(m_fps);
+	m_window.setVerticalSyncEnabled(true);
 	m_escena = new Menu(m_volumen, m_recursos);
 }
 

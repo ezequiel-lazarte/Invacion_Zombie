@@ -5,7 +5,8 @@
 using namespace std;
 
 Partida::Partida(int &volumen, Resources *recursos) : 
-		m_color_fondo(20,110,255), m_player(volumen, recursos) { 
+		m_color_fondo(20,110,255), m_player(volumen, recursos) {
+	m_data = new DatosDePartida;
 	m_volumen = volumen;
 	m_recursos = recursos;
 	srand(time(NULL));
@@ -56,7 +57,8 @@ Partida::Partida(int &volumen, Resources *recursos) :
 	m_corazon.setTexture(m_recursos->getCorazon());
 	m_corazon.setPosition(10,12);
 	m_corazon.setScale(.13,.13);
-
+	
+	m_pos_player = m_player.getPosInicial();
 }
 
 void Partida::Actualizar (Juego &juego) {
@@ -75,17 +77,14 @@ void Partida::Actualizar (Juego &juego) {
 		if(m_player.Colision(m_enemigos[i]) && m_player.getVida()>0 && Keyboard::isKeyPressed(Keyboard::Key::F) && m_player.getArma() == 1) {
 			m_player.golpe();
 		}
-		if(m_player.getVida()>0 && Keyboard::isKeyPressed(Keyboard::Key::F) && m_player.getArma() == 2) {
-			m_player.sonidoDisparo();
-		}
 		if(Keyboard::isKeyPressed(Keyboard::Key::F) && m_player.Colision(m_enemigos[i])) {
 			m_enemigos[i].BajarVida();
 		}
 		m_disparos = m_player.getDisparos();
-		for(auto it=m_disparos.begin(); it != m_disparos.end(); it++) {
+		for(vector<Bala>::iterator it=m_disparos.begin(); it != m_disparos.end(); it++) {
 			if(m_enemigos[i].Colision(*it)) {
 				m_enemigos[i].BajarVida();
-				m_player.borrarBala(it);
+				//m_player.borrarBala(it);
 			}
 		}
 	}
@@ -101,7 +100,11 @@ void Partida::Actualizar (Juego &juego) {
 			m_enemigos[i].Finalizar();
 		}
 		m_player.Finalizar();
-		juego.CambiarEscena(new GameOver(m_volumen, m_recursos));
+		juego.CambiarEscena(new GameOver(m_volumen, m_recursos, m_data));
+	}
+	if(m_player.getVida() > 0 && m_player.getPos().y >= m_player.getPosInicial().y && (m_pos_player.x > m_player.getPos().x+50 || m_pos_player.x < m_player.getPos().x-50)) {
+		m_player.sonidoPaso();
+		m_pos_player = m_player.getPos();
 	}
 	CrearEnemigos();
 	m_vida_player.setString(to_string(m_player.getVida()));
@@ -130,9 +133,7 @@ void Partida::ActualizarPuntaje ( ) {
 		m_puntaje_actual = m_crono.asSeconds();
 	}
 	if(m_player.getVida()<=0) {
-		/// llamo a
-		string nombre_player = "John";
-		int tiempo = 777;
+		m_data->setTiempo((int)m_puntaje_actual/10);
 	}
 }
 

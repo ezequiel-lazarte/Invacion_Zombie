@@ -4,7 +4,7 @@
 Bala::Bala (Resources *recursos, int volumen): m_pos(0,0) {
 	m_recursos = recursos;
 	m_volumen = volumen;
-	m_velocidad = 3;
+	m_velocidad = 10;
 	m_sprite.setTexture(m_recursos->getBala());
 	m_sprite.setScale(0.02, 0.02);
 }

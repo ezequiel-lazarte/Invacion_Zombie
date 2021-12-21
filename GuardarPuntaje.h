@@ -14,15 +14,17 @@ using namespace std;
 
 class GuardarPuntaje : public Escena{
 public:
-	GuardarPuntaje(int &volumen, Resources *recursos, sf::Event evento);
+	GuardarPuntaje(int &volumen, Resources *recursos, sf::Event evento, DatosDePartida *data);
 	void Actualizar (Juego & juego) override;
 	void Dibujar (sf::RenderWindow & window) override;
+	~GuardarPuntaje();
 private:
 	Sprite m_fondo;
 	Sound m_musica;
 	Text m_titulo;
-	int m_volumen;
 	Resources *m_recursos;
+	Puntajes *m_puntajes;
+	int m_volumen;
 };
 
 
