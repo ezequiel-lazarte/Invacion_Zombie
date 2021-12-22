@@ -12,8 +12,8 @@ Partida::Partida(int &volumen, Resources *recursos) :
 	srand(time(NULL));
 	m_posDesde = -2500;
 	m_posHasta = 2500;
-	m_numeroEnemigos1 = 10;
-	m_numeroEnemigos2 = 15;
+	m_numeroEnemigos1 = 5;
+	m_numeroEnemigos2 = 5;
 	for(int i=0;i<m_numeroEnemigos1;i++) {
 		m_enemigos.resize(m_enemigos.size() + 1);
 		enemigo.setTexture(m_recursos->getEnemigo_1());

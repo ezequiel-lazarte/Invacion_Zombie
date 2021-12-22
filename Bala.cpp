@@ -24,13 +24,15 @@ void Bala::Dibujar (sf::RenderWindow & w) {
 }
 
 void Bala::setPos (sf::Vector2f pos, char lado) {
-	m_pos = pos;
-	m_sprite.setPosition(pos);
+	m_pos.x = pos.x;
+	m_pos.y = pos.y+50;
 	m_lado = lado;
 	if(lado == 'R') {
+		m_pos.x = m_pos.x+50;
+		m_sprite.setPosition(m_pos);
 		/**posicionar la bala**/
 	} else if(lado == 'L') {
-		m_pos = {m_pos.x+15, m_pos.y};
+		m_pos.x = m_pos.x+30;
 		m_sprite.setPosition(m_pos);
 		/**posicionar la bala**/
 	}

@@ -14,55 +14,60 @@
 
 using namespace std;
 
+enum UltimaTextura {quieto=0, camina=1, golpeQuieto=2, golpeCamina=3, disparaQuieto=4, disparaCamina=5};
+
 class Player : public Entidad {
 public:
 	Player(int &volumen, Resources *recursos);
 	void Actualizar ();
 	void Dibujar (sf::RenderWindow & w);
-	sf::Sprite &getSprite();
-	sf::Vector2f getPos();
 	void BajarVida();
-	int getVida();
+	void setPlayer();
 	void movimientoTeclas();
 	void controlMovimientos();
 	void controlArmas();
-	void MovimientoGolpea();
-	void MovimientoGolpeaCamina();
-	void MovimientoCamina();
-	void MovimientoQuieto();
+	void animaciones();
+	void animacionQuieto();
+	void animacionCamina();
+	void animacionGolpeaQuieto();
+	void animacionGolpeaCamina();
+	void animacionNoDisparaQuieto();
+	void animacionDisparaQuieto();
+	void animacionNoDisparaCamina();
+	void animacionDisparaCamina();
 	void golpe();
 	void disparar();
 	void sonidoDisparo();
 	void sonidoPaso();
 	void sonidoImpacto();
 	void generarDisparo();
-	bool armaDeFuego();
 	void borrarBala(int pos);
-	sf::Vector2f getPosInicial();
-	vector<Bala> getDisparos();
-	int getArma();
 	void Finalizar();
+	sf::Vector2f getPosInicial();
+	sf::Sprite &getSprite();
+	sf::Vector2f getPos();
+	vector<Bala> getDisparos();
+	bool armaDeFuego();
+	int getArma();
+	int getVida();
 private:
 	sf::Vector2f m_pos_inicial;
 	sf::Vector2f m_move;
 	sf::Sound m_golpe, m_disparo, m_paso, m_impacto_bala, m_recarga_pistola;
 	sf::Clock m_clock;
-	vector<sf::Texture> m_texturas_adel;
-	vector<sf::Texture> m_texturas_atras;
-	vector<sf::Texture> m_texturas_ataque_atras;
-	vector<sf::Texture> m_texturas_ataque_adel;
-	vector<sf::Texture> m_texturas_quieto; /// 0 y 1 son atras, 2 y 3 son adel
+	sf::Texture m_quieto, m_camina, m_pegaQuieto, m_pegaCamina, m_disparaQuieto, m_disparaCamina;
 	size_t m_ultima_tecla;
 	size_t m_vida;
 	Resources *m_recursos;
 	vector<Bala> m_balas;
+	UltimaTextura m_ultima_textura;
 	int m_volumen, m_alto_sprite;
 	float m_cambiar_textura, m_tiempoDespues, m_tiempoAhora, m_tiempoRecarga;
 	float adel, atras; // contador para cambiar de sprite
-	float m_gravedad;
+	float m_gravedad, m_move_quieto, m_move_camina, m_move_pegaQuieto, m_move_pegaCamina, m_move_disparaQuieto, m_move_disparaCamina;
 	int m_arma;
 	char m_lado;
-	bool m_si_disparo;;
+	bool m_si_disparo;
 };
 
 #endif

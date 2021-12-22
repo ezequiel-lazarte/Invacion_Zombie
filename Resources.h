@@ -27,13 +27,17 @@ public:
 	texture_t &getMenu();
 	texture_t &getPantallaCarga();
 	texture_t &getPartida();
-	texture_t &getPlayer();
 	texture_t &getPuntajes();
 	texture_t &getCorazon();
 	texture_t &getSol();
 	texture_t &getLuna();
 	texture_t &getButtonsMenu();
+	texture_t &getPlayerQuieto();
 	texture_t &getPlayerCamina();
+	texture_t &getPlayerGolpeQuieto();
+	texture_t &getPlayerGolpeCamina();
+	texture_t &getPlayerDisparaQuieto();
+	texture_t &getPlayerDisparaCamina();
 	///sounds
 	sound_t &getBufferCreditos();
 	sound_t &getBufferEnemigo_1();

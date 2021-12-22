@@ -53,10 +53,6 @@ sf::Texture &Resources::getPartida ( ) {
 	return getTexture_or_insert(m_t, m_texture, m_pos);
 }
 
-sf::Texture &Resources::getPlayer ( ) {
-	return m_t[0]; //Falta armar el png completo de player
-}
-
 sf::Texture &Resources::getPuntajes ( ) {
 	m_texture.loadFromFile("recursos/fondos/puntajes.jpg");
 	m_pos = 5;
@@ -99,9 +95,41 @@ texture_t & Resources::getButtonsMenu ( ) {
 	return getTexture_or_insert(m_t, m_texture, m_pos);
 }
 
+/// player
+
+texture_t & Resources::getPlayerQuieto ( ) {
+	m_texture.loadFromFile("recursos/player/player_quieto.png");
+	m_pos = 13;
+	return getTexture_or_insert(m_t, m_texture, m_pos);
+}
+
 texture_t & Resources::getPlayerCamina ( ) {
 	m_texture.loadFromFile("recursos/player/player_caminar.png");
-	m_pos = 13;
+	m_pos = 14;
+	return getTexture_or_insert(m_t, m_texture, m_pos);
+}
+
+texture_t & Resources::getPlayerGolpeQuieto ( ) {
+	m_texture.loadFromFile("recursos/player/player_golpe_quieto.png");
+	m_pos = 15;
+	return getTexture_or_insert(m_t, m_texture, m_pos);
+}
+
+texture_t & Resources::getPlayerGolpeCamina ( ) {
+	m_texture.loadFromFile("recursos/player/"); /// falta hacer
+	m_pos = 16;
+	return getTexture_or_insert(m_t, m_texture, m_pos);
+}
+
+texture_t & Resources::getPlayerDisparaQuieto ( ) {
+	m_texture.loadFromFile("recursos/player/player_quieto_arma.png");
+	m_pos = 17;
+	return getTexture_or_insert(m_t, m_texture, m_pos);
+}
+
+texture_t & Resources::getPlayerDisparaCamina ( ) {
+	m_texture.loadFromFile("recursos/player/player_corre_arma.png");
+	m_pos = 18;
 	return getTexture_or_insert(m_t, m_texture, m_pos);
 }
 

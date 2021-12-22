@@ -4,6 +4,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
+#include <cmath>
 using namespace std;
 using namespace sf;
 
@@ -22,43 +23,16 @@ Player::Player(int &volumen, Resources *recursos) {
 	m_recarga_pistola.setBuffer(m_recursos->getBufferRecargaPistola());
 	m_recarga_pistola.setVolume(m_volumen+50);
 	
-	string recurso;
-	m_arma = 1;
-	sf::Texture textura;
-	for(int i=0;i<6;i++) { 
-		/// adelante
-		recurso = "recursos/player/player_ade/cam_adel"+ to_string(i+1) +".png";
-		textura.loadFromFile(recurso);
-		m_texturas_adel.push_back(textura);
-		///atras
-		recurso = "recursos/player/player_atras/cam_atras"+ to_string(i+1) +".png";
-		textura.loadFromFile(recurso);
-		m_texturas_atras.push_back(textura);
-		/// ataque adelante
-		recurso = "recursos/player/player_ataque_adel/sprite_"+ to_string(i+1) +".png";
-		textura.loadFromFile(recurso);
-		m_texturas_ataque_adel.push_back(textura);
-		/// ataque atras
-		recurso = "recursos/player/player_ataque_atras/sprite_"+ to_string(i+1) +".png";
-		textura.loadFromFile(recurso);
-		m_texturas_ataque_atras.push_back(textura);
-	}
-	for(int i=0;i<4;i++) { /// 0 y 1 son atras, 2 y 3 son adel
-		/// Quieto
-		recurso = "recursos/player/player_quieto/sprite_"+ to_string(i+1) +".png";
-		textura.loadFromFile(recurso);
-		m_texturas_quieto.push_back(textura);
-	}
+	m_quieto = m_recursos->getPlayerQuieto();
+	m_camina = m_recursos->getPlayerCamina();
+	m_pegaQuieto = m_recursos->getPlayerGolpeQuieto();
+	m_pegaCamina = m_recursos->getPlayerGolpeCamina();
+	m_disparaQuieto = m_recursos->getPlayerDisparaQuieto();
+	m_disparaCamina = m_recursos->getPlayerDisparaCamina();
 	
-	m_alto_sprite = 320/3;
-	m_ancho_sprite = 320/5;
-	m_move = {4,0};
-	m_gravedad = 6;
-	m_pos_inicial.x = 1080/2;
-	m_pos_inicial.y = 520-m_alto_sprite*.9;
-	m_sprite.setTexture(m_texturas_adel[0]);
-	m_sprite.setScale(.3,.3);
-	m_sprite.setPosition(m_pos_inicial);
+	m_arma = 1;
+	
+	setPlayer();
 	
 	adel=0;
 	atras = 0;
@@ -74,25 +48,42 @@ Player::Player(int &volumen, Resources *recursos) {
 	m_tiempoAhora = m_tiempoDespues = m_tiempoRecarga = 0;
 	
 	m_si_disparo = false;
+	
+	m_move_quieto = m_move_camina = m_move_pegaQuieto = m_move_pegaCamina = m_move_disparaQuieto = m_move_disparaCamina = 0;
+}
+
+void Player::setPlayer () {
+	m_alto_sprite = 320*.9;
+	m_ancho_sprite = 320*.9;
+	m_move = {4,0};
+	m_gravedad = 6;
+	m_pos_inicial.x = 1080/2;
+	m_pos_inicial.y = 510-m_alto_sprite*.3;
+	m_sprite.setTexture(m_recursos->getPlayerDisparaCamina());
+	m_sprite.setPosition(m_pos_inicial);
+	m_sprite.setScale(.3,.3);
+	
+	m_size_rect = {0,0};
+	m_alto_sprite = 320;
+	m_ancho_sprite = 320;
+	m_rect = {m_size_rect.x+320, m_size_rect.y, m_alto_sprite, m_ancho_sprite};
+	
+	m_ultima_textura = quieto;
 }
 
 void Player::Actualizar () {
 	controlMovimientos();
 	movimientoTeclas();
 	controlArmas();
-	MovimientoQuieto();
-	MovimientoGolpea();
-	MovimientoGolpeaCamina();
-	MovimientoCamina();
+	animaciones();
 	disparar();
 }
 
 void Player::Dibujar (sf::RenderWindow & w) {
-	w.draw(m_sprite);
-	/// la bala se tendria que dibujar cuando se dispare
 	for(int i=0; i<m_balas.size(); i++) {
 		m_balas[i].Dibujar(w);
 	}
+	w.draw(m_sprite);
 }
 
 sf::Sprite & Player::getSprite ( ) {
@@ -116,6 +107,8 @@ void Player::BajarVida ( ) {
 int Player::getVida ( ) {
 	return m_vida;
 }
+
+/**
 
 void Player::MovimientoGolpea ( ) {
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::F) and m_ultima_tecla == 1) {
@@ -205,6 +198,7 @@ void Player::MovimientoQuieto ( ) {
 	}
 }
 
+**/
 void Player::golpe ( ) {
 	m_golpe.play();
 }
@@ -305,7 +299,7 @@ void Player::controlMovimientos ( ) {
 	}
 	if(m_gravedad<0 and player_pos.y == m_pos_inicial.y) m_gravedad = 6;
 	player_pos = m_sprite.getPosition();
-	int limite_x = 1080-m_ancho_sprite;
+	int limite_x = 1080-70;
 	
 	if(player_pos.x < -35) player_pos.x = -35;
 	if(player_pos.x > limite_x) player_pos.x = limite_x;
@@ -313,3 +307,129 @@ void Player::controlMovimientos ( ) {
 	m_sprite.setPosition(player_pos);
 }
 
+void Player::animaciones ( ) {
+	if(!sf::Keyboard::isKeyPressed(sf::Keyboard::F) && m_arma == 1
+	   && !(sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))) {
+		animacionQuieto(); /// sin arma
+		m_arma = 1;
+	}
+	if(!sf::Keyboard::isKeyPressed(sf::Keyboard::F) && m_arma == 1 
+		&& (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))) {
+		animacionCamina(); /// sin arma
+		m_arma = 1;
+	}
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::F) && m_arma == 1 
+	   && !(sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))) {
+		animacionGolpeaQuieto(); /// sin arma
+		m_arma = 1;
+	}
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::F) && m_arma == 1 
+		&& (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))) {
+		animacionGolpeaCamina(); /// sin arma
+		m_arma = 1;
+	}
+	if(!sf::Keyboard::isKeyPressed(sf::Keyboard::F) && m_arma == 2 
+		&& !(sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))) {
+		animacionDisparaQuieto();
+		m_arma = 2;
+	}
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::F) && m_arma == 2 
+		&& !(sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))) {
+		animacionDisparaQuieto();
+		m_arma = 2;
+	}
+	if(!sf::Keyboard::isKeyPressed(sf::Keyboard::F) && m_arma == 2 
+		&& (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))) {
+		animacionDisparaCamina();
+		m_arma = 2;
+	}
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::F) && m_arma == 2 
+	   && (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))) {
+		animacionDisparaCamina();
+		m_arma = 2;
+	}
+}
+
+void Player::animacionQuieto ( ) {
+	m_sprite.setTexture(m_quieto);
+	m_move_quieto += 0.03125;
+	if(m_lado == 'R') {
+		m_rect = {m_size_rect.x+int(ceil(m_move_quieto)*320), m_size_rect.y, m_alto_sprite, m_ancho_sprite};
+	}
+	if(m_lado == 'L') {
+		m_rect = {m_size_rect.x+int(ceil(m_move_quieto)*320), m_size_rect.y+320, m_alto_sprite, m_ancho_sprite};
+	}
+	m_sprite.setTextureRect(m_rect);
+	if(m_move_quieto>=5) m_move_quieto=0;
+}
+
+void Player::animacionCamina ( ) {
+	m_sprite.setTexture(m_camina);
+	m_move_camina += 0.03125;
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+		m_rect = {m_size_rect.x+int(ceil(m_move_camina)*320), m_size_rect.y, m_alto_sprite, m_ancho_sprite};
+		m_sprite.move(m_move);
+	}
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+		m_rect = {m_size_rect.x+int(ceil(m_move_camina)*320), m_size_rect.y+320, m_alto_sprite, m_ancho_sprite};
+		m_sprite.move(-m_move);
+	}
+	m_sprite.setTextureRect(m_rect);
+	if(m_move_camina>=5) m_move_camina=0;
+}
+
+void Player::animacionGolpeaQuieto ( ) {
+	m_sprite.setTexture(m_pegaQuieto);
+	m_move_pegaQuieto += 0.03125;
+	if(m_lado == 'R') {
+		m_rect = {m_size_rect.x+int(ceil(m_move_pegaQuieto)*320), m_size_rect.y, m_alto_sprite, m_ancho_sprite};
+	}
+	if(m_lado == 'L') {
+		m_rect = {m_size_rect.x+int(ceil(m_move_pegaQuieto)*320), m_size_rect.y+320, m_alto_sprite, m_ancho_sprite};
+	}
+	m_sprite.setTextureRect(m_rect);
+	if(m_move_pegaQuieto>=5) m_move_pegaQuieto=0;
+}
+
+void Player::animacionGolpeaCamina ( ) {
+	m_sprite.setTexture(m_pegaCamina);
+	m_move_pegaCamina += 0.03125;
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+		m_rect = {m_size_rect.x+int(ceil(m_move_pegaCamina)*320), m_size_rect.y, m_alto_sprite, m_ancho_sprite};
+		m_sprite.move(m_move);
+	}
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+		m_rect = {m_size_rect.x+int(ceil(m_move_pegaCamina)*320), m_size_rect.y+320, m_alto_sprite, m_ancho_sprite};
+		m_sprite.move(-m_move);
+	}
+	m_sprite.setTextureRect(m_rect);
+	if(m_move_pegaCamina>=5) m_move_pegaCamina=0;
+}
+
+void Player::animacionDisparaQuieto ( ) {
+	m_sprite.setTexture(m_disparaQuieto);
+	m_move_disparaQuieto += 0.03125;
+	if(m_lado == 'R') {
+		m_rect = {m_size_rect.x+int(ceil(m_move_disparaQuieto)*320), m_size_rect.y, m_alto_sprite, m_ancho_sprite};
+	}
+	if(m_lado == 'L') {
+		m_rect = {m_size_rect.x+int(ceil(m_move_disparaQuieto)*320), m_size_rect.y+320, m_alto_sprite, m_ancho_sprite};
+	}
+	m_sprite.setTextureRect(m_rect);
+	if(m_move_disparaQuieto>=5) m_move_disparaQuieto=0;
+}
+
+void Player::animacionDisparaCamina ( ) {
+	m_sprite.setTexture(m_disparaCamina);
+	m_move_disparaCamina += 0.03125;
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+		m_rect = {m_size_rect.x+int(ceil(m_move_disparaCamina)*320), m_size_rect.y, m_alto_sprite, m_ancho_sprite};
+		m_sprite.move(m_move);
+	}
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+		m_rect = {m_size_rect.x+int(ceil(m_move_disparaCamina)*320), m_size_rect.y+320, m_alto_sprite, m_ancho_sprite};
+		m_sprite.move(-m_move);
+	}
+	m_sprite.setTextureRect(m_rect);
+	if(m_move_disparaCamina>=5) m_move_disparaCamina=0;
+}
