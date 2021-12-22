@@ -21,8 +21,10 @@ public:
 	Partida(int &volumen, Resources *recursos);
 	void Actualizar(Juego &juego) override;
 	void CrearEnemigos();
+	void GestionEnemigos();
 	void Dibujar(RenderWindow &window) override;
 	void ActualizarPuntaje();
+	int numeroAleatorio();
 private:
 	vector<Enemigo_1> m_enemigos;
 	vector<Bala> m_disparos;
@@ -40,7 +42,7 @@ private:
 	Time m_crono;
 	Text m_vida_player, m_tiempo, m_t1;
 	string nameplayer; // nombre del jugador
-	float m_puntaje_actual; // me guardo el puntaje del jugador
+	float m_puntaje_actual, m_tiempoActual, m_tiempoParaSumarEnemigos; // me guardo el puntaje del jugador
 	int m_numeroEnemigos1, m_numeroEnemigos2, aux, m_posDesde, m_posHasta, m_volumen;
 };
 

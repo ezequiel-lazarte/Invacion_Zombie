@@ -13,7 +13,7 @@ Partida::Partida(int &volumen, Resources *recursos) :
 	m_posDesde = -2500;
 	m_posHasta = 2500;
 	m_numeroEnemigos1 = 10;
-	m_numeroEnemigos2 = 20;
+	m_numeroEnemigos2 = 15;
 	for(int i=0;i<m_numeroEnemigos1;i++) {
 		m_enemigos.resize(m_enemigos.size() + 1);
 		enemigo.setTexture(m_recursos->getEnemigo_1());
@@ -59,12 +59,18 @@ Partida::Partida(int &volumen, Resources *recursos) :
 	m_corazon.setScale(.13,.13);
 	
 	m_pos_player = m_player.getPosInicial();
+	
+	m_tiempoActual = 0;
+	
+	m_tiempoParaSumarEnemigos = 15;
 }
 
 void Partida::Actualizar (Juego &juego) {
 	m_crono = m_reloj.getElapsedTime();
 	aux = m_crono.asSeconds();
 	m_tiempo.setString(to_string(aux));
+	CrearEnemigos();
+	GestionEnemigos();
 	if(Keyboard::isKeyPressed(Keyboard::Key::Escape)) {
 		m_musica_fondo.stop();
 		for(int i=0;i<m_enemigos.size();i++) {
@@ -72,22 +78,6 @@ void Partida::Actualizar (Juego &juego) {
 		}
 		m_player.Finalizar();
 		juego.CambiarEscena(new Menu(m_volumen, m_recursos));
-	}
-	for(int i=0;i<m_enemigos.size();i++) {
-		if(m_player.Colision(m_enemigos[i]) && m_player.getVida()>0 && Keyboard::isKeyPressed(Keyboard::Key::F) && m_player.getArma() == 1) {
-			m_player.golpe();
-		}
-		if(Keyboard::isKeyPressed(Keyboard::Key::F) && m_player.Colision(m_enemigos[i]) && m_player.getArma() == 1) {
-			m_enemigos[i].BajarVida();
-		}
-		m_disparos = m_player.getDisparos();
-		for(int j=0; j < m_player.getDisparos().size(); j++) {
-			if(m_enemigos[i].Colision(m_player.getDisparos()[j])) {
-				m_enemigos[i].BajarVida();
-				m_player.sonidoImpacto();
-				m_player.borrarBala(j);
-			}
-		}
 	}
 	if(m_player.getVida()>0) {
 		for(int i=0;i<m_enemigos.size();i++) {
@@ -107,13 +97,8 @@ void Partida::Actualizar (Juego &juego) {
 		m_player.sonidoPaso();
 		m_pos_player = m_player.getPos();
 	}
-	CrearEnemigos();
 	m_vida_player.setString(to_string(m_player.getVida()));
 	m_player.Actualizar();
-	for(size_t i=0;i<m_enemigos.size();i++) {
-		m_enemigos[i].Actualizar();
-		m_enemigos[i].setPosPlayer(m_player.getPos());
-	}
 	m_fondo_1.Actualizar();
 	ActualizarPuntaje();
 }
@@ -160,3 +145,55 @@ void Partida::CrearEnemigos ( ) {
 		}
 	}
 }
+
+void Partida::GestionEnemigos ( ) {
+	m_tiempoActual = m_reloj.getElapsedTime().asSeconds();
+	if(m_tiempoActual >= m_tiempoParaSumarEnemigos) {
+		int num = numeroAleatorio();
+		Enemigo_1 enemy;
+		
+		if(num % 2 == 0) {
+			enemy.setTexture(m_recursos->getEnemigo_1());
+			enemy.setVida(80);
+			enemy.setDanio(300);
+			enemy.SetPosEnemigo(rand()%(m_posHasta - m_posDesde) + m_posDesde);
+			m_numeroEnemigos1++;
+		} else {
+			enemy.setTexture(m_recursos->getEnemigo_2());
+			enemy.setVida(30);
+			enemy.setDanio(800);
+			enemy.SetPosEnemigo(rand()%(m_posHasta - m_posDesde) + m_posDesde);
+			m_numeroEnemigos2++;
+		}
+		if(m_tiempoActual == 400) {
+			std::cout << "xs";
+		}
+		m_enemigos.push_back(enemy);
+		m_tiempoParaSumarEnemigos = m_tiempoActual+5;
+	}
+	for(int i=0;i<m_enemigos.size();i++) {
+		m_enemigos[i].Actualizar();
+		m_enemigos[i].setPosPlayer(m_player.getPos());
+		if(m_player.Colision(m_enemigos[i]) && m_player.getVida()>0 && Keyboard::isKeyPressed(Keyboard::Key::F) && m_player.getArma() == 1) {
+			m_player.golpe();
+		}
+		if(Keyboard::isKeyPressed(Keyboard::Key::F) && m_player.Colision(m_enemigos[i]) && m_player.getArma() == 1) {
+			m_enemigos[i].BajarVida();
+		}
+		m_disparos = m_player.getDisparos();
+		for(int j=0; j < m_player.getDisparos().size(); j++) {
+			if(m_enemigos[i].Colision(m_player.getDisparos()[j])) {
+				m_enemigos[i].BajarVida();
+				m_player.sonidoImpacto();
+				m_player.borrarBala(j);
+			}
+		}
+	}
+}
+
+int Partida::numeroAleatorio ( ) {
+	srand(time(NULL));
+	int num = 1+rand()%(101-1);
+	return num;
+}
+
