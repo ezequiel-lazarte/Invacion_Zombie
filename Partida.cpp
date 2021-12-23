@@ -50,7 +50,7 @@ Partida::Partida(int &volumen, Resources *recursos) :
 	
 	m_tiempo.setFont(m_recursos->getFont());
 	m_tiempo.setString(to_string(m_crono.asSeconds()));
-	m_tiempo.setPosition(260,10);
+	m_tiempo.setPosition(300,10);
 	m_tiempo.setCharacterSize(30);
 	m_tiempo.setFillColor(Color::Red);
 	
@@ -58,7 +58,7 @@ Partida::Partida(int &volumen, Resources *recursos) :
 	
 	m_nro_kill.setFont(m_recursos->getFont());
 	m_nro_kill.setString("Kills: " + to_string(m_nro_kills));
-	m_nro_kill.setPosition(360, 10);
+	m_nro_kill.setPosition(460, 10);
 	m_nro_kill.setCharacterSize(30);
 	m_nro_kill.setFillColor(Color::Red);
 	
