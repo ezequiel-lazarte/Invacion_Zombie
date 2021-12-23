@@ -50,9 +50,17 @@ Partida::Partida(int &volumen, Resources *recursos) :
 	
 	m_tiempo.setFont(m_recursos->getFont());
 	m_tiempo.setString(to_string(m_crono.asSeconds()));
-	m_tiempo.setPosition(300,10);
+	m_tiempo.setPosition(260,10);
 	m_tiempo.setCharacterSize(30);
 	m_tiempo.setFillColor(Color::Red);
+	
+	m_nro_kills = 0;
+	
+	m_nro_kill.setFont(m_recursos->getFont());
+	m_nro_kill.setString("Kills: " + to_string(m_nro_kills));
+	m_nro_kill.setPosition(360, 10);
+	m_nro_kill.setCharacterSize(30);
+	m_nro_kill.setFillColor(Color::Red);
 	
 	m_corazon.setTexture(m_recursos->getCorazon());
 	m_corazon.setPosition(10,12);
@@ -108,6 +116,7 @@ void Partida::Dibujar (RenderWindow & window) {
 	m_player.Dibujar(window);
 	for(size_t i=0;i<m_enemigos.size();i++) m_enemigos[i].Dibujar(window);
 	window.draw(m_vida_player);
+	window.draw(m_nro_kill);
 	window.draw(m_tiempo);
 	window.draw(m_t1);
 	window.draw(m_corazon);
@@ -179,6 +188,10 @@ void Partida::GestionEnemigos ( ) {
 		}
 		if(Keyboard::isKeyPressed(Keyboard::Key::F) && m_player.Colision(m_enemigos[i]) && m_player.getArma() == 1) {
 			m_enemigos[i].BajarVida();
+			if(m_enemigos[i].getVida() <= 0) {
+				++m_nro_kills;
+				m_nro_kill.setString("Kills: " + to_string(m_nro_kills));
+			}
 		}
 		m_disparos = m_player.getDisparos();
 		for(int j=0; j < m_player.getDisparos().size(); j++) {
@@ -186,6 +199,10 @@ void Partida::GestionEnemigos ( ) {
 				m_enemigos[i].BajarVida();
 				m_player.sonidoImpacto();
 				m_player.borrarBala(j);
+				if(m_enemigos[i].getVida() <= 0) {
+					++m_nro_kills;
+					m_nro_kill.setString("Kills: " + to_string(m_nro_kills));
+				}
 			}
 		}
 	}

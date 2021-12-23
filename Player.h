@@ -31,9 +31,7 @@ public:
 	void animacionCamina();
 	void animacionGolpeaQuieto();
 	void animacionGolpeaCamina();
-	void animacionNoDisparaQuieto();
 	void animacionDisparaQuieto();
-	void animacionNoDisparaCamina();
 	void animacionDisparaCamina();
 	void golpe();
 	void disparar();
