@@ -8,8 +8,8 @@ Enemigo_1::Enemigo_1() {
 	m_ancho_sprite = 144;
 	m_rect = {m_size_rect.x+144, m_size_rect.y, m_alto_sprite, m_ancho_sprite};
 	
+	m_sonido1.loadFromFile("recursos/sounds/zombie.wav");
 	m_sound_zombie.setBuffer(m_sonido1);
-	m_sound_zombie.setVolume(20);
 	
 	m_move_sprite = 0;
 	m_move = {1.3,0};
@@ -41,9 +41,9 @@ void Enemigo_1::Finalizar ( ) {
 }
 
 void Enemigo_1::BajarVida ( ) {
-	if(m_vida>0) m_vida -= m_danio;
+	if(m_vida>0 && m_tipo_arma == 1) m_vida -= m_danio;
+	else if(m_vida>0 && m_tipo_arma == 2) m_vida -=m_danio*.1;
 }
-
 
 void Enemigo_1::CambiarVolumenMusica (float vol) {
 	m_sound_zombie.setVolume(vol);
@@ -81,5 +81,13 @@ void Enemigo_1::setVida (int vida) {
 
 void Enemigo_1::setDanio (int danio) {
 	m_danio = danio;
+}
+
+void Enemigo_1::setTipoArma (int nroArma) {
+	m_tipo_arma = nroArma;
+}
+
+void Enemigo_1::playSonidoZombie ( ) {
+	m_sound_zombie.play();
 }
 

@@ -14,8 +14,6 @@
 
 using namespace std;
 
-enum UltimaTextura {quieto=0, camina=1, golpeQuieto=2, golpeCamina=3, disparaQuieto=4, disparaCamina=5};
-
 class Player : public Entidad {
 public:
 	Player(int &volumen, Resources *recursos);
@@ -58,7 +56,6 @@ private:
 	size_t m_vida;
 	Resources *m_recursos;
 	vector<Bala> m_balas;
-	UltimaTextura m_ultima_textura;
 	int m_volumen, m_alto_sprite;
 	float m_cambiar_textura, m_tiempoDespues, m_tiempoAhora, m_tiempoRecarga;
 	float adel, atras; // contador para cambiar de sprite

@@ -12,12 +12,12 @@ Partida::Partida(int &volumen, Resources *recursos) :
 	srand(time(NULL));
 	m_posDesde = -2500;
 	m_posHasta = 2500;
-	m_numeroEnemigos1 = 5;
-	m_numeroEnemigos2 = 5;
+	m_numeroEnemigos1 = 1;
+	m_numeroEnemigos2 = 0;
 	for(int i=0;i<m_numeroEnemigos1;i++) {
 		m_enemigos.resize(m_enemigos.size() + 1);
 		enemigo.setTexture(m_recursos->getEnemigo_1());
-		enemigo.setVida(80);
+		enemigo.setVida(40);
 		enemigo.setDanio(300);
 		m_enemigos[i] = enemigo;
 		m_enemigos[i].SetPosEnemigo(rand()%(m_posHasta - m_posDesde) + m_posDesde);
@@ -25,8 +25,8 @@ Partida::Partida(int &volumen, Resources *recursos) :
 	for(int i=m_numeroEnemigos1;i<m_numeroEnemigos2;i++) {
 		m_enemigos.resize(m_enemigos.size() + 1);
 		enemigo.setTexture(m_recursos->getEnemigo_2());
-		enemigo.setVida(30);
-		enemigo.setDanio(800);
+		enemigo.setVida(110);
+		enemigo.setDanio(500);
 		m_enemigos[i] = enemigo;
 		m_enemigos[i].SetPosEnemigo(rand()%(m_posHasta - m_posDesde) + m_posDesde);
 	}
@@ -101,7 +101,7 @@ void Partida::Actualizar (Juego &juego) {
 		m_player.Finalizar();
 		juego.CambiarEscena(new GameOver(m_volumen, m_recursos, m_data));
 	}
-	if(m_player.getVida() > 0 && m_player.getPos().y >= m_player.getPosInicial().y && (m_pos_player.x > m_player.getPos().x+50 || m_pos_player.x < m_player.getPos().x-50)) {
+	if(m_player.getVida() > 0 && m_player.getPos().y >= m_player.getPosInicial().y && (m_pos_player.x > m_player.getPos().x+120 || m_pos_player.x < m_player.getPos().x-120)) {
 		m_player.sonidoPaso();
 		m_pos_player = m_player.getPos();
 	}
@@ -137,7 +137,7 @@ void Partida::CrearEnemigos ( ) {
 	m_posHasta = 3800;
 	for(size_t i=0;i<m_numeroEnemigos1;i++) {
 		if(m_enemigos[i].getVida() <= 0) {
-			enemigo.setVida(80);
+			enemigo.setVida(40);
 			enemigo.setDanio(300);
 			enemigo.setTexture(m_recursos->getEnemigo_1());
 			enemigo.SetPosEnemigo(m_posDesde);
@@ -146,8 +146,8 @@ void Partida::CrearEnemigos ( ) {
 	}
 	for(size_t i=m_numeroEnemigos1;i<m_enemigos.size();i++) {
 		if(m_enemigos[i].getVida() <= 0) {
-			enemigo.setVida(30);
-			enemigo.setDanio(800);
+			enemigo.setVida(110);
+			enemigo.setDanio(500);
 			enemigo.setTexture(m_recursos->getEnemigo_2());
 			enemigo.SetPosEnemigo(m_posHasta);
 			m_enemigos[i] = enemigo;
@@ -163,14 +163,14 @@ void Partida::GestionEnemigos ( ) {
 		
 		if(num % 2 == 0) {
 			enemy.setTexture(m_recursos->getEnemigo_1());
-			enemy.setVida(80);
+			enemy.setVida(40);
 			enemy.setDanio(300);
 			enemy.SetPosEnemigo(rand()%(m_posHasta - m_posDesde) + m_posDesde);
 			m_numeroEnemigos1++;
 		} else {
 			enemy.setTexture(m_recursos->getEnemigo_2());
-			enemy.setVida(30);
-			enemy.setDanio(800);
+			enemy.setVida(110);
+			enemy.setDanio(500);
 			enemy.SetPosEnemigo(rand()%(m_posHasta - m_posDesde) + m_posDesde);
 			m_numeroEnemigos2++;
 		}
@@ -181,8 +181,13 @@ void Partida::GestionEnemigos ( ) {
 		m_tiempoParaSumarEnemigos = m_tiempoActual+5;
 	}
 	for(int i=0;i<m_enemigos.size();i++) {
+		m_enemigos[i].setTipoArma(m_player.getArma());
 		m_enemigos[i].Actualizar();
 		m_enemigos[i].setPosPlayer(m_player.getPos());
+		
+//		if(m_enemigos[i].getPos().x >= 0 && m_enemigos[i].getPos().x <= 1080) 
+//			m_enemigos[i].playSonidoZombie();
+		
 		if(m_player.Colision(m_enemigos[i]) && m_player.getVida()>0 && Keyboard::isKeyPressed(Keyboard::Key::F) && m_player.getArma() == 1) {
 			m_player.golpe();
 		}

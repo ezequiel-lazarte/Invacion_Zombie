@@ -67,8 +67,6 @@ void Player::setPlayer () {
 	m_alto_sprite = 320;
 	m_ancho_sprite = 320;
 	m_rect = {m_size_rect.x+320, m_size_rect.y, m_alto_sprite, m_ancho_sprite};
-	
-	m_ultima_textura = quieto;
 }
 
 void Player::Actualizar () {
@@ -178,14 +176,12 @@ void Player::disparar ( ) {
 }
 
 void Player::controlArmas ( ) {
-	/// si el jugador toca el num 1 se ponen los puños si usa el 2 se pone el arma
+	/// si el jugador toca el num 1 se ponen los puños si usa el 2 se pone la escopeta
 	if(Keyboard::isKeyPressed(Keyboard::Num1)) {
 		m_arma = 1;
-		/// se saca el arma y se dejan los puños
 	}
 	if(Keyboard::isKeyPressed(Keyboard::Num2)) {
 		m_arma = 2;
-		/// se pone el arma
 	}
 }
 

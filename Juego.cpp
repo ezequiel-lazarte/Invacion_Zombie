@@ -52,5 +52,4 @@ void Juego::CambiarEscena (Escena *Proxima_Escena) {
 Juego::~Juego ( ) {
 	delete m_recursos;
 	delete m_escena;
-	delete m_proxima_escena;
 }

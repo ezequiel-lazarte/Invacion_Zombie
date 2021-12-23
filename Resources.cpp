@@ -116,7 +116,7 @@ texture_t & Resources::getPlayerGolpeQuieto ( ) {
 }
 
 texture_t & Resources::getPlayerGolpeCamina ( ) {
-	m_texture.loadFromFile("recursos/player/"); /// falta hacer
+	m_texture.loadFromFile("recursos/player/player_golpe_camina.png");
 	m_pos = 16;
 	return getTexture_or_insert(m_t, m_texture, m_pos);
 }

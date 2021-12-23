@@ -16,10 +16,12 @@ public:
 	void Animaciones();
 	void BajarVida();
 	void Finalizar();
+	void playSonidoZombie();
 	void setPosPlayer(sf::Vector2f pos_player);
 	void setTexture(sf::Texture &t);
 	void setVida(int vida);
 	void setDanio(int danio);
+	void setTipoArma(int nroArma);
 	int getVida();
 	sf::Vector2f getPos();
 private:
@@ -27,6 +29,7 @@ private:
 	sf::Sound m_sound_zombie;
 	sf::Vector2f m_move, m_pos_player, m_posEnemigo;
 	float m_move_sprite;
+	int m_tipo_arma;
 };
 
 #endif
