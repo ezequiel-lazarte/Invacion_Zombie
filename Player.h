@@ -51,7 +51,7 @@ public:
 private:
 	sf::Vector2f m_pos_inicial;
 	sf::Vector2f m_move;
-	sf::Sound m_golpe, m_disparo, m_paso, m_impacto_bala, m_recarga_pistola;
+	sf::Sound m_golpe, m_disparo, m_paso, m_impacto_bala, m_recarga_escopeta;
 	sf::Clock m_clock;
 	sf::Texture m_quieto, m_camina, m_pegaQuieto, m_pegaCamina, m_disparaQuieto, m_disparaCamina;
 	size_t m_ultima_tecla;

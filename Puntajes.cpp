@@ -98,15 +98,15 @@ void Puntajes::GuardarUnPuntajeNuevo () {
 	delete m_data;
 }
 bool CompararPuntajes(Puntaje p1, Puntaje p2) {
-	if(p1.nameplayer.size()< p2.nameplayer.size()){
-		return true;
-	}else{
-		return false;
-	}
-	/*if(p1.tiempo < p2.tiempo)
+//	if(p1.nameplayer.size()< p2.nameplayer.size()){
+//		return true;
+//	} else {
+//		return false;
+//	}
+	if(p1.tiempo < p2.tiempo)
 		return true;
 	else
-		return false;*/
+		return false;
 }
 
 void Puntajes::Dibujar (sf::RenderWindow & window) {

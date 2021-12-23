@@ -47,7 +47,6 @@ void GuardarPuntaje::Dibujar (sf::RenderWindow & window){
 	window.display();
 }
 
-
 GuardarPuntaje::~GuardarPuntaje ( ) {
 	delete m_puntajes;
 }

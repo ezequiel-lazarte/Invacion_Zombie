@@ -20,8 +20,8 @@ Player::Player(int &volumen, Resources *recursos) {
 	m_paso.setVolume(m_volumen+90);
 	m_impacto_bala.setBuffer(m_recursos->getBufferImpacto());
 	m_impacto_bala.setVolume(m_volumen);
-	m_recarga_pistola.setBuffer(m_recursos->getBufferRecargaPistola());
-	m_recarga_pistola.setVolume(m_volumen+50);
+	m_recarga_escopeta.setBuffer(m_recursos->getBufferRecargaPistola());
+	m_recarga_escopeta.setVolume(m_volumen+50);
 	
 	m_quieto = m_recursos->getPlayerQuieto();
 	m_camina = m_recursos->getPlayerCamina();
@@ -97,6 +97,10 @@ sf::Vector2f Player::getPos ( ) {
 void Player::Finalizar ( ) {
 	m_golpe.stop();
 	m_disparo.stop();
+	m_recarga_escopeta.stop();
+	m_paso.stop();
+	m_impacto_bala.stop();
+	for(int i; i<m_balas.size(); i++) m_balas[i].finalizar();
 }
 
 void Player::BajarVida ( ) {
@@ -168,7 +172,7 @@ void Player::disparar ( ) {
 		m_si_disparo = true;
 	}
 	if(m_tiempoAhora >= m_tiempoRecarga+1 && m_si_disparo) {
-		m_recarga_pistola.play();
+		m_recarga_escopeta.play();
 		m_si_disparo = false;
 	}
 }

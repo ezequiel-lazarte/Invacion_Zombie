@@ -10,8 +10,8 @@ public:
 	void Actualizar();
 	void Dibujar(sf::RenderWindow & w);
 	void setPos(sf::Vector2f pos, char lado);
-	sf::Vector2f getPosition();
 	void finalizar();
+	sf::Vector2f getPosition();;
 private:
 	sf::Vector2f m_pos;
 	Resources *m_recursos;
