@@ -1,32 +1,30 @@
 #ifndef MENU_H
 #define MENU_H
-#include <SFML/Graphics/Font.hpp>
-#include <SFML/Graphics/Text.hpp>
-#include <SFML/Graphics/RenderWindow.hpp>
-#include "Escena.h"
-#include <SFML/Graphics/Sprite.hpp>
-#include <SFML/Graphics/Texture.hpp>
 #include <SFML/Audio/Sound.hpp>
-#include <SFML/Audio/SoundBuffer.hpp>
+#include "Escena.h"
 #include "Resources.h"
 
-class Menu : public Escena{
+class Menu : public Escena {
 public:
-	Menu(int &volumen, Resources *recursos);
+	Menu(int volumen, Resources *resources);
 	void Actualizar(Juego &juego) override;
-	void Dibujar(RenderWindow &window) override;
-	void CambiarVolumenMusica(float vol=50);
+	void Dibujar(sf::RenderWindow &window) override;
+	void Finalizar();
 private:
-	sf::Color m_color, m_color2, m_color3, m_color4;
-	sf::Sound m_musica_inicio;
-	sf::Mouse m_mouse;
-	sf::Texture m_button;
-	sf::Text m_t1, m_play, m_credits, m_scores, m_exit;
-	sf::Sprite m_fondo, m_buttonPlay, m_buttonCredits, m_buttonScores, m_buttonExit;
-	sf::IntRect m_rect;
-	sf::Vector2i m_size_rect, m_pos_mouse;
-	Resources *m_recursos;
-	int m_volumen;
+	void AnimacionTexto();
+	void AnimacionTextoUp();
+	void AnimacionTextoDown();
+	void ControlOpciones(Juego &juego);
+	Resources *m_resources;
+	sf::Color m_color;
+	sf::Sprite m_background;
+	sf::Text m_titulo, m_play, m_options, m_credits, m_exit;
+	sf::Clock m_reloj;
+	sf::Sound m_music, m_cambio_opcion;
+	int m_volumen, m_ultimo_texto;
+	float m_tiempo, m_retraso_cambiar_opcion;
+	unsigned int m_r1, m_r2, m_g1, m_g2, m_b1, m_b2;
 };
 
 #endif
+

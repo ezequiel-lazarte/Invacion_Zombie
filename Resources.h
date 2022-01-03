@@ -51,8 +51,10 @@ public:
 	sound_t &getBufferPaso();
 	sound_t &getBufferImpacto();
 	sound_t &getBufferRecargaPistola();
+	sound_t &getBufferCambioOpcion();
 	///fonts
 	font_t &getFont();
+	font_t &getFont2();
 private:
 	texture_t m_texture;
 	sound_t m_buffer;

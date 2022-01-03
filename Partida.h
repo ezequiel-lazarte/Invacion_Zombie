@@ -11,6 +11,7 @@
 #include <vector>
 #include "Puntajes.h"
 #include "DatosDePartida.h"
+#include <SFML/Window/Event.hpp>
 using namespace std;
 
 class Juego;

@@ -24,7 +24,6 @@ private:
 	Sound m_musica_gameOver;
 	Sound m_voz_gameover;
 	sf::Text m_guardarPuntaje, m_text;
-	sf::RenderWindow *m_window;
 	sf::IntRect m_rect;
 	sf::Vector2i m_size_rect, m_pos_mouse;
 	sf::Texture m_button;

@@ -51,7 +51,6 @@ void GameOver::Actualizar (Juego & juego) {
 }
 
 void GameOver::Dibujar (sf::RenderWindow & window) {
-	m_window = &window;
 	window.clear();
 	window.draw(m_text);
 	window.draw(m_gameOver);

@@ -1,135 +1,166 @@
 #include "Menu.h"
-#include <SFML/Window/Keyboard.hpp>
-#include "Juego.h"
+#include "Resources.h"
 #include "Partida.h"
-#include <SFML/Audio/Sound.hpp>
 #include "Puntajes.h"
 #include "Creditos.h"
-#include "PantallaCarga.h"
 
-Menu::Menu(int &volumen, Resources *recursos){
-	m_recursos = recursos;
+Menu::Menu(int volumen, Resources *resources) {
+	m_resources = resources;
 	m_volumen = volumen;
-	m_pos_mouse = {0,0};
-	m_musica_inicio.setBuffer(m_recursos->getBufferMenu());
-	m_musica_inicio.play();
-	m_musica_inicio.setLoop(true);
+	m_background.setTexture(m_resources->getMenu());
+	m_background.setScale(1.2,1.24);
 	
+	m_music.setBuffer(m_resources->getBufferMenu());
+	m_music.setVolume(m_volumen);
+	m_music.play();
+	m_music.setLoop(true);
+	
+	m_cambio_opcion.setBuffer(m_resources->getBufferCambioOpcion());
+	m_cambio_opcion.setVolume(m_volumen+50);
+	
+	/// Text
 	m_color = {0,180,0};
-	m_t1.setFont(m_recursos->getFont());
-	m_t1.setFillColor(m_color);
-	m_t1.setString("Invasion Zombie");
-	m_t1.setPosition(200,-20);
-	m_t1.setCharacterSize(120);
+	m_titulo.setFont(m_resources->getFont2());
+	m_titulo.setFillColor(m_color);
+	m_titulo.setString("Invasion Zombie");
+	m_titulo.setPosition(200,20);
+	m_titulo.setCharacterSize(80);
 	
-	m_fondo.setTexture(m_recursos->getMenu());
-	m_fondo.setPosition(0,0);
-	m_fondo.setScale(1.2,1.24);
-	m_musica_inicio.setVolume(30);
+	m_play.setFont(m_resources->getFont2());
+	m_play.setString("Jugar");
+	m_play.setPosition(480, 190);
+	m_play.setCharacterSize(40);
+	m_play.setFillColor(sf::Color(33,33,33));
 	
-	/// Botones del menu
-	m_rect = {0, 0, 600, 204}; /// {posX, posY, sizeX, sizeY}
-	m_buttonPlay.setTexture(m_recursos->getButtonsMenu());
-	m_buttonPlay.setTextureRect(m_rect);
-	m_buttonPlay.setPosition(480, 180);
-	m_buttonPlay.setScale(0.2,0.2);
+	m_options.setFont(m_resources->getFont2());
+	m_options.setString("Puntajes");
+	m_options.setPosition(440, 250);
+	m_options.setCharacterSize(40);
 	
-	m_rect = {0, 200, 600, 195};
-	m_buttonScores.setTexture(m_recursos->getButtonsMenu());
-	m_buttonScores.setTextureRect(m_rect);
-	m_buttonScores.setPosition(480, 240);
-	m_buttonScores.setScale(0.2,0.2);
-	
-	m_rect = {0, 400, 600, 190};
-	m_buttonCredits.setTexture(m_recursos->getButtonsMenu());
-	m_buttonCredits.setTextureRect(m_rect);
-	m_buttonCredits.setPosition(480, 300);
-	m_buttonCredits.setScale(0.2,0.2);
-	
-	m_rect = {0, 595, 600, 202};
-	m_buttonExit.setTexture(m_recursos->getButtonsMenu());
-	m_buttonExit.setTextureRect(m_rect);
-	m_buttonExit.setPosition(480, 360);
-	m_buttonExit.setScale(0.2,0.2);
-	
-	
-	/// Textos de los botones
-	
-	m_color = {0,0,0};
-	m_play.setFont(m_recursos->getFont());
-	m_play.setString("Play");
-	m_play.setFillColor(m_color);
-	m_play.setPosition(520, 182);
-	m_play.setCharacterSize(25);
-	
-	m_color = {0,0,0};
-	m_scores.setFont(m_recursos->getFont());
-	m_scores.setString("Puntajes");
-	m_scores.setFillColor(m_color);
-	m_scores.setPosition(505, 240);
-	m_scores.setCharacterSize(25);
-	
-	m_color = {0,0,0};
-	m_credits.setFont(m_recursos->getFont());
+	m_credits.setFont(m_resources->getFont2());
 	m_credits.setString("Creditos");
-	m_credits.setFillColor(m_color);
-	m_credits.setPosition(505, 300);
-	m_credits.setCharacterSize(25);
+	m_credits.setPosition(440, 310);
+	m_credits.setCharacterSize(40);
 	
-	m_color = {0,0,0};
-	m_exit.setFont(m_recursos->getFont());
+	m_exit.setFont(m_resources->getFont2());
 	m_exit.setString("Salir");
-	m_exit.setFillColor(m_color);
-	m_exit.setPosition(520, 360);
-	m_exit.setCharacterSize(25);
-}
-void Menu::Actualizar (Juego &juego) {
-	m_pos_mouse = sf::Mouse::getPosition(juego.getWindow());
+	m_exit.setPosition(480, 370);
+	m_exit.setCharacterSize(40);
 	
-	if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-		if(485 < m_pos_mouse.x && m_pos_mouse.x < 592) {
-			if(182 < m_pos_mouse.y && m_pos_mouse.y < 218) {
-				m_musica_inicio.stop();
-				juego.CambiarEscena(new PantallaCarga(m_volumen, m_recursos));
-			}
-		}
-		if(485 < m_pos_mouse.x && m_pos_mouse.x < 592) {
-			if(241 < m_pos_mouse.y && m_pos_mouse.y < 277) {
-				m_musica_inicio.stop();
-				juego.CambiarEscena(new Puntajes(m_volumen, m_recursos));
-			}
-		}
-		if(485 < m_pos_mouse.x && m_pos_mouse.x < 592) {
-			if(300 < m_pos_mouse.y && m_pos_mouse.y < 336) {
-				m_musica_inicio.stop();
-				juego.CambiarEscena(new Creditos(m_volumen, m_recursos));
-			}
-		}
-		if(485 < m_pos_mouse.x && m_pos_mouse.x < 592) {
-			if(360 < m_pos_mouse.y && m_pos_mouse.y < 396) {
-				m_musica_inicio.stop();
-				juego.getWindow().close();
-			}
-		}
-	}
+	m_ultimo_texto = 1;
+	m_retraso_cambiar_opcion = 0.1;
+	m_tiempo = 0+m_retraso_cambiar_opcion;
+	m_reloj.restart();
 }
 
-void Menu::Dibujar (RenderWindow & window) {
-	window.clear({0,0,0});
-	window.draw(m_fondo);
-	window.draw(m_t1);
-	window.draw(m_buttonPlay);
-	window.draw(m_buttonScores);
-	window.draw(m_buttonCredits);
-	window.draw(m_buttonExit);
+void Menu::Actualizar (Juego &juego) {
+	if(m_reloj.getElapsedTime().asSeconds() >= m_tiempo) {
+		AnimacionTexto();
+		m_tiempo = m_reloj.getElapsedTime().asSeconds()+m_retraso_cambiar_opcion;
+	}
+	ControlOpciones(juego);
+}
+
+void Menu::Dibujar (sf::RenderWindow &window) {
+	window.clear(sf::Color(33,33,33));
+	window.draw(m_background);
+	window.draw(m_titulo);
 	window.draw(m_play);
-	window.draw(m_scores);
+	window.draw(m_options);
 	window.draw(m_credits);
 	window.draw(m_exit);
 	window.display();
 }
 
-void Menu::CambiarVolumenMusica (float vol) {
-	m_volumen = vol;
+void Menu::AnimacionTexto ( ) {
+	m_r1 = m_g1 = m_b1 = 33;
+	m_r2 = m_g2 = m_b2 = 255;
+	AnimacionTextoUp();
+	AnimacionTextoDown();
 }
 
+void Menu::AnimacionTextoUp ( ) {
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && m_ultimo_texto == 1) {
+		m_cambio_opcion.play();
+		m_play.setFillColor(sf::Color(m_r2,m_g2,m_b2));
+		m_exit.setFillColor(sf::Color(m_r1,m_g1,m_b1));
+		m_ultimo_texto = 4;
+		return;
+	}
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && m_ultimo_texto == 2) {
+		m_cambio_opcion.play();
+		m_options.setFillColor(sf::Color(m_r2,m_g2,m_b2));
+		m_play.setFillColor(sf::Color(m_r1,m_g1,m_b1));
+		m_ultimo_texto = 1;
+		return;
+	}
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && m_ultimo_texto == 3) {
+		m_cambio_opcion.play();
+		m_credits.setFillColor(sf::Color(m_r2,m_g2,m_b2));
+		m_options.setFillColor(sf::Color(m_r1,m_g1,m_b1));
+		m_ultimo_texto = 2;
+		return;
+	}
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && m_ultimo_texto == 4) {
+		m_cambio_opcion.play();
+		m_exit.setFillColor(sf::Color(m_r2,m_g2,m_b2));
+		m_credits.setFillColor(sf::Color(m_r1,m_g1,m_b1));
+		m_ultimo_texto = 3;
+		return;
+	}
+}
+
+void Menu::AnimacionTextoDown ( ) {
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && m_ultimo_texto == 1) {
+		m_cambio_opcion.play();
+		m_play.setFillColor(sf::Color(m_r2,m_g2,m_b2));
+		m_options.setFillColor(sf::Color(m_r1,m_g1,m_b1));
+		m_ultimo_texto = 2;
+		return;
+	}
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && m_ultimo_texto == 2) {
+		m_cambio_opcion.play();
+		m_options.setFillColor(sf::Color(m_r2,m_g2,m_b2));
+		m_credits.setFillColor(sf::Color(m_r1,m_g1,m_b1));
+		m_ultimo_texto = 3;
+		return;
+	}
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && m_ultimo_texto == 3) {
+		m_cambio_opcion.play();
+		m_credits.setFillColor(sf::Color(m_r2,m_g2,m_b2));
+		m_exit.setFillColor(sf::Color(m_r1,m_g1,m_b1));
+		m_ultimo_texto = 4;
+		return;
+	}
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && m_ultimo_texto == 4) {
+		m_cambio_opcion.play();
+		m_exit.setFillColor(sf::Color(m_r2,m_g2,m_b2));
+		m_play.setFillColor(sf::Color(m_r1,m_g1,m_b1));
+		m_ultimo_texto = 1;
+		return;
+	}
+}
+
+void Menu::ControlOpciones (Juego &juego) {
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && m_ultimo_texto == 1) {
+		Finalizar();
+		juego.CambiarEscena(new Partida(m_volumen, m_resources));
+	}
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && m_ultimo_texto == 2) {
+		Finalizar();
+		juego.CambiarEscena(new Puntajes(m_volumen, m_resources));
+	}
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && m_ultimo_texto == 3) {
+		Finalizar();
+		juego.CambiarEscena(new Creditos(m_volumen, m_resources));
+	}
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && m_ultimo_texto == 4) {
+		Finalizar();
+		juego.Finalizar();
+	}
+}
+
+void Menu::Finalizar ( ) {
+	m_music.stop();
+	m_cambio_opcion.stop();
+}

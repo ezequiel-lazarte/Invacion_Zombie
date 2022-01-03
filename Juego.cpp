@@ -29,9 +29,8 @@ void Juego::Jugar ( ) {
 void Juego::ProcesarEventos ( ) {
 	Event evento;
 	while(m_window.pollEvent(evento)) {
-		if(evento.type == Event::Closed){
-			m_window.close();
-		}else{ m_escena-> Procesar_evento(evento);}
+		if(evento.type == Event::Closed) m_window.close();
+		else m_escena-> Procesar_evento(evento);
 	}
 }
 void Juego::Actualizar ( ) {
@@ -39,6 +38,10 @@ void Juego::Actualizar ( ) {
 }
 void Juego::Dibujar () {
 	m_escena->Dibujar(m_window);
+}
+
+void Juego::Finalizar ( ) {
+	m_window.close();
 }
 
 RenderWindow & Juego::getWindow ( ) {
@@ -53,3 +56,4 @@ Juego::~Juego ( ) {
 	delete m_recursos;
 	delete m_escena;
 }
+

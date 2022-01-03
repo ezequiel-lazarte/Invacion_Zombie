@@ -208,10 +208,22 @@ sf::SoundBuffer & Resources::getBufferRecargaPistola() {
 	return getBuffer_or_insert(m_s, m_buffer, m_pos);
 }
 
+sf::SoundBuffer & Resources::getBufferCambioOpcion() {
+	m_buffer.loadFromFile("recursos/sounds/cambio_opcion.wav");
+	m_pos = 12;
+	return getBuffer_or_insert(m_s, m_buffer, m_pos);
+}
+
 /** ****************** ************ ***** FONTS ***** ************ ****************** **/
 
 sf::Font & Resources::getFont ( ) {
 	m_font.loadFromFile("recursos/fuentes/Cave-Story.ttf");
 	m_pos = 0;
+	return getFont_or_insert(m_f, m_font, m_pos);
+}
+
+sf::Font & Resources::getFont2 ( ) {
+	m_font.loadFromFile("recursos/fuentes/Games.ttf");
+	m_pos = 1;
 	return getFont_or_insert(m_f, m_font, m_pos);
 }

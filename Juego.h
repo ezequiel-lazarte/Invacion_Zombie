@@ -16,6 +16,7 @@ public:
 	void Actualizar();
 	void Dibujar();
 	void CambiarEscena(Escena *Proxima_Escena);
+	void Finalizar();
 	RenderWindow &getWindow();
 	~Juego();
 private:
