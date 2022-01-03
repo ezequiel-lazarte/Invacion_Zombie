@@ -18,7 +18,7 @@ private:
 	Resources *m_resources;
 	sf::Color m_color;
 	sf::Sprite m_background;
-	sf::Text m_titulo, m_play, m_options, m_credits, m_exit;
+	sf::Text m_titulo, m_play, m_score, m_credits, m_exit;
 	sf::Clock m_reloj;
 	sf::Sound m_music, m_cambio_opcion;
 	int m_volumen, m_ultimo_texto;

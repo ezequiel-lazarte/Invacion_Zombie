@@ -30,22 +30,25 @@ Menu::Menu(int volumen, Resources *resources) {
 	m_play.setString("Jugar");
 	m_play.setPosition(480, 190);
 	m_play.setCharacterSize(40);
-	m_play.setFillColor(sf::Color(33,33,33));
+	m_play.setFillColor(sf::Color(255,255,255));
 	
-	m_options.setFont(m_resources->getFont2());
-	m_options.setString("Puntajes");
-	m_options.setPosition(440, 250);
-	m_options.setCharacterSize(40);
+	m_score.setFont(m_resources->getFont2());
+	m_score.setString("Puntajes");
+	m_score.setPosition(440, 250);
+	m_score.setCharacterSize(40);
+	m_score.setFillColor(sf::Color(33,33,33));
 	
 	m_credits.setFont(m_resources->getFont2());
 	m_credits.setString("Creditos");
 	m_credits.setPosition(440, 310);
 	m_credits.setCharacterSize(40);
+	m_credits.setFillColor(sf::Color(33,33,33));
 	
 	m_exit.setFont(m_resources->getFont2());
 	m_exit.setString("Salir");
 	m_exit.setPosition(480, 370);
 	m_exit.setCharacterSize(40);
+	m_exit.setFillColor(sf::Color(33,33,33));
 	
 	m_ultimo_texto = 1;
 	m_retraso_cambiar_opcion = 0.1;
@@ -66,15 +69,15 @@ void Menu::Dibujar (sf::RenderWindow &window) {
 	window.draw(m_background);
 	window.draw(m_titulo);
 	window.draw(m_play);
-	window.draw(m_options);
+	window.draw(m_score);
 	window.draw(m_credits);
 	window.draw(m_exit);
 	window.display();
 }
 
 void Menu::AnimacionTexto ( ) {
-	m_r1 = m_g1 = m_b1 = 33;
-	m_r2 = m_g2 = m_b2 = 255;
+	m_r1 = m_g1 = m_b1 = 255;
+	m_r2 = m_g2 = m_b2 = 33;
 	AnimacionTextoUp();
 	AnimacionTextoDown();
 }
@@ -89,7 +92,7 @@ void Menu::AnimacionTextoUp ( ) {
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && m_ultimo_texto == 2) {
 		m_cambio_opcion.play();
-		m_options.setFillColor(sf::Color(m_r2,m_g2,m_b2));
+		m_score.setFillColor(sf::Color(m_r2,m_g2,m_b2));
 		m_play.setFillColor(sf::Color(m_r1,m_g1,m_b1));
 		m_ultimo_texto = 1;
 		return;
@@ -97,7 +100,7 @@ void Menu::AnimacionTextoUp ( ) {
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && m_ultimo_texto == 3) {
 		m_cambio_opcion.play();
 		m_credits.setFillColor(sf::Color(m_r2,m_g2,m_b2));
-		m_options.setFillColor(sf::Color(m_r1,m_g1,m_b1));
+		m_score.setFillColor(sf::Color(m_r1,m_g1,m_b1));
 		m_ultimo_texto = 2;
 		return;
 	}
@@ -114,13 +117,13 @@ void Menu::AnimacionTextoDown ( ) {
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && m_ultimo_texto == 1) {
 		m_cambio_opcion.play();
 		m_play.setFillColor(sf::Color(m_r2,m_g2,m_b2));
-		m_options.setFillColor(sf::Color(m_r1,m_g1,m_b1));
+		m_score.setFillColor(sf::Color(m_r1,m_g1,m_b1));
 		m_ultimo_texto = 2;
 		return;
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && m_ultimo_texto == 2) {
 		m_cambio_opcion.play();
-		m_options.setFillColor(sf::Color(m_r2,m_g2,m_b2));
+		m_score.setFillColor(sf::Color(m_r2,m_g2,m_b2));
 		m_credits.setFillColor(sf::Color(m_r1,m_g1,m_b1));
 		m_ultimo_texto = 3;
 		return;
