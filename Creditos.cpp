@@ -4,7 +4,7 @@
 Creditos::Creditos(int &volumen, Resources *recursos) {
 	m_volumen = volumen;
 	m_recursos = recursos;
-	m_musica.setBuffer(m_recursos->getBufferCreditos());
+	m_musica.openFromFile(m_recursos->getMusicCreditos());
 	m_musica.play();
 	m_color = {180,180,0};
 	m_move = {0,1};

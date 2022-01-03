@@ -11,16 +11,16 @@ using namespace std;
 
 
 GuardarPuntaje:: GuardarPuntaje(int &volumen, Resources *recursos, sf::Event evento, DatosDePartida *data) {
-	m_puntajes = new Puntajes(volumen, recursos);
+	m_puntajes = new Puntajes(volumen, recursos, false);
 	m_puntajes->setData(data);
 	m_recursos = recursos;
 	m_volumen = volumen;
 	m_fondo.setTexture(m_recursos->getGuardarPuntajes());
 	m_fondo.setScale(1.1,1.3);
 	
-	m_musica.setBuffer(m_recursos->getBufferPuntajes());
-	m_musica.play();
-	m_musica.setLoop(true);
+//	m_musica.setBuffer(m_recursos->getBufferPuntajes());
+//	m_musica.play();
+//	m_musica.setLoop(true);
 	
 	m_titulo.setFont(m_recursos->getFont());
 	
@@ -35,7 +35,7 @@ GuardarPuntaje:: GuardarPuntaje(int &volumen, Resources *recursos, sf::Event eve
 
 void GuardarPuntaje::Actualizar (Juego & juego) {
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
-		m_musica.stop();
+//		m_musica.stop();
 		juego.CambiarEscena(new Menu(m_volumen, m_recursos));
 	}
 }

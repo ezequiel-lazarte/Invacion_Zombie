@@ -2,8 +2,8 @@
 #define CREDITOS_H
 #include "Escena.h"
 #include <SFML/Audio/Sound.hpp>
-#include <SFML/Audio/SoundBuffer.hpp>
 #include "Resources.h"
+#include <SFML/Audio/Music.hpp>
 
 using namespace sf;
 
@@ -14,7 +14,7 @@ public:
 	void Dibujar (sf::RenderWindow & window);
 	void CambiarVolumenMusica(float vol);
 private:
-	Sound m_musica;
+	Music m_musica;
 	Vector2f m_move;
 	Color m_color;
 	Text m_t1, m_t2;

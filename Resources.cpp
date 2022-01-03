@@ -135,46 +135,15 @@ texture_t & Resources::getPlayerDisparaCamina ( ) {
 
 /** ****************** ************ ***** SOUNDS EFECTS ***** ************ ****************** **/
 
-sf::SoundBuffer & Resources::getBufferCreditos ( ) {
-	m_buffer.loadFromFile("recursos/musica/creditos.wav");
-	m_pos = 0;
-	return getBuffer_or_insert(m_s, m_buffer, m_pos);
-}
-
-
 sf::SoundBuffer & Resources::getBufferEnemigo_1 ( ) {
 	m_buffer.loadFromFile("recursos/musica/zombie1.wav");
 	m_pos = 1;
 	return getBuffer_or_insert(m_s, m_buffer, m_pos);
 }
 
-sf::SoundBuffer & Resources::getBufferGameOver ( ) {
-	m_buffer.loadFromFile("recursos/gameOver/gameover.wav");
-	m_pos = 2;
-	return getBuffer_or_insert(m_s, m_buffer, m_pos);
-}
-
 sf::SoundBuffer & Resources::getBufferVozGameOver ( ) {
 	m_buffer.loadFromFile("recursos/gameOver/voz_gameover.wav");
 	m_pos = 3;
-	return getBuffer_or_insert(m_s, m_buffer, m_pos);
-}
-
-sf::SoundBuffer & Resources::getBufferMenu ( ) {
-	m_buffer.loadFromFile("recursos/musica/Bewitched.wav");
-	m_pos = 4;
-	return getBuffer_or_insert(m_s, m_buffer, m_pos);
-}
-
-sf::SoundBuffer & Resources::getBufferPartida ( ) {
-	m_buffer.loadFromFile("recursos/musica/Lost.wav");
-	m_pos = 5;
-	return getBuffer_or_insert(m_s, m_buffer, m_pos);
-}
-
-sf::SoundBuffer & Resources::getBufferPuntajes ( ) {
-	m_buffer.loadFromFile("recursos/musica/puntajes.wav");
-	m_pos = 6;
 	return getBuffer_or_insert(m_s, m_buffer, m_pos);
 }
 
@@ -212,6 +181,34 @@ sf::SoundBuffer & Resources::getBufferCambioOpcion() {
 	m_buffer.loadFromFile("recursos/sounds/cambio_opcion.wav");
 	m_pos = 12;
 	return getBuffer_or_insert(m_s, m_buffer, m_pos);
+}
+
+
+/** ****************** ************ ***** MUSIC ***** ************ ****************** **/
+
+string Resources::getMusicCreditos ( ) {
+	string url = "recursos/musica/creditos.wav";
+	return url;
+}
+
+string Resources::getMusicGameOver ( ) {
+	string url = "recursos/musica/gameover.wav";
+	return url;
+}
+
+string Resources::getMusicMenu ( ) {
+	string url = "recursos/musica/Bewitched.wav";
+	return url;
+}
+
+string Resources::getMusicPartida ( ) {
+	string url = "recursos/musica/Lost.wav";
+	return url;
+}
+
+string Resources::getMusicPuntajes ( ) {
+	string url = "recursos/musica/puntajes.wav";
+	return url;
 }
 
 /** ****************** ************ ***** FONTS ***** ************ ****************** **/

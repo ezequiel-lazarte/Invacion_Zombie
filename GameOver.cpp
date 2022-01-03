@@ -9,7 +9,7 @@ GameOver::GameOver(int &volumen, Resources *recursos, DatosDePartida *data) {
 	m_gameOver.setScale(1.1,1.1);
 	m_gameOver.setPosition(-25,0); 
 	
-	m_musica_gameOver.setBuffer(m_recursos->getBufferGameOver());
+	m_musica_gameOver.openFromFile(m_recursos->getMusicGameOver());
 	m_musica_gameOver.play();
 	m_musica_gameOver.setLoop(true);
 	/// sonidos
@@ -41,10 +41,10 @@ void GameOver::Actualizar (Juego & juego) {
 	if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 		if(430 < m_pos_mouse.x && m_pos_mouse.x < 638) { // 463
 			if(463 < m_pos_mouse.y && m_pos_mouse.y < 496) {
-				m_musica_gameOver.stop();
-				m_voz_gameover.stop();
+				Finalizar();
 				sf::Event evento;
 				juego.CambiarEscena(new GuardarPuntaje(m_volumen, m_recursos, evento, NULL));
+				
 			}
 		}
 	}

@@ -10,7 +10,7 @@ Menu::Menu(int volumen, Resources *resources) {
 	m_background.setTexture(m_resources->getMenu());
 	m_background.setScale(1.2,1.24);
 	
-	m_music.setBuffer(m_resources->getBufferMenu());
+	m_music.openFromFile(m_resources->getMusicMenu());
 	m_music.setVolume(m_volumen);
 	m_music.play();
 	m_music.setLoop(true);
@@ -151,7 +151,7 @@ void Menu::ControlOpciones (Juego &juego) {
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && m_ultimo_texto == 2) {
 		Finalizar();
-		juego.CambiarEscena(new Puntajes(m_volumen, m_resources));
+		juego.CambiarEscena(new Puntajes(m_volumen, m_resources, true));
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && m_ultimo_texto == 3) {
 		Finalizar();

@@ -11,6 +11,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "Resources.h"
 #include "GameOver.h"
+#include <SFML/Audio/Music.hpp>
 
 class GameOver : public Escena {
 public:
@@ -21,7 +22,7 @@ public:
 	void CambiarVolumenMusica(float vol);
 private:
 	sf::Sprite m_gameOver;
-	Sound m_musica_gameOver;
+	Music m_musica_gameOver;
 	Sound m_voz_gameover;
 	sf::Text m_guardarPuntaje, m_text;
 	sf::IntRect m_rect;

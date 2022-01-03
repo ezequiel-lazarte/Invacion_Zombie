@@ -20,7 +20,6 @@ public:
 	~GuardarPuntaje();
 private:
 	Sprite m_fondo;
-	Sound m_musica;
 	Text m_titulo;
 	Resources *m_recursos;
 	Puntajes *m_puntajes;

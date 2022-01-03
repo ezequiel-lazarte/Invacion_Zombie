@@ -3,6 +3,7 @@
 #include <SFML/Audio/Sound.hpp>
 #include "Escena.h"
 #include "Resources.h"
+#include <SFML/Audio/Music.hpp>
 
 class Menu : public Escena {
 public:
@@ -20,7 +21,8 @@ private:
 	sf::Sprite m_background;
 	sf::Text m_titulo, m_play, m_score, m_credits, m_exit;
 	sf::Clock m_reloj;
-	sf::Sound m_music, m_cambio_opcion;
+	sf::Music m_music;
+	sf::Sound m_cambio_opcion;
 	int m_volumen, m_ultimo_texto;
 	float m_tiempo, m_retraso_cambiar_opcion;
 	unsigned int m_r1, m_r2, m_g1, m_g2, m_b1, m_b2;

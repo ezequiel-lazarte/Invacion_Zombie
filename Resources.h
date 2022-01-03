@@ -39,19 +39,20 @@ public:
 	texture_t &getPlayerDisparaQuieto();
 	texture_t &getPlayerDisparaCamina();
 	///sounds
-	sound_t &getBufferCreditos();
 	sound_t &getBufferEnemigo_1();
-	sound_t &getBufferGameOver();
 	sound_t &getBufferVozGameOver();
-	sound_t &getBufferMenu();
-	sound_t &getBufferPartida();
-	sound_t &getBufferPuntajes();
 	sound_t &getBufferGolpe();
 	sound_t &getBufferDisparo();
 	sound_t &getBufferPaso();
 	sound_t &getBufferImpacto();
 	sound_t &getBufferRecargaPistola();
 	sound_t &getBufferCambioOpcion();
+	/// Music
+	string getMusicCreditos();
+	string getMusicGameOver();
+	string getMusicMenu();
+	string getMusicPartida();
+	string getMusicPuntajes();
 	///fonts
 	font_t &getFont();
 	font_t &getFont2();

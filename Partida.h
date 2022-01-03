@@ -35,7 +35,7 @@ private:
 	Fondo m_fondo_1;
 	Player m_player;
 	Enemigo_1 enemigo;
-	Sound m_musica_fondo;
+	Music m_musica_fondo;
 	Resources *m_recursos;
 	DatosDePartida *m_data;
 	Sprite m_corazon;

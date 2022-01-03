@@ -30,7 +30,7 @@ Partida::Partida(int &volumen, Resources *recursos) :
 		m_enemigos[i] = enemigo;
 		m_enemigos[i].SetPosEnemigo(rand()%(m_posHasta - m_posDesde) + m_posDesde);
 	}
-	m_musica_fondo.setBuffer(m_recursos->getBufferPartida());
+	m_musica_fondo.openFromFile(m_recursos->getMusicPartida());
 	m_musica_fondo.play();
 	m_musica_fondo.setLoop(true);
 	m_crono = m_reloj.restart();

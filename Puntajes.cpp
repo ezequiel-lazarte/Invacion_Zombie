@@ -6,15 +6,17 @@
 #include <cstring>
 using namespace std;
 vector<Puntaje> Puntajes::m_puntajes ={};
-Puntajes::Puntajes(int &volumen, Resources *recursos)  {
+Puntajes::Puntajes(int &volumen, Resources *recursos, bool musica_on)  {
+	m_musica_on = musica_on;
 	m_volumen = volumen;
 	m_recursos = recursos;
 	m_fondo.setTexture(m_recursos->getPuntajes());
 	m_fondo.setScale(1.1,1.3);
-	
-	m_musica.setBuffer(m_recursos->getBufferPuntajes());
-	m_musica.play();
-	m_musica.setLoop(true);
+	if(m_musica_on) {
+		m_musica.openFromFile(m_recursos->getMusicPuntajes());
+		m_musica.play();
+		m_musica.setLoop(true);
+	}
 	
 	m_titulo.setFont(m_recursos->getFont());
 	
@@ -55,7 +57,7 @@ Puntajes::Puntajes(int &volumen, Resources *recursos)  {
 
 void Puntajes::Actualizar (Juego & juego) {
 	if(Keyboard::isKeyPressed(Keyboard::Escape)) {
-		m_musica.stop();
+		Finalizar();
 		juego.CambiarEscena(new Menu(m_volumen, m_recursos));
 	}
 }
@@ -121,5 +123,13 @@ void Puntajes::Dibujar (sf::RenderWindow & window) {
 
 void Puntajes::setData (DatosDePartida * data) {
 	m_data = data;
+}
+
+void Puntajes::Finalizar ( ) {
+	if(m_musica_on)	m_musica.stop();
+}
+
+Puntajes::~Puntajes ( ) {
+	Finalizar();
 }
 
