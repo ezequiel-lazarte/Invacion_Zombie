@@ -26,7 +26,7 @@ PantallaCarga::PantallaCarga(int &volumen, Resources *recursos) {
 }
 
 void PantallaCarga::Actualizar (Juego & juego) {
-	if(m_crono.asSeconds() >= 0  ) juego.CambiarEscena(new Partida(m_volumen, m_recursos));
+	if(m_crono.asSeconds() >= 5  ) juego.CambiarEscena(new Partida(m_volumen, m_recursos));
 	m_sprite.setTexture(m_texturas[m_cambiar_textura]);
 	if(m_cambiar_textura>=7) m_cambiar_textura=0;
 	m_cambiar_textura +=1;

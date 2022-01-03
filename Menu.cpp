@@ -1,8 +1,8 @@
 #include "Menu.h"
 #include "Resources.h"
-#include "Partida.h"
 #include "Puntajes.h"
 #include "Creditos.h"
+#include "PantallaCarga.h"
 
 Menu::Menu(int volumen, Resources *resources) {
 	m_resources = resources;
@@ -147,7 +147,7 @@ void Menu::AnimacionTextoDown ( ) {
 void Menu::ControlOpciones (Juego &juego) {
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && m_ultimo_texto == 1) {
 		Finalizar();
-		juego.CambiarEscena(new Partida(m_volumen, m_resources));
+		juego.CambiarEscena(new PantallaCarga(m_volumen, m_resources));
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && m_ultimo_texto == 2) {
 		Finalizar();
