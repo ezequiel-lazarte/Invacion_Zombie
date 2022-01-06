@@ -129,6 +129,7 @@ void Partida::ActualizarPuntaje ( ) {
 	}
 	if(m_player.getVida()<=0) {
 		m_data->setTiempo((int)m_puntaje_actual/10);
+		m_data->setKills(m_nro_kills);
 	}
 }
 

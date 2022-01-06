@@ -36,6 +36,7 @@ void InputText::ventana(sf::Event e, DatosDePartida *data) {
 					string string_ingresado = text_entrada.getValue();// obtener la palabra que se ingresó
 					cout<<string_ingresado;
 					data->setNombrePlayer(string_ingresado);
+					data->guardarPuntaje();
 //					Puntajes B;
 //					B.GuardarUnPuntajeNuevo(string_ingresado);
 					return;

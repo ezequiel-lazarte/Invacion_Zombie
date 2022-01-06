@@ -42,7 +42,6 @@ private:
 	Clock m_reloj;
 	Time m_crono;
 	Text m_vida_player, m_tiempo, m_t1, m_nro_kill;
-	string nameplayer; // nombre del jugador
 	float m_puntaje_actual, m_tiempoActual, m_tiempoParaSumarEnemigos; // me guardo el puntaje del jugador
 	int m_numeroEnemigos1, m_numeroEnemigos2, aux, m_posDesde, m_posHasta, m_volumen, m_nro_kills;
 };
