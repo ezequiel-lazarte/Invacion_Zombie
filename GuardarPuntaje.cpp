@@ -18,10 +18,6 @@ GuardarPuntaje:: GuardarPuntaje(int &volumen, Resources *recursos, sf::Event eve
 	m_fondo.setTexture(m_recursos->getGuardarPuntajes());
 	m_fondo.setScale(1.1,1.3);
 	
-//	m_musica.setBuffer(m_recursos->getBufferPuntajes());
-//	m_musica.play();
-//	m_musica.setLoop(true);
-	
 	m_titulo.setFont(m_recursos->getFont());
 	
 	m_titulo.setPosition(260,-30);

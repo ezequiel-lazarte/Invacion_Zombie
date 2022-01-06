@@ -175,9 +175,6 @@ void Partida::GestionEnemigos ( ) {
 			enemy.SetPosEnemigo(rand()%(m_posHasta - m_posDesde) + m_posDesde);
 			m_numeroEnemigos2++;
 		}
-		if(m_tiempoActual == 400) {
-			std::cout << "xs";
-		}
 		m_enemigos.push_back(enemy);
 		m_tiempoParaSumarEnemigos = m_tiempoActual+5;
 	}
@@ -185,9 +182,6 @@ void Partida::GestionEnemigos ( ) {
 		m_enemigos[i].setTipoArma(m_player.getArma());
 		m_enemigos[i].Actualizar();
 		m_enemigos[i].setPosPlayer(m_player.getPos());
-		
-//		if(m_enemigos[i].getPos().x >= 0 && m_enemigos[i].getPos().x <= 1080) 
-//			m_enemigos[i].playSonidoZombie();
 		
 		if(m_player.Colision(m_enemigos[i]) && m_player.getVida()>0 && Keyboard::isKeyPressed(Keyboard::Key::F) && m_player.getArma() == 1) {
 			m_player.golpe();

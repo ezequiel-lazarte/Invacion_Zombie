@@ -18,6 +18,7 @@ public:
 	void Dibujar (sf::RenderWindow & window) override;
 	void CambiarVolumenMusica(float vol);
 	void setData(DatosDePartida *data);
+	void actualizarData();
 	void Finalizar();
 	~Puntajes();
 private:

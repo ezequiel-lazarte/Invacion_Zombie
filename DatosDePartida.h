@@ -10,22 +10,24 @@ struct Data {
 	int tiempo, kills;
 };
 
-bool mayor_kills_o_tiempo(Data d1, Data d2);
+inline bool mayor_kills_o_tiempo(Data d1, Data d2);
 
 class DatosDePartida {
 public:
 	DatosDePartida();
+	void abrirParaLectura();
+	void crearBinario();
 	void setNombrePlayer(const string &name);
 	void setTiempo(const int &tiempo);
 	void setKills(const int &kills);
 	void guardarPuntaje();
-	void leerData();
-	void ordenaPuntajes();
 	string getNombrePlayer(int pos);
 	int getTiempo(int pos);
 	int getKills(int pos);
 	int getSizeData();
 private:
+	void leerData();
+	void ordenaPuntajes();
 	ifstream m_archi_read;
 	ofstream m_archi_write;
 	vector<Data> m_dataGame;

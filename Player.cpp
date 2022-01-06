@@ -47,9 +47,9 @@ Player::Player(int &volumen, Resources *recursos) {
 	m_clock.restart();
 	m_tiempoAhora = m_tiempoDespues = m_tiempoRecarga = 0;
 	
-	m_si_disparo = false;
+	m_si_disparo = m_si_golpeo = false;
 	
-	m_move_quieto = m_move_camina = m_move_pegaQuieto = m_move_pegaCamina = m_move_disparaQuieto = m_move_disparaCamina = 0;
+	m_move_quieto = m_move_camina = m_move_pegaQuieto = m_move_pegaCamina = m_move_disparaQuieto = m_move_disparaCamina = m_tiempoGolpear = 0;
 }
 
 void Player::setPlayer () {
@@ -214,6 +214,11 @@ void Player::controlMovimientos ( ) {
 	if(player_pos.x > limite_x) player_pos.x = limite_x;
 	if(player_pos.y > m_pos_inicial.y) player_pos.y = m_pos_inicial.y;
 	m_sprite.setPosition(player_pos);
+}
+
+void Player::controlGolpear ( ) {
+	/// limitar al jugador a golpear por un cierto tiempo, luego inabilitarlo por unos segundos hasta que recupere las fuerzas
+	
 }
 
 void Player::animaciones ( ) {

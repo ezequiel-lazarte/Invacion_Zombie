@@ -30,6 +30,7 @@ private:
 	sf::Texture m_button;
 	sf::Sprite m_buttonSave;
 	Resources *m_recursos;
+	DatosDePartida *m_data;
 	int m_volumen;
 };
 

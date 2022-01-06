@@ -16,6 +16,7 @@ Puntajes::Puntajes(int &volumen, Resources *recursos, bool musica_on)  {
 		m_musica.openFromFile(m_recursos->getMusicPuntajes());
 		m_musica.play();
 		m_musica.setLoop(true);
+		m_data = new DatosDePartida;
 	}
 	
 	m_titulo.setFont(m_recursos->getFont());
@@ -24,20 +25,6 @@ Puntajes::Puntajes(int &volumen, Resources *recursos, bool musica_on)  {
 	m_titulo.setFillColor(sf::Color {180,0,0});
 	m_titulo.setString("Mejores Puntajes");
 	m_titulo.setCharacterSize(90);
-	
-	/// Puntajes
-	string aux;
-	Text t1;
-	for(int i=0;i<5;i++) {
-		aux = "Top " + to_string(i+1) + ": " + m_data->getNombrePlayer(i) + 
-			" \nKills: " + to_string(m_data->getKills(i)) + " \nTiempo: " + to_string(m_data->getTiempo(i));
-		t1.setFont(m_recursos->getFont());
-		t1.setCharacterSize(30);
-		t1.setPosition(30,85*(i+1));
-		t1.setString(aux);
-		t1.setFillColor(sf::Color {180,0,0});
-		m_posiciones.push_back(t1);
-	}
 }
 
 void Puntajes::Actualizar (Juego & juego) {
@@ -63,6 +50,22 @@ void Puntajes::Dibujar (sf::RenderWindow & window) {
 
 void Puntajes::setData (DatosDePartida * data) {
 	m_data = data;
+	actualizarData();
+}
+
+void Puntajes::actualizarData ( ) {
+	string aux;
+	Text t1;
+	for(int i=0;i<5;i++) {
+		aux = "Top " + to_string(i+1) + ": " + m_data->getNombrePlayer(i) + 
+			" \nKills: " + to_string(m_data->getKills(i)) + " \nTiempo: " + to_string(m_data->getTiempo(i));
+		t1.setFont(m_recursos->getFont());
+		t1.setCharacterSize(30);
+		t1.setPosition(30,85*(i+1));
+		t1.setString(aux);
+		t1.setFillColor(sf::Color {180,0,0});
+		m_posiciones.push_back(t1);
+	}
 }
 
 void Puntajes::Finalizar ( ) {
@@ -71,5 +74,5 @@ void Puntajes::Finalizar ( ) {
 
 Puntajes::~Puntajes ( ) {
 	Finalizar();
+	if(m_musica_on) delete m_data;
 }
-

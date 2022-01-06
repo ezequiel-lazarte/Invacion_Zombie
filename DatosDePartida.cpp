@@ -11,15 +11,35 @@ DatosDePartida::DatosDePartida() : m_dataGame(5, {"Vacio", 0, 0}) {
 	m_nro_puntajes = 5;
 	
 	Data data({"Player", 0, 0});
-	
+	abrirParaLectura();
+}
+
+void DatosDePartida::abrirParaLectura ( ) {
 	m_archi_read.open(m_nameBinary, ios::binary|ios::ate);
 	if(!m_archi_read.is_open()) {
 		cerr << "Error al abrir el archivo puntajes.dat" << endl;
+		crearBinario();
+		abrirParaLectura();
+		return;
 	} else {
 		cout << "Exito al abrir el binario" << endl;
 	}
 	leerData();
 	m_archi_read.close();
+}
+
+void DatosDePartida::crearBinario ( ) {
+	m_archi_write.open(m_nameBinary, ios::binary|ios::trunc);
+	m_archi_write.seekp(0);
+	char name[10] = "Vacio";
+	int aux = 0;
+	for(unsigned int i=0; i<5; i++) {
+		strcpy(name, m_dataGame[i].name.c_str());
+		m_archi_write.write(name, sizeof(name));
+		m_archi_write.write(reinterpret_cast<char*>(&aux),sizeof(aux));
+		m_archi_write.write(reinterpret_cast<char*>(&aux),sizeof(aux));
+	}
+	m_archi_write.close();
 }
 
 void DatosDePartida::setNombrePlayer (const string &name) {
@@ -67,7 +87,7 @@ void DatosDePartida::leerData ( ) {
 			aux.name = name;
 			m_archi_read.read(reinterpret_cast<char*>(&aux.tiempo), sizeof(aux.tiempo));
 			m_archi_read.read(reinterpret_cast<char*>(&aux.kills), sizeof(aux.kills));
-			m_dataGame.push_back(aux);
+			m_dataGame[i] = aux;
 		}
 	}
 }
@@ -88,11 +108,11 @@ int DatosDePartida::getKills (int pos) {
 	return m_dataGame[pos].kills;
 }
 
-bool mayor_kills_o_tiempo (Data d1, Data d2) {
+inline bool mayor_kills_o_tiempo (Data d1, Data d2) {
 	if(d1.kills >= d2.kills) {
 		if(d1.kills == d2.kills && d1.tiempo >= d2.tiempo) 
 			return true;
-		else 
+		else
 			return false;
 	} else
 	   return false;

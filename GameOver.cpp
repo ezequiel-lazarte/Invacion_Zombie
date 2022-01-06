@@ -5,6 +5,7 @@
 
 GameOver::GameOver(int &volumen, Resources *recursos, DatosDePartida *data) {
 	m_recursos = recursos;
+	m_data = data;
 	m_gameOver.setTexture(m_recursos->getGameOver());
 	m_gameOver.setScale(1.1,1.1);
 	m_gameOver.setPosition(-25,0); 
@@ -43,7 +44,7 @@ void GameOver::Actualizar (Juego & juego) {
 			if(463 < m_pos_mouse.y && m_pos_mouse.y < 496) {
 				Finalizar();
 				sf::Event evento;
-				juego.CambiarEscena(new GuardarPuntaje(m_volumen, m_recursos, evento, NULL));
+				juego.CambiarEscena(new GuardarPuntaje(m_volumen, m_recursos, evento, m_data));
 				
 			}
 		}

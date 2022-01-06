@@ -34,6 +34,9 @@ void Juego::ProcesarEventos ( ) {
 	}
 }
 void Juego::Actualizar ( ) {
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::F11)) {
+		
+	}
 	m_escena->Actualizar(*this);
 }
 void Juego::Dibujar () {
