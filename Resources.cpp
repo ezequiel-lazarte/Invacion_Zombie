@@ -1,7 +1,7 @@
 #include "Resources.h"
 #include "Funciones.h"
 
-Resources::Resources ( ) : m_pos(-1) {
+Resources::Resources ( ) : m_pos(-1), m_url("") {
 	
 }
 
@@ -187,28 +187,28 @@ sf::SoundBuffer & Resources::getBufferCambioOpcion() {
 /** ****************** ************ ***** MUSIC ***** ************ ****************** **/
 
 string Resources::getMusicCreditos ( ) {
-	string url = "recursos/musica/creditos.wav";
-	return url;
+	m_url = "recursos/musica/creditos.wav";
+	return m_url;
 }
 
 string Resources::getMusicGameOver ( ) {
-	string url = "recursos/musica/gameover.wav";
-	return url;
+	m_url = "recursos/musica/gameover.wav";
+	return m_url;
 }
 
 string Resources::getMusicMenu ( ) {
-	string url = "recursos/musica/Bewitched.wav";
-	return url;
+	m_url = "recursos/musica/Bewitched.wav";
+	return m_url;
 }
 
 string Resources::getMusicPartida ( ) {
-	string url = "recursos/musica/Lost.wav";
-	return url;
+	m_url = "recursos/musica/Lost.wav";
+	return m_url;
 }
 
 string Resources::getMusicPuntajes ( ) {
-	string url = "recursos/musica/puntajes.wav";
-	return url;
+	m_url = "recursos/musica/puntajes.wav";
+	return m_url;
 }
 
 /** ****************** ************ ***** FONTS ***** ************ ****************** **/

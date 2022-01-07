@@ -37,7 +37,6 @@ void DatosDePartida::crearBinario ( ) {
 		m_archi_write.write(reinterpret_cast<char*>(&aux),sizeof(aux));
 	}
 	m_archi_write.close();
-	cout << "Se creo el binario" << endl;
 }
 
 void DatosDePartida::setNombrePlayer (const string &name) {

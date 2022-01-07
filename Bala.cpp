@@ -30,11 +30,9 @@ void Bala::setPos (sf::Vector2f pos, char lado) {
 	if(lado == 'R') {
 		m_pos.x = m_pos.x+50;
 		m_sprite.setPosition(m_pos);
-		/**posicionar la bala**/
 	} else if(lado == 'L') {
 		m_pos.x = m_pos.x+30;
 		m_sprite.setPosition(m_pos);
-		/**posicionar la bala**/
 	}
 }
 

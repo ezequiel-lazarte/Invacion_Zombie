@@ -7,7 +7,7 @@ using namespace sf;
 
 Juego::Juego() : m_window(VideoMode(1080,520), "Invasión Zombie") {
 	m_fps = 60;
-	m_volumen = 40;
+	m_volumen = 10;
 	m_recursos = new Resources;
 	m_window.setFramerateLimit(m_fps);
 	m_window.setVerticalSyncEnabled(true);

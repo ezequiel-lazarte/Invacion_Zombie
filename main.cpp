@@ -8,4 +8,3 @@ int main(){
 	g.Jugar();
 	return 0;
 }
-

@@ -20,7 +20,6 @@ public:
 	void setPosPlayer(sf::Vector2f pos_player);
 	void setTexture(sf::Texture &t);
 	void setVida(int vida);
-	void setDanio(int danio);
 	void setTipoArma(int nroArma);
 	int getVida();
 	sf::Vector2f getPos();

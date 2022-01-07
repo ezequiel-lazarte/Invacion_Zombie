@@ -47,7 +47,7 @@ Player::Player(int &volumen, Resources *&recursos) {
 	m_clock.restart();
 	m_tiempoAhora = m_tiempoDespues = m_tiempoRecarga = 0;
 	
-	m_si_disparo = m_si_golpeo = false;
+	m_si_disparo = m_dar_golpe = false;
 	
 	m_move_quieto = m_move_camina = m_move_pegaQuieto = m_move_pegaCamina = m_move_disparaQuieto = m_move_disparaCamina = m_tiempoGolpear = 0;
 }
@@ -218,7 +218,10 @@ void Player::controlMovimientos ( ) {
 
 void Player::controlGolpear ( ) {
 	/// limitar al jugador a golpear por un cierto tiempo, luego inabilitarlo por unos segundos hasta que recupere las fuerzas
-	
+	if(m_clock.getElapsedTime().asSeconds() >= m_tiempoGolpear) {
+		m_dar_golpe = true;
+		m_tiempoGolpear = m_clock.getElapsedTime().asSeconds()+10;
+	}
 }
 
 void Player::animaciones ( ) {
@@ -234,12 +237,12 @@ void Player::animaciones ( ) {
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::F) && m_arma == 1 
 	   && !(sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))) {
-		animacionGolpeaQuieto(); /// sin arma
+		animacionGolpeaQuieto(); /// sin arma golpe
 		m_arma = 1;
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::F) && m_arma == 1 
 		&& (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))) {
-		animacionGolpeaCamina(); /// sin arma
+		animacionGolpeaCamina(); /// sin arma golpe
 		m_arma = 1;
 	}
 	if(!sf::Keyboard::isKeyPressed(sf::Keyboard::F) && m_arma == 2 

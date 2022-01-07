@@ -42,7 +42,7 @@ void Enemigo_1::Finalizar ( ) {
 
 void Enemigo_1::BajarVida ( ) {
 	if(m_vida>0 && m_tipo_arma == 1) m_vida -= m_danio;
-	else if(m_vida>0 && m_tipo_arma == 2) m_vida -=m_danio*.1;
+	else if(m_vida>0 && m_tipo_arma == 2) m_vida -=m_danio;
 }
 
 void Enemigo_1::CambiarVolumenMusica (float vol) {
@@ -79,12 +79,10 @@ void Enemigo_1::setVida (int vida) {
 	m_vida = vida;
 }
 
-void Enemigo_1::setDanio (int danio) {
-	m_danio = danio;
-}
-
 void Enemigo_1::setTipoArma (int nroArma) {
 	m_tipo_arma = nroArma;
+	if(m_tipo_arma == 1) m_danio = 1000;
+	if(m_tipo_arma == 2) m_danio = 20;
 }
 
 void Enemigo_1::playSonidoZombie ( ) {

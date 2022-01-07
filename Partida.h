@@ -17,7 +17,7 @@ using namespace std;
 class Juego;
 using namespace sf;
 
-class Partida : public Escena{
+class Partida : public Escena {
 public:
 	Partida(int &volumen, Resources *&recursos);
 	void Actualizar(Juego &juego) override;
@@ -44,6 +44,7 @@ private:
 	Text m_vida_player, m_tiempo, m_t1, m_nro_kill;
 	float m_puntaje_actual, m_tiempoActual, m_tiempoParaSumarEnemigos; // me guardo el puntaje del jugador
 	int m_numeroEnemigos1, m_numeroEnemigos2, aux, m_posDesde, m_posHasta, m_volumen, m_nro_kills;
+	int m_vida_enemigo1, m_vida_enemigo2;
 };
 
 #endif

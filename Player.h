@@ -63,7 +63,7 @@ private:
 	float m_gravedad, m_move_quieto, m_move_camina, m_move_pegaQuieto, m_move_pegaCamina, m_move_disparaQuieto, m_move_disparaCamina;
 	int m_arma;
 	char m_lado;
-	bool m_si_disparo, m_si_golpeo;
+	bool m_si_disparo, m_dar_golpe;
 };
 
 #endif

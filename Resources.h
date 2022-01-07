@@ -65,6 +65,7 @@ private:
 	map<int, sound_t> m_s;
 	map<int, font_t> m_f;
 	
+	string m_url;
 	int m_pos;
 };
 
