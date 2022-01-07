@@ -8,7 +8,7 @@ using namespace std;
 using namespace sf;
 
 
-void InputText::ventana(sf::Event e, DatosDePartida *data) {
+void InputText::ventana(sf::Event e, DatosDePartida *&data) {
 	// crea una ventana
 	sf::RenderWindow w(VideoMode(1080,520), " ");
 	// cargar una fuente para los textos
@@ -25,25 +25,20 @@ void InputText::ventana(sf::Event e, DatosDePartida *data) {
 	text_entrada.setMaxChars(10); // no mas de 10 caracteres
 	text_entrada.setSingleWord(true); // no permitir ingresar espacios, para que sea solo una palabra
 	// bucle principal
+	string string_ingresado = "";
 	while(w.isOpen()) {
-		
 		// procesar eventos
 		while(w.pollEvent(e)) {
+			if (e.type==sf::Event::KeyPressed && e.key.code==sf::Keyboard::Return) { // si apretó enter, se toma la palabra y se la agrega a la lista
+				string_ingresado = text_entrada.getValue();// obtener la palabra que se ingresó
+				cout << string_ingresado << endl;
+				data->setNombrePlayer(string_ingresado);
+				return;
+			} else{
+				text_entrada.processEvent(e); // para que el texto tome las teclas que pulsamos
+			}
 			if(e.type == Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Return)){
-				w.close();	
-			}  else { 
-				if (e.type==sf::Event::KeyPressed && e.key.code==sf::Keyboard::Return) { // si apretó enter, se toma la palabra y se la agrega a la lista
-					string string_ingresado = text_entrada.getValue();// obtener la palabra que se ingresó
-					cout<<string_ingresado;
-					data->setNombrePlayer(string_ingresado);
-					data->guardarPuntaje();
-//					Puntajes B;
-//					B.GuardarUnPuntajeNuevo(string_ingresado);
-					return;
-					
-				} else{
-					text_entrada.processEvent(e); // para que el texto tome las teclas que pulsamos
-				}
+				w.close();
 			}
 			// dibujar
 			w.clear(Color(255,255,255,255));
@@ -52,7 +47,5 @@ void InputText::ventana(sf::Event e, DatosDePartida *data) {
 			w.draw(text_entrada);
 			w.display();
 		}
-		
 	}
-	
 }

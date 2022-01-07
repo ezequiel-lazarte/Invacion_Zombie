@@ -5,6 +5,7 @@
 #include "PantallaCarga.h"
 
 Menu::Menu(int volumen, Resources *resources) {
+	m_data = new DatosDePartida;
 	m_resources = resources;
 	m_volumen = volumen;
 	m_background.setTexture(m_resources->getMenu());
@@ -151,7 +152,7 @@ void Menu::ControlOpciones (Juego &juego) {
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && m_ultimo_texto == 2) {
 		Finalizar();
-		juego.CambiarEscena(new Puntajes(m_volumen, m_resources, true));
+		juego.CambiarEscena(new Puntajes(m_volumen, m_resources, true, m_data));
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && m_ultimo_texto == 3) {
 		Finalizar();

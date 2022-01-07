@@ -9,12 +9,13 @@
 #include "Puntajes.h"
 #include <string>
 #include "Resources.h"
+#include "ImputBox.h"
 
 using namespace std;
 
 class GuardarPuntaje : public Escena{
 public:
-	GuardarPuntaje(int &volumen, Resources *recursos, sf::Event evento, DatosDePartida *data);
+	GuardarPuntaje(int &volumen, Resources *recursos, sf::Event evento, DatosDePartida *&data);
 	void Actualizar (Juego & juego) override;
 	void Dibujar (sf::RenderWindow & window) override;
 	~GuardarPuntaje();
@@ -23,6 +24,8 @@ private:
 	Text m_titulo;
 	Resources *m_recursos;
 	Puntajes *m_puntajes;
+	InputText m_ingresoTexto;
+	DatosDePartida *m_data;
 	int m_volumen;
 };
 

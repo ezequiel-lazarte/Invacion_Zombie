@@ -3,7 +3,7 @@
 #include "Creditos.h"
 #include "GuardarPuntaje.h"
 
-GameOver::GameOver(int &volumen, Resources *recursos, DatosDePartida *data) {
+GameOver::GameOver(int &volumen, Resources *recursos, DatosDePartida *&data) {
 	m_recursos = recursos;
 	m_data = data;
 	m_gameOver.setTexture(m_recursos->getGameOver());
@@ -45,7 +45,6 @@ void GameOver::Actualizar (Juego & juego) {
 				Finalizar();
 				sf::Event evento;
 				juego.CambiarEscena(new GuardarPuntaje(m_volumen, m_recursos, evento, m_data));
-				
 			}
 		}
 	}

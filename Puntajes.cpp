@@ -6,7 +6,7 @@
 #include <cstring>
 using namespace std;
 
-Puntajes::Puntajes(int &volumen, Resources *recursos, bool musica_on)  {
+Puntajes::Puntajes(int &volumen, Resources *recursos, bool musica_on, DatosDePartida *data)  {
 	m_musica_on = musica_on;
 	m_volumen = volumen;
 	m_recursos = recursos;
@@ -16,9 +16,10 @@ Puntajes::Puntajes(int &volumen, Resources *recursos, bool musica_on)  {
 		m_musica.openFromFile(m_recursos->getMusicPuntajes());
 		m_musica.play();
 		m_musica.setLoop(true);
-		m_data = new DatosDePartida;
+		
 	}
-	
+	m_data = data;
+	actualizarData();
 	m_titulo.setFont(m_recursos->getFont());
 	
 	m_titulo.setPosition(260,-30);
@@ -48,12 +49,8 @@ void Puntajes::Dibujar (sf::RenderWindow & window) {
 	window.display();
 }
 
-void Puntajes::setData (DatosDePartida * data) {
-	m_data = data;
-	actualizarData();
-}
-
 void Puntajes::actualizarData ( ) {
+	m_posiciones.clear();
 	string aux;
 	Text t1;
 	for(int i=0;i<5;i++) {
@@ -74,5 +71,5 @@ void Puntajes::Finalizar ( ) {
 
 Puntajes::~Puntajes ( ) {
 	Finalizar();
-	if(m_musica_on) delete m_data;
+	delete m_data;
 }

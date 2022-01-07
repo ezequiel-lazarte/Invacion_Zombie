@@ -40,6 +40,7 @@ void DatosDePartida::crearBinario ( ) {
 		m_archi_write.write(reinterpret_cast<char*>(&aux),sizeof(aux));
 	}
 	m_archi_write.close();
+	cout << "Se creo el binario" << endl;
 }
 
 void DatosDePartida::setNombrePlayer (const string &name) {
@@ -58,10 +59,11 @@ void DatosDePartida::guardarPuntaje ( ) {
 	
 	m_archi_write.open(m_nameBinary, ios::binary|ios::trunc);
 	if(m_archi_write.is_open()) {
-		cout << "Ok" << endl;
+		cout << "El binario se abrio correctamente para escritura" << endl;
 	} else {
-		cerr << "Error" << endl;
+		cerr << "Error el binario no se pudo abrir para escritura" << endl;
 	}
+	cout << "Datos partida: " << m_nameplayer << " " << m_tiempo << " " << m_kills << endl;
 	
 	m_archi_write.seekp(0);
 	char name[10] = "";
@@ -72,6 +74,7 @@ void DatosDePartida::guardarPuntaje ( ) {
 		m_archi_write.write(reinterpret_cast<char*>(&m_dataGame[i].kills),sizeof(m_dataGame[i].kills));
 	}
 	m_archi_write.close();
+	leerData();
 }
 
 void DatosDePartida::leerData ( ) {
@@ -90,6 +93,7 @@ void DatosDePartida::leerData ( ) {
 			m_dataGame[i] = aux;
 		}
 	}
+	ordenaPuntajes();
 }
 
 void DatosDePartida::setTiempo (const int &tiempo) {
@@ -112,14 +116,17 @@ inline bool mayor_kills_o_tiempo (Data d1, Data d2) {
 	if(d1.kills >= d2.kills) {
 		if(d1.kills == d2.kills && d1.tiempo >= d2.tiempo) 
 			return true;
-		else
-			return false;
 	} else
 	   return false;
+	return true;
 }
 
 void DatosDePartida::ordenaPuntajes () {
+	cout << "Tamaño del dataGame: " << m_dataGame.size() << endl;
 	sort(m_dataGame.begin(), m_dataGame.end(), mayor_kills_o_tiempo);
+	for(int i=0; i<m_dataGame.size();i++) {
+		cout << "Player" << i << ": " << m_dataGame[i].name << endl;
+	}
 }
 
 int DatosDePartida::getSizeData ( ) {

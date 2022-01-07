@@ -15,7 +15,7 @@
 
 class GameOver : public Escena {
 public:
-	GameOver(int &volumen, Resources *recursos, DatosDePartida *data);
+	GameOver(int &volumen, Resources *recursos, DatosDePartida *&data);
 	void Actualizar (Juego & juego);
 	void Dibujar (sf::RenderWindow & window);
 	void Finalizar();

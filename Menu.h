@@ -4,6 +4,7 @@
 #include "Escena.h"
 #include "Resources.h"
 #include <SFML/Audio/Music.hpp>
+#include "DatosDePartida.h"
 
 class Menu : public Escena {
 public:
@@ -17,6 +18,7 @@ private:
 	void AnimacionTextoDown();
 	void ControlOpciones(Juego &juego);
 	Resources *m_resources;
+	DatosDePartida *m_data;
 	sf::Color m_color;
 	sf::Sprite m_background;
 	sf::Text m_titulo, m_play, m_score, m_credits, m_exit;
