@@ -8,7 +8,7 @@
 using namespace std;
 using namespace sf;
 
-Player::Player(int &volumen, Resources *recursos) {
+Player::Player(int &volumen, Resources *&recursos) {
 	m_recursos = recursos;
 	m_volumen = volumen*0.5;
 	

@@ -3,7 +3,7 @@
 #include "Creditos.h"
 #include "GuardarPuntaje.h"
 
-GameOver::GameOver(int &volumen, Resources *recursos, DatosDePartida *&data) {
+GameOver::GameOver(int &volumen, Resources *&recursos, DatosDePartida *&data) {
 	m_volumen = volumen;
 	m_recursos = recursos;
 	m_data = data;

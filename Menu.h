@@ -8,7 +8,7 @@
 
 class Menu : public Escena {
 public:
-	Menu(int volumen, Resources *resources);
+	Menu(int volumen, Resources *&resources);
 	void Actualizar(Juego &juego) override;
 	void Dibujar(sf::RenderWindow &window) override;
 	void Finalizar();

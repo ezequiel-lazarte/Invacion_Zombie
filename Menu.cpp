@@ -4,7 +4,7 @@
 #include "Creditos.h"
 #include "PantallaCarga.h"
 
-Menu::Menu(int volumen, Resources *resources) {
+Menu::Menu(int volumen, Resources *&resources) {
 	m_data = new DatosDePartida;
 	m_resources = resources;
 	m_volumen = volumen;

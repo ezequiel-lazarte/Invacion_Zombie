@@ -15,7 +15,7 @@ using namespace std;
 
 class GuardarPuntaje : public Escena{
 public:
-	GuardarPuntaje(int &volumen, Resources *recursos, sf::Event evento, DatosDePartida *&data);
+	GuardarPuntaje(int &volumen, Resources *&recursos, sf::Event evento, DatosDePartida *&data);
 	void Actualizar (Juego & juego) override;
 	void Dibujar (sf::RenderWindow & window) override;
 	~GuardarPuntaje();

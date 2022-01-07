@@ -1,7 +1,7 @@
 #include "Creditos.h"
 #include "Menu.h"
 
-Creditos::Creditos(int &volumen, Resources *recursos) {
+Creditos::Creditos(int &volumen, Resources *&recursos) {
 	m_volumen = volumen;
 	m_recursos = recursos;
 	m_musica.openFromFile(m_recursos->getMusicCreditos());

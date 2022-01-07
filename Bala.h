@@ -6,7 +6,7 @@
 
 class Bala : public Entidad {
 public:
-	Bala(Resources *recursos, int volumen);
+	Bala(Resources *&recursos, int volumen);
 	void Actualizar();
 	void Dibujar(sf::RenderWindow & w);
 	void setPos(sf::Vector2f pos, char lado);

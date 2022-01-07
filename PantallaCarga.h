@@ -15,7 +15,7 @@ using namespace std;
 
 class PantallaCarga : public Escena {
 public:
-	PantallaCarga(int &volumen, Resources *recursos);
+	PantallaCarga(int &volumen, Resources *&recursos);
 	void Actualizar(Juego &juego);
 	void Dibujar(sf::RenderWindow &window);
 private:

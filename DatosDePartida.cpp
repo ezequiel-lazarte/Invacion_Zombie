@@ -10,7 +10,6 @@ DatosDePartida::DatosDePartida() : m_dataGame(5, {"Vacio", 0, 0}) {
 	m_nameBinary = "Puntajes/Puntajes.dat";
 	m_nro_puntajes = 5;
 	
-	Data data({"Player", 0, 0});
 	abrirParaLectura();
 }
 
@@ -31,7 +30,7 @@ void DatosDePartida::crearBinario ( ) {
 	m_archi_write.seekp(0);
 	char name[10] = "Vacio";
 	int aux = 0;
-	for(unsigned int i=0; i<5; i++) {
+	for(unsigned int i=0; i<m_nro_puntajes; i++) {
 		strcpy(name, m_dataGame[i].name.c_str());
 		m_archi_write.write(name, sizeof(name));
 		m_archi_write.write(reinterpret_cast<char*>(&aux),sizeof(aux));
@@ -62,7 +61,7 @@ void DatosDePartida::guardarPuntaje ( ) {
 	
 	m_archi_write.seekp(0);
 	char name[10] = "";
-	for(unsigned int i=0; i<5; i++) {
+	for(unsigned int i=0; i<m_nro_puntajes; i++) {
 		strcpy(name, m_dataGame[i].name.c_str());
 		m_archi_write.write(name, sizeof(name));
 		m_archi_write.write(reinterpret_cast<char*>(&m_dataGame[i].tiempo),sizeof(m_dataGame[i].tiempo));
@@ -80,7 +79,7 @@ void DatosDePartida::leerData ( ) {
 	Data aux;
 	char name[10] = "";
 	if(cant_data != 0) {
-		for(int i=0;i<5;i++) {
+		for(int i=0;i<m_nro_puntajes;i++) {
 			m_archi_read.read(name, sizeof(name));
 			aux.name = name;
 			m_archi_read.read(reinterpret_cast<char*>(&aux.tiempo), sizeof(aux.tiempo));

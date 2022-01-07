@@ -19,7 +19,7 @@ using namespace sf;
 
 class Partida : public Escena{
 public:
-	Partida(int &volumen, Resources *recursos);
+	Partida(int &volumen, Resources *&recursos);
 	void Actualizar(Juego &juego) override;
 	void CrearEnemigos();
 	void GestionEnemigos();

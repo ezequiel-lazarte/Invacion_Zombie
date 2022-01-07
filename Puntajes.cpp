@@ -6,7 +6,7 @@
 #include <cstring>
 using namespace std;
 
-Puntajes::Puntajes(int &volumen, Resources *recursos, bool musica_on, DatosDePartida *data)  {
+Puntajes::Puntajes(int &volumen, Resources *&recursos, bool musica_on, DatosDePartida *&data)  {
 	m_musica_on = musica_on;
 	m_volumen = volumen;
 	m_recursos = recursos;

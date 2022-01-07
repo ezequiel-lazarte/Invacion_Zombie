@@ -4,7 +4,7 @@
 #include <iostream>
 using namespace std;
 
-Partida::Partida(int &volumen, Resources *recursos) : 
+Partida::Partida(int &volumen, Resources *&recursos) : 
 		m_color_fondo(20,110,255), m_player(volumen, recursos) {
 	m_data = new DatosDePartida;
 	m_volumen = volumen;
@@ -106,7 +106,10 @@ void Partida::Actualizar (Juego &juego) {
 		m_player.sonidoPaso();
 		m_pos_player = m_player.getPos();
 	}
-	m_vida_player.setString(to_string(m_player.getVida()));
+	if(m_player.getVida() >= 0) 
+		m_vida_player.setString(to_string(m_player.getVida()));
+	else 
+		m_vida_player.setString(to_string(0));
 	m_player.Actualizar();
 	m_fondo_1.Actualizar();
 	ActualizarPuntaje();

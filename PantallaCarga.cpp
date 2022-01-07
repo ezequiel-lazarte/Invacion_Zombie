@@ -6,7 +6,7 @@
 #include "Resources.h"
 using namespace std;
 using namespace sf;
-PantallaCarga::PantallaCarga(int &volumen, Resources *recursos) {
+PantallaCarga::PantallaCarga(int &volumen, Resources *&recursos) {
 	m_volumen = volumen;
 	m_recursos = recursos;
 	sf::Texture aux;

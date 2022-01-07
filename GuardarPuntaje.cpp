@@ -10,7 +10,7 @@ using namespace std;
 
 
 
-GuardarPuntaje:: GuardarPuntaje(int &volumen, Resources *recursos, sf::Event evento, DatosDePartida *&data) : m_ingresoTexto(recursos->getFont(),30,sf::Color::Black) {
+GuardarPuntaje:: GuardarPuntaje(int &volumen, Resources *&recursos, sf::Event evento, DatosDePartida *&data) : m_ingresoTexto(recursos->getFont(),30,sf::Color::Black) {
 	m_puntajes = new Puntajes(volumen, recursos, false, data);
 	m_data = data;
 	m_recursos = recursos;

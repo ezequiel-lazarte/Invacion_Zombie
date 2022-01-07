@@ -9,7 +9,7 @@ using namespace sf;
 
 class Creditos : public Escena {
 public:
-	Creditos(int &volumen, Resources *recursos);
+	Creditos(int &volumen, Resources *&recursos);
 	void Actualizar (Juego & juego);
 	void Dibujar (sf::RenderWindow & window);
 	void CambiarVolumenMusica(float vol);

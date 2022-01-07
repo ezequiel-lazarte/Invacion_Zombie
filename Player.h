@@ -16,7 +16,7 @@ using namespace std;
 
 class Player : public Entidad {
 public:
-	Player(int &volumen, Resources *recursos);
+	Player(int &volumen, Resources *&recursos);
 	void Actualizar ();
 	void Dibujar (sf::RenderWindow & w);
 	void BajarVida();
