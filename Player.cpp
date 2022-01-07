@@ -17,11 +17,11 @@ Player::Player(int &volumen, Resources *recursos) {
 	m_golpe.setBuffer(m_recursos->getBufferGolpe());
 	m_golpe.setVolume(m_volumen);
 	m_paso.setBuffer(m_recursos->getBufferPaso());
-	m_paso.setVolume(m_volumen+90);
+	m_paso.setVolume(m_volumen*3);
 	m_impacto_bala.setBuffer(m_recursos->getBufferImpacto());
 	m_impacto_bala.setVolume(m_volumen);
 	m_recarga_escopeta.setBuffer(m_recursos->getBufferRecargaPistola());
-	m_recarga_escopeta.setVolume(m_volumen+50);
+	m_recarga_escopeta.setVolume(m_volumen*2);
 	
 	m_quieto = m_recursos->getPlayerQuieto();
 	m_camina = m_recursos->getPlayerCamina();

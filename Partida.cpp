@@ -32,6 +32,7 @@ Partida::Partida(int &volumen, Resources *recursos) :
 	}
 	m_musica_fondo.openFromFile(m_recursos->getMusicPartida());
 	m_musica_fondo.play();
+	m_musica_fondo.setVolume(m_volumen);
 	m_musica_fondo.setLoop(true);
 	m_crono = m_reloj.restart();
 	

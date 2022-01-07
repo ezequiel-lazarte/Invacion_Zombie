@@ -16,7 +16,7 @@ Puntajes::Puntajes(int &volumen, Resources *recursos, bool musica_on, DatosDePar
 		m_musica.openFromFile(m_recursos->getMusicPuntajes());
 		m_musica.play();
 		m_musica.setLoop(true);
-		
+		m_musica.setVolume(m_volumen);
 	}
 	m_data = data;
 	actualizarData();

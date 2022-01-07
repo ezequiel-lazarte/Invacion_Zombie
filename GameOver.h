@@ -19,7 +19,6 @@ public:
 	void Actualizar (Juego & juego);
 	void Dibujar (sf::RenderWindow & window);
 	void Finalizar();
-	void CambiarVolumenMusica(float vol);
 private:
 	sf::Sprite m_gameOver;
 	Music m_musica_gameOver;

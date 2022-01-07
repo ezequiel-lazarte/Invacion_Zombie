@@ -17,7 +17,7 @@ Menu::Menu(int volumen, Resources *resources) {
 	m_music.setLoop(true);
 	
 	m_cambio_opcion.setBuffer(m_resources->getBufferCambioOpcion());
-	m_cambio_opcion.setVolume(m_volumen+50);
+	m_cambio_opcion.setVolume(m_volumen*2);
 	
 	/// Text
 	m_color = {0,180,0};

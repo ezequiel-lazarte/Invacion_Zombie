@@ -31,7 +31,6 @@ void InputText::ventana(sf::Event e, DatosDePartida *&data) {
 		while(w.pollEvent(e)) {
 			if (e.type==sf::Event::KeyPressed && e.key.code==sf::Keyboard::Return) { // si apretó enter, se toma la palabra y se la agrega a la lista
 				string_ingresado = text_entrada.getValue();// obtener la palabra que se ingresó
-				cout << string_ingresado << endl;
 				data->setNombrePlayer(string_ingresado);
 				return;
 			} else{
@@ -40,7 +39,6 @@ void InputText::ventana(sf::Event e, DatosDePartida *&data) {
 			if(e.type == Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Return)){
 				w.close();
 			}
-			// dibujar
 			w.clear(Color(255,255,255,255));
 			text_entrada.update(); // para que el texto se dibuje correctamente (hay que hacer esta llamada despues de processEvent y antes del draw)
 			w.draw(text_comun);

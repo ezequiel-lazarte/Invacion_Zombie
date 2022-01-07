@@ -4,6 +4,7 @@
 #include "GuardarPuntaje.h"
 
 GameOver::GameOver(int &volumen, Resources *recursos, DatosDePartida *&data) {
+	m_volumen = volumen;
 	m_recursos = recursos;
 	m_data = data;
 	m_gameOver.setTexture(m_recursos->getGameOver());
@@ -12,12 +13,13 @@ GameOver::GameOver(int &volumen, Resources *recursos, DatosDePartida *&data) {
 	
 	m_musica_gameOver.openFromFile(m_recursos->getMusicGameOver());
 	m_musica_gameOver.play();
+	m_musica_gameOver.setVolume(m_volumen);
 	m_musica_gameOver.setLoop(true);
-	/// sonidos
+	
 	m_voz_gameover.setBuffer(m_recursos->getBufferVozGameOver());
 	m_voz_gameover.play();
-	m_voz_gameover.setVolume(30);
-	/// textos
+	m_voz_gameover.setVolume(m_volumen);
+	
 	m_guardarPuntaje.setFont(m_recursos->getFont());
 	m_guardarPuntaje.setString("Guardar Puntaje");
 	m_guardarPuntaje.setFillColor(Color::Black);
@@ -40,7 +42,7 @@ GameOver::GameOver(int &volumen, Resources *recursos, DatosDePartida *&data) {
 void GameOver::Actualizar (Juego & juego) {
 	m_pos_mouse = sf::Mouse::getPosition(juego.getWindow());
 	if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-		if(430 < m_pos_mouse.x && m_pos_mouse.x < 638) { // 463
+		if(430 < m_pos_mouse.x && m_pos_mouse.x < 638) {
 			if(463 < m_pos_mouse.y && m_pos_mouse.y < 496) {
 				Finalizar();
 				sf::Event evento;
@@ -58,12 +60,6 @@ void GameOver::Dibujar (sf::RenderWindow & window) {
 	window.draw(m_guardarPuntaje);
 	window.display();
 }
-
-void GameOver::CambiarVolumenMusica (float vol) {
-	m_musica_gameOver.setVolume(vol);
-	m_voz_gameover.setVolume(vol);
-}
-
 void GameOver::Finalizar ( ) {
 	m_musica_gameOver.stop();
 	m_voz_gameover.stop();
