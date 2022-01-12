@@ -4,11 +4,12 @@
 #include <vector>
 #include <SFML/Audio/Sound.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
+#include "Resources.h"
 using namespace std;
 
 class Enemigo_1 : public Entidad {
 public:
-	Enemigo_1();
+	Enemigo_1(Resources *recursos);
 	void SetPosEnemigo(float x);
 	void Actualizar();
 	void Dibujar(sf::RenderWindow & w);
@@ -24,6 +25,7 @@ public:
 	int getVida();
 	sf::Vector2f getPos();
 private:
+	sf::Sprite m_barra_vida;
 	sf::SoundBuffer m_sonido1;
 	sf::Sound m_sound_zombie;
 	sf::Vector2f m_move, m_pos_player, m_posEnemigo;

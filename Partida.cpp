@@ -5,27 +5,25 @@
 using namespace std;
 
 Partida::Partida(int &volumen, Resources *&recursos) : 
-		m_color_fondo(20,110,255), m_player(volumen, recursos) {
+		m_color_fondo(20,110,255), m_player(volumen, recursos), enemigo(recursos) {
 	m_data = new DatosDePartida;
 	m_volumen = volumen;
 	m_recursos = recursos;
 	srand(time(NULL));
 	m_posDesde = -2500;
 	m_posHasta = 2500;
-	m_numeroEnemigos1 = 10;
-	m_numeroEnemigos2 = 10;
+	m_numeroEnemigos1 = 2;
+	m_numeroEnemigos2 = 2;
 	for(int i=0;i<m_numeroEnemigos1;i++) {
-		m_enemigos.resize(m_enemigos.size() + 1);
 		enemigo.setTexture(m_recursos->getEnemigo_1());
 		enemigo.setVida(m_vida_enemigo1);
-		m_enemigos[i] = enemigo;
+		m_enemigos.push_back(enemigo);
 		m_enemigos[i].SetPosEnemigo(rand()%(m_posHasta - m_posDesde) + m_posDesde);
 	}
 	for(int i=m_numeroEnemigos1;i<m_numeroEnemigos2;i++) {
-		m_enemigos.resize(m_enemigos.size() + 1);
 		enemigo.setTexture(m_recursos->getEnemigo_2());
 		enemigo.setVida(m_vida_enemigo2);
-		m_enemigos[i] = enemigo;
+		m_enemigos.push_back(enemigo);
 		m_enemigos[i].SetPosEnemigo(rand()%(m_posHasta - m_posDesde) + m_posDesde);
 	}
 	m_musica_fondo.openFromFile(m_recursos->getMusicPartida());
@@ -163,7 +161,7 @@ void Partida::GestionEnemigos ( ) {
 	m_tiempoActual = m_reloj.getElapsedTime().asSeconds();
 	if(m_tiempoActual >= m_tiempoParaSumarEnemigos) {
 		int num = numeroAleatorio();
-		Enemigo_1 enemy;
+		Enemigo_1 enemy(m_recursos);
 		
 		if(num % 2 == 0) {
 			enemy.setTexture(m_recursos->getEnemigo_1());

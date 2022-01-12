@@ -133,6 +133,12 @@ texture_t & Resources::getPlayerDisparaCamina ( ) {
 	return getTexture_or_insert(m_t, m_texture, m_pos);
 }
 
+texture_t & Resources::getBarraVidaEnemigo ( ) {
+	m_texture.loadFromFile("recursos/partida/vida_enemigo.png");
+	m_pos = 19;
+	return getTexture_or_insert(m_t, m_texture, m_pos);
+}
+
 /** ****************** ************ ***** SOUNDS EFECTS ***** ************ ****************** **/
 
 sf::SoundBuffer & Resources::getBufferEnemigo_1 ( ) {

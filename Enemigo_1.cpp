@@ -1,8 +1,9 @@
 #include "Enemigo_1.h"
 #include <cmath>
+#include <SFML/Graphics/Texture.hpp>
 using namespace std;
 
-Enemigo_1::Enemigo_1() {
+Enemigo_1::Enemigo_1(Resources *recursos) {
 	m_size_rect = {0,0};
 	m_alto_sprite = 144;
 	m_ancho_sprite = 144;
@@ -13,6 +14,8 @@ Enemigo_1::Enemigo_1() {
 	
 	m_move_sprite = 0;
 	m_move = {1.3,0};
+	
+	
 }
 
 void Enemigo_1::SetPosEnemigo (float x) {

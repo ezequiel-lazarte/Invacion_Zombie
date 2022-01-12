@@ -38,6 +38,7 @@ public:
 	texture_t &getPlayerGolpeCamina();
 	texture_t &getPlayerDisparaQuieto();
 	texture_t &getPlayerDisparaCamina();
+	texture_t &getBarraVidaEnemigo();
 	///sounds
 	sound_t &getBufferEnemigo_1();
 	sound_t &getBufferVozGameOver();
