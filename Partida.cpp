@@ -14,6 +14,9 @@ Partida::Partida(int &volumen, Resources *&recursos) :
 	m_posHasta = 2500;
 	m_numeroEnemigos1 = 2;
 	m_numeroEnemigos2 = 2;
+	
+	m_vida_enemigo1 = 50;
+	m_vida_enemigo2 = 100;
 	for(int i=0;i<m_numeroEnemigos1;i++) {
 		enemigo.setTexture(m_recursos->getEnemigo_1());
 		enemigo.setVida(m_vida_enemigo1);
@@ -26,6 +29,7 @@ Partida::Partida(int &volumen, Resources *&recursos) :
 		m_enemigos.push_back(enemigo);
 		m_enemigos[i].SetPosEnemigo(rand()%(m_posHasta - m_posDesde) + m_posDesde);
 	}
+	
 	m_musica_fondo.openFromFile(m_recursos->getMusicPartida());
 	m_musica_fondo.play();
 	m_musica_fondo.setVolume(m_volumen);
@@ -68,9 +72,6 @@ Partida::Partida(int &volumen, Resources *&recursos) :
 	m_tiempoActual = 0;
 	
 	m_tiempoParaSumarEnemigos = 15;
-	
-	m_vida_enemigo1 = 10;
-	m_vida_enemigo2 = 100;
 }
 
 void Partida::Actualizar (Juego &juego) {
@@ -112,12 +113,24 @@ void Partida::Actualizar (Juego &juego) {
 	m_player.Actualizar();
 	m_fondo_1.Actualizar();
 	ActualizarPuntaje();
+	/// actualiza botiquines
+	for(size_t i=0;i<m_botiquines.size();i++) {
+		m_botiquines[i].Actualizar();
+	}
+	GestionBotiquines();
 }
 
 void Partida::Dibujar (RenderWindow & window) {
 	m_fondo_1.Dibujar(window);
 	m_player.Dibujar(window);
-	for(size_t i=0;i<m_enemigos.size();i++) m_enemigos[i].Dibujar(window);
+	for(int i=0; i<m_botiquines.size(); i++) {
+		if(m_botiquines[i].getDibujar()) {
+			m_botiquines[i].Dibujar(window);
+		}
+	}
+	for(size_t i=0;i<m_enemigos.size();i++) {
+		m_enemigos[i].Dibujar(window);
+	}
 	window.draw(m_vida_player);
 	window.draw(m_nro_kill);
 	window.draw(m_tiempo);
@@ -141,6 +154,7 @@ void Partida::CrearEnemigos ( ) {
 	m_posHasta = 3800;
 	for(size_t i=0;i<m_numeroEnemigos1;i++) {
 		if(m_enemigos[i].getVida() <= 0) {
+			CrearBotiquines(i);
 			enemigo.setVida(m_vida_enemigo1);
 			enemigo.setTexture(m_recursos->getEnemigo_1());
 			enemigo.SetPosEnemigo(m_posDesde);
@@ -149,6 +163,7 @@ void Partida::CrearEnemigos ( ) {
 	}
 	for(size_t i=m_numeroEnemigos1;i<m_enemigos.size();i++) {
 		if(m_enemigos[i].getVida() <= 0) {
+			CrearBotiquines(i);
 			enemigo.setVida(m_vida_enemigo2);
 			enemigo.setTexture(m_recursos->getEnemigo_2());
 			enemigo.SetPosEnemigo(m_posHasta);
@@ -189,16 +204,7 @@ void Partida::GestionEnemigos ( ) {
 			m_enemigos[i].BajarVida();
 			if(m_enemigos[i].getVida() <= 0) {
 				++m_nro_kills;
-				int vida = rand() % 10;
-				if(vida <= 2){
-					int cura =  m_player.getVida() + 5;
-					if(cura >= 100){
-						m_player.setVidaCura(100);
-					}else{
-						
-						m_player.setVidaCura(cura);
-					}
-				}
+				GestionBotiquines();
 				m_nro_kill.setString("Kills: " + to_string(m_nro_kills));
 			}
 		}
@@ -210,16 +216,7 @@ void Partida::GestionEnemigos ( ) {
 				m_player.borrarBala(j);
 				if(m_enemigos[i].getVida() <= 0) {
 					++m_nro_kills;
-					int vida = rand() % 10;
-					if(vida <= 2){
-						int cura =  m_player.getVida() + 5;
-						if(cura >= 100){
-							m_player.setVidaCura(100);
-						}else{
-							
-							m_player.setVidaCura(cura);
-						}
-					}
+					GestionBotiquines();
 					m_nro_kill.setString("Kills: " + to_string(m_nro_kills));
 				}
 			}
@@ -231,5 +228,35 @@ int Partida::numeroAleatorio ( ) {
 	srand(time(NULL));
 	int num = 1+rand()%(101-1);
 	return num;
+}
+
+void Partida::CrearBotiquines (int pos) {
+	if(numeroAleatorio() <= 30) { /// 30% es la probabilidad de que se genere un botiquin 
+		Botiquin botiquin(m_recursos);
+		botiquin.setPosEnemigo(m_enemigos[pos].getPos());
+		botiquin.setDibujar(true);
+		m_botiquines.push_back(botiquin);
+	}
+}
+
+void Partida::GestionBotiquines ( ) {
+	vector<Botiquin>::iterator itB = m_botiquines.begin();
+	for(int j=0; j<m_enemigos.size(); j++) {
+		for(int i=0; i<m_botiquines.size(); i++) {
+			itB++;
+			if(m_botiquines[i].Colision(m_player) && !m_enemigos[j].Colision(m_player)) {
+				
+				int cura =  m_player.getVida() + 5;
+				if(cura >= 100){
+					m_player.setVidaCura(100);
+				} else {
+					m_player.setVidaCura(cura);
+				}
+				m_botiquines[i].setDibujar(false);
+				m_botiquines.erase(itB);
+			}
+		}
+	}
+	
 }
 

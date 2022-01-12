@@ -12,6 +12,7 @@
 #include "Puntajes.h"
 #include "DatosDePartida.h"
 #include <SFML/Window/Event.hpp>
+#include "Botiquin.h"
 using namespace std;
 
 class Juego;
@@ -21,15 +22,18 @@ class Partida : public Escena {
 public:
 	Partida(int &volumen, Resources *&recursos);
 	void Actualizar(Juego &juego) override;
+	void Dibujar(RenderWindow &window) override;
+private:
+	void ActualizarPuntaje();
 	void CrearEnemigos();
 	void GestionEnemigos();
-	void Dibujar(RenderWindow &window) override;
-	void ActualizarPuntaje();
+	void GestionBotiquines();
+	void CrearBotiquines(int pos);
 	int numeroAleatorio();
-private:
 	vector<Enemigo_1> m_enemigos;
 	vector<Bala> m_disparos;
 	vector<Bala>::iterator itDisparo;
+	vector<Botiquin> m_botiquines;
 	Vector2f m_pos_player;
 	Color m_color_fondo;
 	Fondo m_fondo_1;

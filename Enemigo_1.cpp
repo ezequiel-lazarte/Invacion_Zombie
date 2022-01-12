@@ -15,7 +15,6 @@ Enemigo_1::Enemigo_1(Resources *recursos) {
 	m_move_sprite = 0;
 	m_move = {1.3,0};
 	
-	
 }
 
 void Enemigo_1::SetPosEnemigo (float x) {
