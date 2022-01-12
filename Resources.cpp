@@ -139,6 +139,12 @@ texture_t & Resources::getBarraVidaEnemigo ( ) {
 	return getTexture_or_insert(m_t, m_texture, m_pos);
 }
 
+texture_t & Resources::getBotiquin ( ) {
+	m_texture.loadFromFile("recursos/partida/botiquin.png");
+	m_pos = 20;
+	return getTexture_or_insert(m_t, m_texture, m_pos);
+}
+
 /** ****************** ************ ***** SOUNDS EFECTS ***** ************ ****************** **/
 
 sf::SoundBuffer & Resources::getBufferEnemigo_1 ( ) {
