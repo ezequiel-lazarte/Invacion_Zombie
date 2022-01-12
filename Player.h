@@ -19,6 +19,7 @@ public:
 	Player(int &volumen, Resources *&recursos);
 	void Actualizar ();
 	void Dibujar (sf::RenderWindow & w);
+	void setVidaCura(int cura);
 	void BajarVida();
 	void setPlayer();
 	void movimientoTeclas();

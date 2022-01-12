@@ -100,7 +100,10 @@ void Player::Finalizar ( ) {
 	m_impacto_bala.stop();
 	for(int i; i<m_balas.size(); i++) m_balas[i].finalizar();
 }
-
+void Player::setVidaCura(int cura){
+	m_vida = cura;
+	
+}
 void Player::BajarVida ( ) {
 	if(m_vida>=0) m_vida -= m_danio;
 	if(m_vida<0) m_vida = 0;

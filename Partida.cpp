@@ -71,8 +71,8 @@ Partida::Partida(int &volumen, Resources *&recursos) :
 	
 	m_tiempoParaSumarEnemigos = 15;
 	
-	m_vida_enemigo1 = 100;
-	m_vida_enemigo2 = 200;
+	m_vida_enemigo1 = 10;
+	m_vida_enemigo2 = 100;
 }
 
 void Partida::Actualizar (Juego &juego) {
@@ -191,6 +191,16 @@ void Partida::GestionEnemigos ( ) {
 			m_enemigos[i].BajarVida();
 			if(m_enemigos[i].getVida() <= 0) {
 				++m_nro_kills;
+				int vida = rand() % 10;
+				if(vida <= 2){
+					int cura =  m_player.getVida() + 5;
+					if(cura >= 100){
+						m_player.setVidaCura(100);
+					}else{
+						
+						m_player.setVidaCura(cura);
+					}
+				}
 				m_nro_kill.setString("Kills: " + to_string(m_nro_kills));
 			}
 		}
@@ -202,6 +212,16 @@ void Partida::GestionEnemigos ( ) {
 				m_player.borrarBala(j);
 				if(m_enemigos[i].getVida() <= 0) {
 					++m_nro_kills;
+					int vida = rand() % 10;
+					if(vida <= 2){
+						int cura =  m_player.getVida() + 5;
+						if(cura >= 100){
+							m_player.setVidaCura(100);
+						}else{
+							
+							m_player.setVidaCura(cura);
+						}
+					}
 					m_nro_kill.setString("Kills: " + to_string(m_nro_kills));
 				}
 			}
