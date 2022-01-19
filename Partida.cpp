@@ -12,8 +12,9 @@ Partida::Partida(int &volumen, Resources *&recursos) :
 	srand(time(NULL));
 	m_posDesde = -2500;
 	m_posHasta = 2500;
-	m_numeroEnemigos1 = 2;
-	m_numeroEnemigos2 = 2;
+	
+	m_numeroEnemigos1 = 20;
+	m_numeroEnemigos2 = 20;
 	
 	m_vida_enemigo1 = 50;
 	m_vida_enemigo2 = 100;
@@ -122,7 +123,6 @@ void Partida::Actualizar (Juego &juego) {
 
 void Partida::Dibujar (RenderWindow & window) {
 	m_fondo_1.Dibujar(window);
-	m_player.Dibujar(window);
 	for(int i=0; i<m_botiquines.size(); i++) {
 		if(m_botiquines[i].getDibujar()) {
 			m_botiquines[i].Dibujar(window);
@@ -131,6 +131,7 @@ void Partida::Dibujar (RenderWindow & window) {
 	for(size_t i=0;i<m_enemigos.size();i++) {
 		m_enemigos[i].Dibujar(window);
 	}
+	m_player.Dibujar(window);
 	window.draw(m_vida_player);
 	window.draw(m_nro_kill);
 	window.draw(m_tiempo);
@@ -244,7 +245,7 @@ void Partida::GestionBotiquines ( ) {
 	for(int j=0; j<m_enemigos.size(); j++) {
 		for(int i=0; i<m_botiquines.size(); i++) {
 			itB++;
-			if(m_botiquines[i].Colision(m_player) && !m_enemigos[j].Colision(m_player)) {
+			if(m_botiquines[i].Colision(m_player) && !m_enemigos[j].Colision(m_player) && m_player.getVida() < 100) {
 				
 				int cura =  m_player.getVida() + 5;
 				if(cura >= 100){

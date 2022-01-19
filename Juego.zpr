@@ -45,7 +45,7 @@ path=InputBoxMain.cpp
 cursor=34:44
 [source]
 path=Partida.cpp
-cursor=233:37
+cursor=133:28
 open=true
 [source]
 path=GameOver.cpp

@@ -3,7 +3,7 @@
 #include <SFML/Graphics/Texture.hpp>
 using namespace std;
 
-Enemigo_1::Enemigo_1(Resources *recursos) {
+Enemigo_1::Enemigo_1(Resources *recursos) : m_barra_vida(100, recursos) {
 	m_size_rect = {0,0};
 	m_alto_sprite = 144;
 	m_ancho_sprite = 144;
@@ -14,7 +14,6 @@ Enemigo_1::Enemigo_1(Resources *recursos) {
 	
 	m_move_sprite = 0;
 	m_move = {1.3,0};
-	
 }
 
 void Enemigo_1::SetPosEnemigo (float x) {
@@ -23,15 +22,22 @@ void Enemigo_1::SetPosEnemigo (float x) {
 	if(m_posEnemigo.x >= 0 and m_posEnemigo.x < 1080) m_posEnemigo.x -= 1950;
 	m_sprite.setScale(0.75,0.75);
 	m_sprite.setPosition(m_posEnemigo);
+	
+	m_barra_vida.setPosition(m_posEnemigo);
 }
 
 void Enemigo_1::Actualizar () {
 	if(m_vida<=0) Finalizar();
+	m_barra_vida.Actualizar();
 	Animaciones();
+	
+	/// actualizo la pos de la barra de vida
+	m_barra_vida.setPosition(m_sprite.getPosition());
 }
 
 void Enemigo_1::Dibujar (sf::RenderWindow & w) {
 	if(m_vida>0) w.draw(m_sprite);
+	m_barra_vida.Dibujar(w);
 }
 
 void Enemigo_1::setPosPlayer (sf::Vector2f pos_player) {
@@ -79,6 +85,7 @@ void Enemigo_1::setTexture (sf::Texture &t) {
 
 void Enemigo_1::setVida (int vida) {
 	m_vida = vida;
+	m_barra_vida.setVida(m_vida);
 }
 
 void Enemigo_1::setTipoArma (int nroArma) {

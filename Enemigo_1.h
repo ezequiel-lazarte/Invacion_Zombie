@@ -5,6 +5,7 @@
 #include <SFML/Audio/Sound.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
 #include "Resources.h"
+#include "BarraVidaEnemigo.h"
 using namespace std;
 
 class Enemigo_1 : public Entidad {
@@ -25,7 +26,7 @@ public:
 	int getVida();
 	sf::Vector2f getPos();
 private:
-	sf::Sprite m_barra_vida;
+	BarraVidaEnemigo m_barra_vida;
 	sf::SoundBuffer m_sonido1;
 	sf::Sound m_sound_zombie;
 	sf::Vector2f m_move, m_pos_player, m_posEnemigo;
