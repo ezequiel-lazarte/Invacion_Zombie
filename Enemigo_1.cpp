@@ -33,6 +33,7 @@ void Enemigo_1::Actualizar () {
 	
 	/// actualizo la pos de la barra de vida
 	m_barra_vida.setPosition(m_sprite.getPosition());
+	m_barra_vida.setVida(m_vida);
 }
 
 void Enemigo_1::Dibujar (sf::RenderWindow & w) {
@@ -85,7 +86,12 @@ void Enemigo_1::setTexture (sf::Texture &t) {
 
 void Enemigo_1::setVida (int vida) {
 	m_vida = vida;
+	
 	m_barra_vida.setVida(m_vida);
+	if(m_vida == 50) 
+		m_barra_vida.setTipoEnemigo(1);
+	if(m_vida == 100)
+		m_barra_vida.setTipoEnemigo(2);
 }
 
 void Enemigo_1::setTipoArma (int nroArma) {

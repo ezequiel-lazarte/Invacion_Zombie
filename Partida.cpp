@@ -13,8 +13,8 @@ Partida::Partida(int &volumen, Resources *&recursos) :
 	m_posDesde = -2500;
 	m_posHasta = 2500;
 	
-	m_numeroEnemigos1 = 20;
-	m_numeroEnemigos2 = 20;
+	m_numeroEnemigos1 = 1;
+	m_numeroEnemigos2 = 2;
 	
 	m_vida_enemigo1 = 50;
 	m_vida_enemigo2 = 100;
