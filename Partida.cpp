@@ -154,7 +154,7 @@ void Partida::CrearEnemigos ( ) {
 	m_posDesde = -3800;
 	m_posHasta = 3800;
 	for(size_t i=0;i<m_numeroEnemigos1;i++) {
-		if(m_enemigos[i].getVida() <= 0) {
+		if(m_enemigos[i].getVida() <= -21) {
 			CrearBotiquines(i);
 			enemigo.setVida(m_vida_enemigo1);
 			enemigo.setTexture(m_recursos->getEnemigo_1());
@@ -163,7 +163,7 @@ void Partida::CrearEnemigos ( ) {
 		}
 	}
 	for(size_t i=m_numeroEnemigos1;i<m_enemigos.size();i++) {
-		if(m_enemigos[i].getVida() <= 0) {
+		if(m_enemigos[i].getVida() <= -21) {
 			CrearBotiquines(i);
 			enemigo.setVida(m_vida_enemigo2);
 			enemigo.setTexture(m_recursos->getEnemigo_2());
@@ -198,10 +198,10 @@ void Partida::GestionEnemigos ( ) {
 		m_enemigos[i].Actualizar();
 		m_enemigos[i].setPosPlayer(m_player.getPos());
 		
-		if(m_player.Colision(m_enemigos[i]) && m_player.getVida()>0 && Keyboard::isKeyPressed(Keyboard::Key::F) && m_player.getArma() == 1) {
+		if(m_player.Colision(m_enemigos[i]) && m_player.getVida()>0 && Keyboard::isKeyPressed(Keyboard::Key::F) && m_player.getArma() == 1 && m_enemigos[i].getVida() > 0) {
 			m_player.golpe();
 		}
-		if(Keyboard::isKeyPressed(Keyboard::Key::F) && m_player.Colision(m_enemigos[i]) && m_player.getArma() == 1) {
+		if(Keyboard::isKeyPressed(Keyboard::Key::F) && m_player.Colision(m_enemigos[i]) && m_player.getArma() == 1 && m_enemigos[i].getVida() > 0) {
 			m_enemigos[i].BajarVida();
 			if(m_enemigos[i].getVida() <= 0) {
 				++m_nro_kills;
@@ -211,7 +211,7 @@ void Partida::GestionEnemigos ( ) {
 		}
 		m_disparos = m_player.getDisparos();
 		for(int j=0; j < m_player.getDisparos().size(); j++) {
-			if(m_enemigos[i].Colision(m_player.getDisparos()[j])) {
+			if(m_enemigos[i].Colision(m_player.getDisparos()[j]) && m_enemigos[i].getVida() > 0) {
 				m_enemigos[i].BajarVida();
 				m_player.sonidoImpacto();
 				m_player.borrarBala(j);

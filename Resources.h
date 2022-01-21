@@ -40,6 +40,7 @@ public:
 	texture_t &getBarraVidaEnemigo();
 	texture_t &getBotiquin();
 	texture_t &getFondo_ciudad();
+	texture_t &getMuerteEnemigo();
 	///sounds
 	sound_t &getBufferEnemigo_1();
 	sound_t &getBufferVozGameOver();

@@ -3,7 +3,8 @@
 #include <SFML/Graphics/Texture.hpp>
 using namespace std;
 
-Enemigo_1::Enemigo_1(Resources *recursos) : m_barra_vida(100, recursos) {
+Enemigo_1::Enemigo_1(Resources *&recursos) : m_barra_vida(100, recursos) {
+	m_recursos = recursos;
 	m_size_rect = {0,0};
 	m_alto_sprite = 144;
 	m_ancho_sprite = 144;
@@ -14,6 +15,8 @@ Enemigo_1::Enemigo_1(Resources *recursos) : m_barra_vida(100, recursos) {
 	
 	m_move_sprite = 0;
 	m_move = {1.3,0};
+	
+	m_move_sprite_es_cero = false;
 }
 
 void Enemigo_1::SetPosEnemigo (float x) {
@@ -37,7 +40,7 @@ void Enemigo_1::Actualizar () {
 }
 
 void Enemigo_1::Dibujar (sf::RenderWindow & w) {
-	if(m_vida>0) w.draw(m_sprite);
+	if(m_vida>-21) w.draw(m_sprite);
 	m_barra_vida.Dibujar(w);
 }
 
@@ -67,14 +70,24 @@ int Enemigo_1::getVida ( ) {
 }
 
 void Enemigo_1::Animaciones ( ) {
+	if(m_vida <= 0) {
+		if(!m_move_sprite_es_cero) {
+			m_move_sprite = 1;
+			m_move_sprite_es_cero = true;
+		}
+		m_sprite.setTexture(m_recursos->getMuerteEnemigo());
+		if(m_move_sprite == 0) m_vida = -21;
+	}
 	m_move_sprite += 0.03125;
 	if(m_sprite.getPosition().x<m_pos_player.x) {
 		m_rect = {m_size_rect.x+int(ceil(m_move_sprite)*144), m_size_rect.y, m_alto_sprite, m_ancho_sprite};
-		m_sprite.move(m_move);
+		if(m_vida > 0) m_sprite.move(m_move);
+		else m_sprite.move(0,0);
 	}
 	if(m_sprite.getPosition().x>m_pos_player.x) {
 		m_rect = {m_size_rect.x+int(ceil(m_move_sprite)*144), m_size_rect.y+144, m_alto_sprite, m_ancho_sprite};
-		m_sprite.move(-m_move);
+		if(m_vida > 0) m_sprite.move(-m_move);
+		else m_sprite.move(0,0);
 	}
 	m_sprite.setTextureRect(m_rect);
 	if(m_move_sprite>=6) m_move_sprite=0;
