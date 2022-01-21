@@ -9,7 +9,7 @@ BarraVidaEnemigo::BarraVidaEnemigo(int vida, Resources *&recursos) {
 	m_rect = {m_size_rect.x, m_size_rect.y, m_ancho_sprite, m_alto_sprite};
 	
 	m_vida = vida;
-	m_cambio_sprite = m_ultima_vida = 0;
+	m_ultima_vida = 0;
 	
 	m_sprite.setTexture(m_recursos->getBarraVidaEnemigo());
 	m_sprite.setTextureRect(m_rect);
@@ -22,7 +22,7 @@ BarraVidaEnemigo::BarraVidaEnemigo(int vida, Resources *&recursos) {
 void BarraVidaEnemigo::Actualizar ( ) {
 	if(m_tipo_enemigo == 1)
 		m_tipo_enemigo_cambio_sprite = 5;
-	if(m_tipo_enemigo == 2)
+	else if(m_tipo_enemigo == 2)
 		m_tipo_enemigo_cambio_sprite = 4;
 	if(m_vida < m_ultima_vida) {
 		m_rect = {m_size_rect.x, m_size_rect.y += m_tipo_enemigo_cambio_sprite*20, m_ancho_sprite, m_alto_sprite};
@@ -40,8 +40,6 @@ void BarraVidaEnemigo::setVida (int vida) {
 	if(m_ultima_vida == 0) {
 		m_ultima_vida = m_vida;
 	}
-	if(m_cambio_sprite == 0)
-		m_cambio_sprite = vida/16;
 }
 
 void BarraVidaEnemigo::setPosition (sf::Vector2f pos) {

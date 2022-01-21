@@ -2,13 +2,12 @@
 #include <SFML/Graphics/Color.hpp>
 
 Fondo::Fondo() : rojo(0), verde(0), azul(0) {
-	m_fondo.loadFromFile("recursos/fondos/escenario/fondo.png");
-	m_sprite.setTexture(m_fondo);
-	m_sprite.setScale(1.06,1);
-	m_proporcion = {1024,356};/// ancho y alto
-	diferencia = 520-m_proporcion.y;
-	m_sprite.setPosition(0,diferencia);
+	GenerarFondoAleatorio();
+	m_sprite.setTexture(m_textura);
+	m_sprite.setPosition(0,0);
+	
 	ultima_textura = 1;
+	
 	// sol
 	m_textura_sol.loadFromFile("recursos/fondos/escenario/sol.png");
 	m_sol.setTexture(m_textura_sol);
@@ -62,7 +61,7 @@ void Fondo::Actualizar ( ) {
 			azul +=.255*12;
 		}
 	}
-	m_color_fondo = {rojo,verde,azul}; 
+	m_color_fondo = {rojo,verde,azul};
 }
 
 void Fondo::Dibujar (sf::RenderWindow & w) {
@@ -77,5 +76,24 @@ int Fondo::GetNumeroNoches ( ) {
 
 Fondo::~Fondo ( ) {
 	m_recursos = NULL;
+}
+
+void Fondo::GenerarFondoAleatorio ( ) {
+	int n = numeroAleatorio();
+	if(n < 25) {
+		m_textura.loadFromFile("recursos/partida/fondos/decierto.png");
+	} else if(n >= 25 && n <50) {
+		m_textura.loadFromFile("recursos/partida/fondos/ciudad.png");
+	} else if(n >= 50 && n <75) {
+		m_textura.loadFromFile("recursos/partida/fondos/nieve.png");
+	} else if(n >= 75 && n <100) {
+		m_textura.loadFromFile("recursos/partida/fondos/campo.png");
+	}
+}
+
+int Fondo::numeroAleatorio ( ) {
+	srand(time(NULL));
+	int num = 1+rand()%(101-1);
+	return num;
 }
 

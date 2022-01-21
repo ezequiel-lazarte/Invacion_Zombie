@@ -21,7 +21,6 @@ public:
 	texture_t &getCreditos();
 	texture_t &getEnemigo_1();
 	texture_t &getEnemigo_2();
-	texture_t &getFondo();
 	texture_t &getGameOver();
 	texture_t &getGuardarPuntajes();
 	texture_t &getMenu();
@@ -40,6 +39,7 @@ public:
 	texture_t &getPlayerDisparaCamina();
 	texture_t &getBarraVidaEnemigo();
 	texture_t &getBotiquin();
+	texture_t &getFondo_ciudad();
 	///sounds
 	sound_t &getBufferEnemigo_1();
 	sound_t &getBufferVozGameOver();

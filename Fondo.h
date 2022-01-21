@@ -12,14 +12,16 @@ public:
 	Fondo();
 	void Actualizar ( );
 	void Dibujar (sf::RenderWindow & w);
+	void GenerarFondoAleatorio();
 	int GetNumeroNoches();
+	int numeroAleatorio();
 	~Fondo();
 private:
 	Vector2f m_proporcion, m_move_sol, m_pos_sol;
 	Sprite m_sol;
 	Color m_color_fondo;
 	sf::Uint8 rojo, verde, azul;
-	Texture m_fondo, m_textura_sol;
+	Texture m_fondo, m_textura_sol, m_textura;
 	Resources *m_recursos;
 	float gravedad;
 	int ultima_textura, diferencia, m_nro_noches; /// 0 para sol y 1 para luna
