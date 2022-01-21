@@ -21,12 +21,14 @@ Partida::Partida(int &volumen, Resources *&recursos) :
 	for(int i=0;i<m_numeroEnemigos1;i++) {
 		enemigo.setTexture(m_recursos->getEnemigo_1());
 		enemigo.setVida(m_vida_enemigo1);
+		enemigo.setTipoEnemigo(1);
 		m_enemigos.push_back(enemigo);
 		m_enemigos[i].SetPosEnemigo(rand()%(m_posHasta - m_posDesde) + m_posDesde);
 	}
 	for(int i=m_numeroEnemigos1;i<m_numeroEnemigos2;i++) {
 		enemigo.setTexture(m_recursos->getEnemigo_2());
 		enemigo.setVida(m_vida_enemigo2);
+		enemigo.setTipoEnemigo(2);
 		m_enemigos.push_back(enemigo);
 		m_enemigos[i].SetPosEnemigo(rand()%(m_posHasta - m_posDesde) + m_posDesde);
 	}
@@ -159,6 +161,7 @@ void Partida::CrearEnemigos ( ) {
 			enemigo.setVida(m_vida_enemigo1);
 			enemigo.setTexture(m_recursos->getEnemigo_1());
 			enemigo.SetPosEnemigo(m_posDesde);
+			enemigo.setTipoEnemigo(1);
 			m_enemigos[i] = enemigo;
 		}
 	}
@@ -168,6 +171,7 @@ void Partida::CrearEnemigos ( ) {
 			enemigo.setVida(m_vida_enemigo2);
 			enemigo.setTexture(m_recursos->getEnemigo_2());
 			enemigo.SetPosEnemigo(m_posHasta);
+			enemigo.setTipoEnemigo(2);
 			m_enemigos[i] = enemigo;
 		}
 	}

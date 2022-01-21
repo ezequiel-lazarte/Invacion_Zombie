@@ -23,6 +23,7 @@ public:
 	void setTexture(sf::Texture &t);
 	void setVida(int vida);
 	void setTipoArma(int nroArma);
+	void setTipoEnemigo(int tipoEnemigo);
 	int getVida();
 	sf::Vector2f getPos();
 private:
@@ -32,7 +33,7 @@ private:
 	sf::Sound m_sound_zombie;
 	sf::Vector2f m_move, m_pos_player, m_posEnemigo;
 	float m_move_sprite;
-	int m_tipo_arma;
+	int m_tipo_arma, m_tipo_enemigo;
 	bool m_move_sprite_es_cero;
 };
 

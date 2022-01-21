@@ -75,7 +75,10 @@ void Enemigo_1::Animaciones ( ) {
 			m_move_sprite = 1;
 			m_move_sprite_es_cero = true;
 		}
-		m_sprite.setTexture(m_recursos->getMuerteEnemigo());
+		if(m_tipo_enemigo == 1) 
+			m_sprite.setTexture(m_recursos->getMuerteEnemigo());
+		else if(m_tipo_enemigo == 2) 
+			m_sprite.setTexture(m_recursos->getMuerteEnemigo2());
 		if(m_move_sprite == 0) m_vida = -21;
 	}
 	m_move_sprite += 0.03125;
@@ -109,11 +112,15 @@ void Enemigo_1::setVida (int vida) {
 
 void Enemigo_1::setTipoArma (int nroArma) {
 	m_tipo_arma = nroArma;
-	if(m_tipo_arma == 1) m_danio = 1000;
+	if(m_tipo_arma == 1) m_danio = 100;
 	if(m_tipo_arma == 2) m_danio = 20;
 }
 
 void Enemigo_1::playSonidoZombie ( ) {
 	m_sound_zombie.play();
+}
+
+void Enemigo_1::setTipoEnemigo (int tipoEnemigo) {
+	m_tipo_enemigo = tipoEnemigo;
 }
 

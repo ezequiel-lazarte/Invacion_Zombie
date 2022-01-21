@@ -151,6 +151,12 @@ sf::Texture &Resources::getMuerteEnemigo ( ) {
 	return getTexture_or_insert(m_t, m_texture, m_pos);
 }
 
+sf::Texture &Resources::getMuerteEnemigo2 ( ) {
+	m_texture.loadFromFile("recursos/enemigos/enemigo2/textura_enemigo_2_muerte.png");
+	m_pos = 22;
+	return getTexture_or_insert(m_t, m_texture, m_pos);
+}
+
 /** ****************** ************ ***** SOUNDS EFECTS ***** ************ ****************** **/
 
 sf::SoundBuffer & Resources::getBufferEnemigo_1 ( ) {
