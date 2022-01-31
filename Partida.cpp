@@ -156,7 +156,7 @@ void Partida::CrearEnemigos ( ) {
 	m_posDesde = -3800;
 	m_posHasta = 3800;
 	for(size_t i=0;i<m_numeroEnemigos1;i++) {
-		if(m_enemigos[i].getVida() <= -21) {
+		if(m_enemigos[i].getVida() <= -210) {
 			CrearBotiquines(i);
 			enemigo.setVida(m_vida_enemigo1);
 			enemigo.setTexture(m_recursos->getEnemigo_1());
@@ -166,7 +166,7 @@ void Partida::CrearEnemigos ( ) {
 		}
 	}
 	for(size_t i=m_numeroEnemigos1;i<m_enemigos.size();i++) {
-		if(m_enemigos[i].getVida() <= -21) {
+		if(m_enemigos[i].getVida() <= -210) {
 			CrearBotiquines(i);
 			enemigo.setVida(m_vida_enemigo2);
 			enemigo.setTexture(m_recursos->getEnemigo_2());

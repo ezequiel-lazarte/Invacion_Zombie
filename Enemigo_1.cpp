@@ -40,7 +40,7 @@ void Enemigo_1::Actualizar () {
 }
 
 void Enemigo_1::Dibujar (sf::RenderWindow & w) {
-	if(m_vida>-21) w.draw(m_sprite);
+	if(m_vida>-210) w.draw(m_sprite);
 	m_barra_vida.Dibujar(w);
 }
 
@@ -79,7 +79,7 @@ void Enemigo_1::Animaciones ( ) {
 			m_sprite.setTexture(m_recursos->getMuerteEnemigo());
 		else if(m_tipo_enemigo == 2) 
 			m_sprite.setTexture(m_recursos->getMuerteEnemigo2());
-		if(m_move_sprite == 0) m_vida = -21;
+		if(m_move_sprite == 0) m_vida = -210;
 	}
 	m_move_sprite += 0.03125;
 	if(m_sprite.getPosition().x<m_pos_player.x) {

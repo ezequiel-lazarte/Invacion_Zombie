@@ -15,7 +15,7 @@ tab_width=4
 tab_use_spaces=0
 explorer_path=.
 inherits_from=
-current_source=Enemigo_1.cpp
+current_source=Partida.cpp
 path_char=\
 [source]
 path=main.cpp
@@ -34,7 +34,7 @@ path=Fondo.cpp
 cursor=4:54
 [source]
 path=Enemigo_1.cpp
-cursor=114:35
+cursor=81:31
 open=true
 [source]
 path=Escena.cpp
@@ -44,7 +44,7 @@ path=InputBoxMain.cpp
 cursor=34:44
 [source]
 path=Partida.cpp
-cursor=23:26
+cursor=25:66
 open=true
 [source]
 path=GameOver.cpp
