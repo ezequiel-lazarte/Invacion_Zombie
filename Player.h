@@ -26,7 +26,6 @@ public:
 	void controlMovimientos();
 	void controlArmas();
 	void controlGolpear();
-	void golpe();
 	void disparar();
 	void sonidoDisparo();
 	void sonidoPaso();

@@ -206,9 +206,6 @@ void Partida::GestionEnemigos ( ) {
 		m_enemigos[i].Actualizar();
 		m_enemigos[i].setPosPlayer(m_player.getPos());
 		
-		if(m_player.Colision(m_enemigos[i]) && m_player.getVida()>0 && Keyboard::isKeyPressed(Keyboard::Key::F) && m_player.getArma() == 1 && m_enemigos[i].getVida() > 0) {
-			m_player.golpe();
-		}
 		if(Keyboard::isKeyPressed(Keyboard::Key::F) && m_player.Colision(m_enemigos[i]) && m_player.getArma() == 1 && m_enemigos[i].getVida() > 0) {
 			m_enemigos[i].BajarVida();
 			if(m_enemigos[i].getVida() <= 0) {

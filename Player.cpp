@@ -14,8 +14,6 @@ Player::Player(int &volumen, Resources *&recursos) {
 	
 	m_disparo.setBuffer(m_recursos->getBufferDisparo());
 	m_disparo.setVolume(m_volumen);
-	m_golpe.setBuffer(m_recursos->getBufferGolpe());
-	m_golpe.setVolume(m_volumen);
 	m_paso.setBuffer(m_recursos->getBufferPaso());
 	m_paso.setVolume(m_volumen*3);
 	m_impacto_bala.setBuffer(m_recursos->getBufferImpacto());
@@ -93,7 +91,6 @@ sf::Vector2f Player::getPos ( ) {
 }
 
 void Player::Finalizar ( ) {
-	m_golpe.stop();
 	m_disparo.stop();
 	m_recarga_escopeta.stop();
 	m_paso.stop();
@@ -113,11 +110,6 @@ void Player::BajarVida ( ) {
 int Player::getVida ( ) {
 	return m_vida;
 }
-
-void Player::golpe ( ) {
-	m_golpe.play();
-}
-
 void Player::sonidoDisparo ( ) {
 	m_disparo.play();
 }

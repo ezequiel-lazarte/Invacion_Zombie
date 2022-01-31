@@ -82,7 +82,7 @@ void Enemigo_1::Animaciones ( ) {
 			m_sprite.setTexture(m_recursos->getMuerteEnemigo());
 		else if(m_vida_inicial == 100) 
 			m_sprite.setTexture(m_recursos->getMuerteEnemigo2());
-		std::cout << m_tipo_enemigo << std::endl;
+		
 		if(m_move_sprite == 0) m_vida = -210;
 	}
 	m_move_sprite += 0.03125;
