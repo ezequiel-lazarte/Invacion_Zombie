@@ -237,7 +237,7 @@ int Partida::numeroAleatorio ( ) {
 }
 
 void Partida::CrearBotiquines (int pos) {
-	if(numeroAleatorio() <= 30) { /// 30% es la probabilidad de que se genere un botiquin 
+	if(numeroAleatorio() <= 30) { /// 30% es la probabilidad de que se genere un botiquin
 		Botiquin botiquin(m_recursos);
 		botiquin.setPosEnemigo(m_enemigos[pos].getPos());
 		botiquin.setDibujar(true);

@@ -36,7 +36,6 @@ void Enemigo_1::Actualizar () {
 	if(m_vida<=0) Finalizar();
 	m_barra_vida.Actualizar();
 	Animaciones();
-	
 	/// actualizo la pos de la barra de vida
 	m_barra_vida.setPosition(m_sprite.getPosition());
 	m_barra_vida.setVida(m_vida);
@@ -112,7 +111,7 @@ void Enemigo_1::setVida (int vida) {
 
 void Enemigo_1::setTipoArma (int nroArma) {
 	m_tipo_arma = nroArma;
-	if(m_tipo_arma == 1) m_danio = 100;
+	if(m_tipo_arma == 1) m_danio = 10;
 	if(m_tipo_arma == 2) m_danio = 20;
 }
 
