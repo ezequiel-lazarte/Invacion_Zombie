@@ -75,6 +75,8 @@ Partida::Partida(int &volumen, Resources *&recursos) :
 	m_tiempoActual = 0;
 	
 	m_tiempoParaSumarEnemigos = 15;
+	
+	m_nro_enemigo = 1;
 }
 
 void Partida::Actualizar (Juego &juego) {
@@ -157,21 +159,23 @@ void Partida::CrearEnemigos ( ) {
 	m_posHasta = 3800;
 	for(size_t i=0;i<m_numeroEnemigos1;i++) {
 		if(m_enemigos[i].getVida() <= -210) {
+			m_nro_enemigo = 1;
 			CrearBotiquines(i);
 			enemigo.setVida(m_vida_enemigo1);
 			enemigo.setTexture(m_recursos->getEnemigo_1());
 			enemigo.SetPosEnemigo(m_posDesde);
-			enemigo.setTipoEnemigo(1);
+			enemigo.setTipoEnemigo(m_nro_enemigo);
 			m_enemigos[i] = enemigo;
 		}
 	}
 	for(size_t i=m_numeroEnemigos1;i<m_enemigos.size();i++) {
 		if(m_enemigos[i].getVida() <= -210) {
+			m_nro_enemigo = 2;
 			CrearBotiquines(i);
 			enemigo.setVida(m_vida_enemigo2);
 			enemigo.setTexture(m_recursos->getEnemigo_2());
 			enemigo.SetPosEnemigo(m_posHasta);
-			enemigo.setTipoEnemigo(2);
+			enemigo.setTipoEnemigo(m_nro_enemigo);
 			m_enemigos[i] = enemigo;
 		}
 	}

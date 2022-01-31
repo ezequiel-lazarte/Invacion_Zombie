@@ -18,7 +18,7 @@ Creditos::Creditos(int &volumen, Resources *&recursos) {
 	m_t2.setFillColor(m_color);
 	m_t2.setPosition(300,130);
 	m_t2.setCharacterSize(40);
-	m_t2.setString("Animacion: 		 Lazarte Ezequiel \n\nMusica:				Lazarte Ezequiel \n\nProgramador:   Lazarte Ezequiel");
+	m_t2.setString("Animacion:          Lazarte Ezequiel \n\nMusica:                Lazarte Ezequiel \n\nProgramador:   Lazarte Ezequiel \n                               Enrique Ismael \n                               Watters Francisco");
 	
 	m_sprite.setTexture(m_recursos->getCreditos());
 	m_sprite.setPosition(0,0); 
@@ -30,8 +30,8 @@ void Creditos::Actualizar (Juego & juego) {
 	m_t1.move(m_move);
 	m_t2.move(m_move);
 	if(m_t1.getPosition().y >= 500) { // si el texto esta por debajo de 500, respawmea arriba
-		m_t1.setPosition(400,-300);
-		m_t2.setPosition(300,-140);
+		m_t1.setPosition(400,-350);
+		m_t2.setPosition(300,-190);
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
 		m_musica.stop();

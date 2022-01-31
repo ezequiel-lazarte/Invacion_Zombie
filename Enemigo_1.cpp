@@ -1,6 +1,7 @@
 #include "Enemigo_1.h"
 #include <cmath>
 #include <SFML/Graphics/Texture.hpp>
+#include <iostream>
 using namespace std;
 
 Enemigo_1::Enemigo_1(Resources *&recursos) : m_barra_vida(100, recursos) {
@@ -17,6 +18,8 @@ Enemigo_1::Enemigo_1(Resources *&recursos) : m_barra_vida(100, recursos) {
 	m_move = {1.3,0};
 	
 	m_move_sprite_es_cero = false;
+	
+	m_tipo_enemigo = 1;
 }
 
 void Enemigo_1::SetPosEnemigo (float x) {
@@ -75,10 +78,11 @@ void Enemigo_1::Animaciones ( ) {
 			m_move_sprite = 1;
 			m_move_sprite_es_cero = true;
 		}
-		if(m_tipo_enemigo == 1) 
+		if(m_vida_inicial == 50) 
 			m_sprite.setTexture(m_recursos->getMuerteEnemigo());
-		else if(m_tipo_enemigo == 2) 
+		else if(m_vida_inicial == 100) 
 			m_sprite.setTexture(m_recursos->getMuerteEnemigo2());
+		std::cout << m_tipo_enemigo << std::endl;
 		if(m_move_sprite == 0) m_vida = -210;
 	}
 	m_move_sprite += 0.03125;
@@ -102,12 +106,8 @@ void Enemigo_1::setTexture (sf::Texture &t) {
 
 void Enemigo_1::setVida (int vida) {
 	m_vida = vida;
-	
+	m_vida_inicial = vida;
 	m_barra_vida.setVida(m_vida);
-	if(m_vida == 50) 
-		m_barra_vida.setTipoEnemigo(1);
-	if(m_vida == 100)
-		m_barra_vida.setTipoEnemigo(2);
 }
 
 void Enemigo_1::setTipoArma (int nroArma) {
@@ -123,4 +123,3 @@ void Enemigo_1::playSonidoZombie ( ) {
 void Enemigo_1::setTipoEnemigo (int tipoEnemigo) {
 	m_tipo_enemigo = tipoEnemigo;
 }
-

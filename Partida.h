@@ -49,6 +49,7 @@ private:
 	float m_puntaje_actual, m_tiempoActual, m_tiempoParaSumarEnemigos; // me guardo el puntaje del jugador
 	int m_numeroEnemigos1, m_numeroEnemigos2, aux, m_posDesde, m_posHasta, m_volumen, m_nro_kills;
 	int m_vida_enemigo1, m_vida_enemigo2;
+	int m_nro_enemigo;
 };
 
 #endif

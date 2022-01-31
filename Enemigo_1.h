@@ -33,7 +33,7 @@ private:
 	sf::Sound m_sound_zombie;
 	sf::Vector2f m_move, m_pos_player, m_posEnemigo;
 	float m_move_sprite;
-	int m_tipo_arma, m_tipo_enemigo;
+	int m_tipo_arma, m_tipo_enemigo, m_vida_inicial;
 	bool m_move_sprite_es_cero;
 };
 
