@@ -13,6 +13,8 @@ BarraVidaEnemigo::BarraVidaEnemigo(int vida, Resources *&recursos) {
 	m_sprite.setTexture(m_recursos->getBarraVidaEnemigo());
 	m_sprite.setTextureRect(m_rect);
 	m_sprite.setScale(.5, .5);
+	
+	m_vida_inicial = 0;
 }
 
 void BarraVidaEnemigo::Actualizar ( ) {
@@ -69,6 +71,7 @@ void BarraVidaEnemigo::Dibujar (sf::RenderWindow & w) {
 
 void BarraVidaEnemigo::setVida (int vida) {
 	m_vida = vida;
+	if(m_vida_inicial == 0) m_vida_inicial = m_vida;
 }
 
 void BarraVidaEnemigo::setPosition (sf::Vector2f pos) {

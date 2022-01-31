@@ -33,7 +33,7 @@ path=Fondo.cpp
 cursor=4:54
 [source]
 path=Enemigo_1.cpp
-cursor=100:0
+cursor=101:45
 open=true
 [source]
 path=Escena.cpp
