@@ -24,7 +24,6 @@ public:
 	texture_t &getGameOver();
 	texture_t &getGuardarPuntajes();
 	texture_t &getMenu();
-	texture_t &getPantallaCarga();
 	texture_t &getPartida();
 	texture_t &getPuntajes();
 	texture_t &getCorazon();
@@ -65,9 +64,9 @@ private:
 	sound_t m_buffer;
 	font_t m_font;
 
-	map<int, texture_t> m_t;
-	map<int, sound_t> m_s;
-	map<int, font_t> m_f;
+	map<string, texture_t> m_t;
+	map<string, sound_t> m_s;
+	map<string, font_t> m_f;
 	
 	string m_url;
 	int m_pos;

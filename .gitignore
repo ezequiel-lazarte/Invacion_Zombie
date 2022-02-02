@@ -1,4 +1,5 @@
 Debug_Win32
+Release_Win32
 *.o
 *.exe
 *.dat
