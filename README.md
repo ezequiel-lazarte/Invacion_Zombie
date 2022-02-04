@@ -1,5 +1,5 @@
 # Invacion_Zombie
-Es un videojuego 2D de survival horror, el objetivo del juego es sobrevivir el maximo de noches posibles, por cada cierto numero 
+Es un videojuego 2D de survival horror, el objetivo del juego es matar el maximo de muertos vivientes posibles, por cada cierto numero 
 de noches que pasan el numero de enemigos es mayor.
 
 Se ha desarrollado en C++ utilizando la libreria SFML.
