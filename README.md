@@ -8,4 +8,4 @@ Este es un proyecto final para la materia Programacion Orientada a Objetos.
 
 Observacion: El juego esta listo para su uso.
 
-Puede descargarse el instalador desde el proximo enlace https://drive.google.com/file/d/10Sbr6bafJdRm45H2IS1sSB5VslCxwKcx/view?usp=sharing
+Puede descargarse el instalador desde el proximo enlace https://drive.google.com/drive/folders/1ong7qJoI81-A-m6Tc2wC6ZESg2FTgMR9?usp=sharing
